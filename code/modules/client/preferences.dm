@@ -146,6 +146,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/no_language_fonts = FALSE
 	var/no_language_icon = FALSE
 	var/no_redflash = FALSE
+	//Caustic Edit
+	var/hide_bounty_tag = FALSE			//If this is true, they want to hide their 'antag tags' that show up on examine!
+	//Caustic Edit End
 
 	var/lastclass
 
@@ -233,6 +236,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/race_bonus
 
 	var/preset_bounty_enabled = FALSE
+	var/fully_custom_bounty = FALSE		//Caustic Edit - Attempt to add a fully custom Bounty Entry
 	var/preset_bounty_poster_key
 	var/preset_bounty_severity_key
 	var/preset_bounty_severity_b_key
@@ -1352,11 +1356,21 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	dat += "<br><br><br><b>Preset Bounty:</b> "
 	dat += "<a href='?_src_=prefs;preference=preset_bounty_toggle;task=input'>[preset_bounty_enabled ? "Enabled" : "Disabled"]</a>"
+
 	if(preset_bounty_enabled)
-		dat += "<br><b>Bounty Poster:</b> "
-		dat += "<a href='?_src_=prefs;preference=preset_bounty_poster_key;task=input'>\
-			[GLOB.bounty_posters[preset_bounty_poster_key] || "None"]\
-		</a>"
+		dat += "<br><br><br><b>Fully Custom Bounty:</b> "
+		dat += "<a href='?_src_=prefs;preference=fully_custom_bounty;task=input'>[fully_custom_bounty ? "Enabled" : "Disabled"]</a>"
+
+		if(fully_custom_bounty)
+			dat += "<br><b>Bounty Poster:</b> "
+			dat += "<a href='?_src_=prefs;preference=custom_bounty_poster_key;task=input'>\
+				[preset_bounty_poster_key || "None"]\
+			</a>"
+		else
+			dat += "<br><b>Bounty Poster:</b> "
+			dat += "<a href='?_src_=prefs;preference=preset_bounty_poster_key;task=input'>\
+				[GLOB.bounty_posters[preset_bounty_poster_key] || "None"]\
+			</a>"
 
 		dat += "<br><b>Crime Severity:</b> "
 		dat += "<a href='?_src_=prefs;preference=preset_bounty_severity_key;task=input'>\
@@ -1372,13 +1386,14 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 		dat += "<a href='?_src_=prefs;preference=preset_bounty_crime;task=input'>\
 			[preset_bounty_crime || "None"]\
 		</a>"
-	if(preset_bounty_severity_key && !GLOB.wretch_severities[preset_bounty_severity_key])
+	
+	if(preset_bounty_severity_key && !fully_custom_bounty && !GLOB.wretch_severities[preset_bounty_severity_key])
 		preset_bounty_severity_key = null
 
-	if(preset_bounty_severity_b_key && !GLOB.bandit_severities[preset_bounty_severity_b_key])
+	if(preset_bounty_severity_b_key && !fully_custom_bounty && !GLOB.bandit_severities[preset_bounty_severity_b_key])
 		preset_bounty_severity_b_key = null
 
-	if(preset_bounty_poster_key && !GLOB.bounty_posters[preset_bounty_poster_key])
+	if(preset_bounty_poster_key && !fully_custom_bounty && !GLOB.bounty_posters[preset_bounty_poster_key])
 		preset_bounty_poster_key = null
 
 
@@ -2364,6 +2379,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if("preset_bounty_toggle")
 					preset_bounty_enabled = !preset_bounty_enabled
 					return
+				
+				if("fully_custom_bounty")
+					fully_custom_bounty = !fully_custom_bounty
+					return
 
 				if("preset_bounty_poster_key")
 					var/list/poster_choices = list()
@@ -2389,6 +2408,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/choice = input(user, "How notorious are you?", "Bounty Amount") as null|anything in sev_choices
 					if(choice)
 						preset_bounty_severity_b_key = sev_choices[choice]
+					return
+
+				if("preset_bounty_poster_custom")
+					preset_bounty_crime = input(user, "Who placed a bounty on you?", "Bounty Poster") as text|null
 					return
 
 				if("preset_bounty_crime")

@@ -60,6 +60,19 @@
 		else
 			to_chat(src, "Your character information will no longer be viewable when masked.")
 
+//Caustic Edit
+/client/verb/hide_bounty_tag()
+	set category = "Options"
+	set name = "Toggle Hiding Bounty Label"
+	if(prefs)
+		prefs.hide_bounty_tag = !prefs.hide_bounty_tag
+		prefs.save_preferences()
+		if(prefs.hide_bounty_tag)
+			to_chat(src, "You will not display most text related to position when someone examines you, even with your face revealed. Using this for non-roleplay reasons may get you talked to by an admin.")
+		else
+			to_chat(src, "You will display all usual text when someone examines you.")
+//Caustic Edit End
+
 /client/verb/mute_animal_emotes()
 	set category = "Options"
 	set name = "Toggle Animal Noise Emotes"

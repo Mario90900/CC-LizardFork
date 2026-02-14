@@ -109,7 +109,8 @@
 			else
 				. = list(span_info("ø ------------ ø\nThis is the <EM>[used_name]</EM>, the [race_name]."))
 
-		if(HAS_TRAIT(src, TRAIT_WITCH))
+		var/hide_text = client.prefs.hide_bounty_tag
+		if(!hide_text && HAS_TRAIT(src, TRAIT_WITCH))
 			if(HAS_TRAIT(user, TRAIT_NOBLE) || HAS_TRAIT(user, TRAIT_INQUISITION) || HAS_TRAIT(user, TRAIT_WITCH))
 				. += span_warning("A witch! Their presence brings an unsettling aura.")
 			else if(HAS_TRAIT(user, TRAIT_COMMIE) || HAS_TRAIT(user, TRAIT_CABAL) || HAS_TRAIT(user, TRAIT_HORDE) || HAS_TRAIT(user, TRAIT_DEPRAVED))
@@ -117,7 +118,7 @@
 			else
 				. += span_notice("Something about them seems... different.")
 // Caustic Edit Start
-		if(HAS_TRAIT(src, TRAIT_FERAL))
+		if(!hide_text && HAS_TRAIT(src, TRAIT_FERAL))
 			if(HAS_TRAIT(user, TRAIT_NOBLE) || HAS_TRAIT(user, TRAIT_INQUISITION) || HAS_TRAIT(user, TRAIT_WITCH))
 				. += span_warning("A savage wild-folk! Dangerous to let one's guard down around.")
 			else if(HAS_TRAIT(user, TRAIT_COMMIE) || HAS_TRAIT(user, TRAIT_CABAL) || HAS_TRAIT(user, TRAIT_HORDE) || HAS_TRAIT(user, TRAIT_DEPRAVED))
@@ -128,13 +129,13 @@
 		if(GLOB.lord_titles[name])
 			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[name]]\".")
 
-		if(HAS_TRAIT(src, TRAIT_NOBLE) || HAS_TRAIT(src, TRAIT_DEFILED_NOBLE))
+		if(!hide_text && HAS_TRAIT(src, TRAIT_NOBLE) || HAS_TRAIT(src, TRAIT_DEFILED_NOBLE))
 			if(HAS_TRAIT(user, TRAIT_NOBLE) || HAS_TRAIT(user, TRAIT_DEFILED_NOBLE))
 				. += span_notice("A fellow noble.")
 			else
 				. += span_notice("A noble!")
 
-		if((HAS_TRAIT(user, TRAIT_RACISMISBAD) && !(src.dna.species.name == "Elf" || src.dna.species.name == "Dark Elf" || src.dna.species.name == "Half Elf")))
+		if(!hide_text && (HAS_TRAIT(user, TRAIT_RACISMISBAD) && !(src.dna.species.name == "Elf" || src.dna.species.name == "Dark Elf" || src.dna.species.name == "Half Elf")))
 			. += span_phobia("An invader...")
 
 		//For tennite schism god-event
@@ -153,10 +154,10 @@
 			if(H.marriedto == name)
 				. += span_love("It's my spouse.")
 
-		if(name in GLOB.excommunicated_players)
+		if(!hide_text && name in GLOB.excommunicated_players)
 			. += span_userdanger("HERETIC! SHAME!")
 
-		if(HAS_TRAIT(src, TRAIT_EXCOMMUNICATED))
+		if(!hide_text && HAS_TRAIT(src, TRAIT_EXCOMMUNICATED))
 			. += span_userdanger("EXCOMMUNICATED! SHAME!")//Temporary, probably going to get rid of the trait since it doesn't fit for us.
 /*
 		if(name in GLOB.excommunicated_players)
@@ -169,16 +170,16 @@
 				if (istype(H.patron, /datum/patron/old_god))
 					. += span_userdanger("HEATHEN! SHAME!")
 */
-		if(name in GLOB.outlawed_players)
+		if(!hide_text && name in GLOB.outlawed_players)
 			. += span_userdanger("OUTLAW!")
 
-		if(HAS_TRAIT(user, TRAIT_JUSTICARSIGHT) && !HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
+		if(!hide_text && HAS_TRAIT(user, TRAIT_JUSTICARSIGHT) && !HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			for(var/datum/bounty/b in GLOB.head_bounties) //I hate this.
 				if(b.target == real_name)
 					. += span_syndradio("[m3] a bounty on [m2] head of [b.amount] mammon for [b.reason], issued by [b.employer].")
 					break
 
-		if(name in GLOB.court_agents)
+		if(!hide_text && name in GLOB.court_agents)
 			var/datum/job/J = SSjob.GetJob(user.mind?.assigned_role)
 			if(J?.department_flag & GARRISON || J?.department_flag & NOBLEMEN || J?.department_flag & COURTIERS || J?.department_flag & RETINUE)
 				. += span_greentext("<b>[m1] an agent of the court!</b>")
@@ -951,6 +952,7 @@
 
 /// Returns patron-related examine text for the mob, if any. Can return null.
 /mob/living/proc/get_heretic_text(mob/examiner)
+	var/hide_text = client.prefs.hide_bounty_tag
 	var/heretic_text = null
 	var/seer
 
@@ -961,24 +963,24 @@
 		seer = TRUE
 
 	if(HAS_TRAIT(src, TRAIT_COMMIE))
-		if(seer)
+		if(!hide_text && seer)
 			heretic_text += "Matthiosan."
 			if(HAS_TRAIT(examiner, TRAIT_COMMIE))
 				heretic_text += " To share with. To take with. For all, and us."
 		else if(HAS_TRAIT(examiner, TRAIT_COMMIE))
 			heretic_text += "Comrade!"
 	else if((HAS_TRAIT(src, TRAIT_CABAL)))
-		if(seer)
+		if(!hide_text && seer)
 			heretic_text += "A member of Zizo's cabal."
 			if(HAS_TRAIT(examiner, TRAIT_CABAL))
 				heretic_text += " May their ambitions not interfere with mine."
 	else if((HAS_TRAIT(src, TRAIT_HORDE)))
-		if(seer)
+		if(!hide_text && seer)
 			heretic_text += "Hardened by Graggar's Rituals."
 			if(HAS_TRAIT(examiner, TRAIT_HORDE))
 				heretic_text += " Mine were a glorious memory."
 	else if((HAS_TRAIT(src, TRAIT_DEPRAVED)))
-		if(seer)
+		if(!hide_text && seer)
 			heretic_text += "Baotha's Touched."
 			if(HAS_TRAIT(examiner, TRAIT_DEPRAVED))
 				heretic_text += " She leads us to the greatest ends."
@@ -1037,20 +1039,21 @@
 
 /// Returns antagonist-related examine text for the mob, if any. Can return null.
 /mob/living/proc/get_villain_text(mob/examiner)
+	var/hide_text = client.prefs.hide_bounty_tag
 	var/villain_text
 	if(mind)
-		if(mind.special_role == "Bandit")
+		if(!hide_text && mind.special_role == "Bandit")
 			if(HAS_TRAIT(examiner, TRAIT_COMMIE))
 				villain_text = span_notice("Free man!")
 			if(HAS_TRAIT(src,TRAIT_KNOWNCRIMINAL))
 				villain_text = span_userdanger("BANDIT!")
 		if(mind.special_role == "Deadite")
 			villain_text = span_userdanger("DEADITE!")
-		if(mind.special_role == "Vampire Lord")
+		if(!hide_text && mind.special_role == "Vampire Lord")
 			var/datum/antagonist/vampire/VD = mind.has_antag_datum(/datum/antagonist/vampire)
 			if(!SEND_SIGNAL(VD.owner, COMSIG_DISGUISE_STATUS))
 				villain_text += span_userdanger("A MONSTER!")
-		if(mind.assigned_role == "Lunatic")
+		if(!hide_text && mind.assigned_role == "Lunatic")
 			villain_text += span_userdanger("LUNATIC!")
 
 	return villain_text
