@@ -2,6 +2,7 @@
 /datum/tat_build
 	var/datum/preferences/owner_preferences = null
 
+	var/archetype
 	var/datum/tat_stats/stats
 	var/datum/tat_items/items
 	var/datum/tat_traits/traits
