@@ -1,0 +1,5 @@
+#define TAT_ARCHETYPE_TOWNER "tat_arch_towner"
+#define TAT_ARCHETYPE_ADVENTURER "tat_arch_adv"
+#define TAT_ARCHETYPE_WRETCH "tat_arch_wretch"
+#define TAT_ARCHETYPE_MERC "tat_arch_merc"
+#define TAT_ARCHETYPE_OUTLANDER "tat_arch_outland"

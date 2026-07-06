@@ -3671,6 +3671,7 @@
 
 //Modular TA files
 #include "modular_twilight_axis\code\datums\tat_system\tat_defines.dm"
+#include "modular_twilight_axis\code\datums\tat_system\_defines\tat_defines_archetypes.dm"
 #include "modular_twilight_axis\code\datums\tat_system\_defines\tat_defines_items.dm"
 #include "modular_twilight_axis\code\datums\tat_system\_defines\tat_defines_skills.dm"
 #include "modular_twilight_axis\code\datums\tat_system\_defines\tat_defines_stats.dm"
@@ -3680,6 +3681,7 @@
 #include "modular_twilight_axis\code\datums\tat_system\core\tat_ui.dm"
 #include "modular_twilight_axis\code\datums\tat_system\core\tat_admin_panel.dm"
 #include "modular_twilight_axis\code\datums\tat_system\core\tat_bans.dm"
+#include "modular_twilight_axis\code\datums\tat_system\domains\tat_archetypes.dm"
 #include "modular_twilight_axis\code\datums\tat_system\domains\tat_items.dm"
 #include "modular_twilight_axis\code\datums\tat_system\domains\tat_trader_lootboxes.dm"
 #include "modular_twilight_axis\code\datums\tat_system\domains\tat_party_leader.dm"
