@@ -21,7 +21,8 @@
 	charge_required = TRUE
 	weapon_cast_penalized = TRUE
 	charge_time = CHARGETIME_MINOR
-	charge_drain = 0
+	charge_swingdelay_type = SWINGDELAY_PENALTY
+	hold_drain = 0
 	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 15 SECONDS
@@ -29,6 +30,9 @@
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
 	spell_impact_intensity = SPELL_IMPACT_LOW
+
+	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN
+	allow_cross_z = FALSE
 
 /obj/projectile/magic/fetch
 	name = "bolt of fetching"
@@ -46,7 +50,7 @@
 		if(L.anti_magic_check() || !firer)
 			L.visible_message(span_warning("[src] vanishes on contact with [target]!"))
 			return BULLET_ACT_BLOCK
-		L.throw_at(throw_target, FETCH_YEET_RANGE, 4)
+		L.throw_at(throw_target, out_of_effective_range() ? round(FETCH_YEET_RANGE / 2) : FETCH_YEET_RANGE, 4)
 	else
 		if(isitem(target))
 			var/obj/item/I = target

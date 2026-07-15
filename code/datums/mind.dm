@@ -437,8 +437,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 					to_chat(current, span_warning("I cannot attune to another minor aspect."), MESSAGE_TYPE_INFO)
 				return FALSE
 			LAZYADD(minor_aspects, aspect)
-	// Grant choice spell first so it appears first on the action bar
-	// If no explicit choice, auto-resolve: prefer one the player already has, else first in list
+	// Auto-resolve the choice spell if none was passed: prefer one the player already has, else first in list.
 	if(!choice_spell && length(aspect.choice_spells))
 		for(var/candidate in aspect.choice_spells)
 			if(has_spell(candidate))
@@ -446,9 +445,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				break
 		if(!choice_spell)
 			choice_spell = aspect.choice_spells[1]
-	if(choice_spell)
-		aspect.grant_choice_spell(src, choice_spell)
-	aspect.grant_spells(src)
+	aspect.grant_ordered(src, choice_spell)
 	// Apply variant swaps — explicit variant takes priority, mastery config gets "mastery" by default
 	if(variant)
 		aspect.apply_variant(src, variant)
@@ -993,8 +990,10 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	if(current)
 		to_chat(current, span_nicegreen("Tip: You can Ctrl-Click your hotkey bar to unlock it, then drag to rearrange your spells. Re-arranging them change which hotkeys they are bound to in order from left to right (Alt 1 to Alt 9 default). You can shift click your spells to learn more about them."), MESSAGE_TYPE_INFO)
 
-/datum/mind/proc/setup_mage_aspects(list/config)
+/datum/mind/proc/setup_mage_aspects(list/config, grant_attunement = TRUE)
 	mage_aspect_config = config
+	if(grant_attunement && current)
+		ADD_TRAIT(current, TRAIT_LEYLINE_ATTUNEMENT, TRAIT_GENERIC)
 	ensure_mage_basics()
 	check_learnspell()
 

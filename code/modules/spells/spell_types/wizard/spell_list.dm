@@ -16,6 +16,7 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/datum/action/cooldown/spell/magicians_brick,
 		/datum/action/cooldown/spell/magicians_stone,
 		/datum/action/cooldown/spell/magicians_rock,
+		/datum/action/cooldown/spell/aetherknife,
 		/datum/action/cooldown/spell/mending,
 		/datum/action/cooldown/spell/mending/lesser, //Caustic Edit - New lesser mending, from Mage 2!
 		/datum/action/cooldown/spell/message,
@@ -24,6 +25,7 @@ GLOBAL_LIST_INIT(utility_spells, (list(
 		/datum/action/cooldown/spell/nondetection,
 		/datum/action/cooldown/spell/projectile/lesser_fetch,
 		/datum/action/cooldown/spell/projectile/lesser_repel,
+		/datum/action/cooldown/spell/projectile/waterbolt,
 		/datum/action/cooldown/spell/readomen,
 		/datum/action/cooldown/spell/shape_wood, // Caustic Edit
 		/datum/action/cooldown/spell/shape_branch, // Caustic Edit - New spells, make wood

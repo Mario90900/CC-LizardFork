@@ -23,6 +23,8 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 	var/is_region_blockaded = FALSE
 	/// Null = this region cannot be blockaded.
 	var/threat_region_id
+	// Ensure this region won't replenish blockade. Used only for Kingsfield because Kingsfield blockade is devastating and shouldn't repeat mid round.
+	var/blockade_replenish_eligible = TRUE
 
 	var/list/produces_today = list()
 	var/list/demands_today = list()
@@ -41,14 +43,18 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 	region_id = TRADE_REGION_KINGSFIELD
 	name = "Kingsfield"
 	subtitle = "The Royal Demesne, Heartland of Azuria"
+	blockade_replenish_eligible = FALSE
 	description = "The royal demesne of the Duke of Azuria, and their most valuable possession besides Azure Peak itself. A stretch of land some ten miles across the south bank of River Azur, home to dozens of agricultural settlements, hamlets, and smaller market towns. Its lands are rich, and its people aplenty. The agricultural heartland of Azuria, producing most of its grain, meat, and dairy, imported into Azure Peak daily and re-exported for profit. Many of Azure Peak's residents keep estates here. The Duke, owning most of the land directly, claims a tithe of ten percent of all produce from the region, and at least a quarter on any land directly owned by the Crown, as is their perogative, making this region vital to the Crown's coffers."
 	threat_region_id = THREAT_REGION_AZURE_BASIN
 	produces = list(
 		TRADE_GOOD_GRAIN = TG_SUPPLY_LOCAL_GRAIN,
 		TRADE_GOOD_OATS = TG_SUPPLY_FOREIGN_GRAIN,
 		TRADE_GOOD_RICE = TG_SUPPLY_FOREIGN_GRAIN,
+		TRADE_GOOD_MAIZE = TG_SUPPLY_FOREIGN_GRAIN,
 		TRADE_GOOD_MEAT = TG_SUPPLY_MEAT_BULK,
 		TRADE_GOOD_PORK = TG_SUPPLY_MEAT_STAPLE,
+		TRADE_GOOD_HAM = TG_SUPPLY_MEAT_STAPLE,
+		TRADE_GOOD_PORK_BELLY = TG_SUPPLY_MEAT_STAPLE,
 		TRADE_GOOD_POULTRY = TG_SUPPLY_MEAT_STAPLE,
 		TRADE_GOOD_RABBIT = TG_SUPPLY_MEAT_STAPLE,
 		TRADE_GOOD_EGG = TG_SUPPLY_MEAT_BULK,
@@ -82,6 +88,7 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 		TRADE_GOOD_POPPY = TG_DEMAND_SPECIALTY_HERB,
 		TRADE_GOOD_DENDOR_ESSENCE = 1, // literal: deliberately scarce, not category-bound
 		TRADE_GOOD_VISCERA = TG_DEMAND_SPECIALTY_HERB,
+		TRADE_GOOD_SINEW = TG_DEMAND_SPECIALTY_HERB,
 		TRADE_GOOD_HIDE = TG_DEMAND_LEATHER,
 		TRADE_GOOD_FUR = TG_DEMAND_LEATHER,
 		TRADE_GOOD_CURED_LEATHER = TG_DEMAND_LEATHER,
@@ -178,6 +185,7 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 	produces = list(
 		TRADE_GOOD_SILK = TG_SUPPLY_SILK,
 		TRADE_GOOD_VISCERA = TG_SUPPLY_SPECIALTY_HERB,
+		TRADE_GOOD_SINEW = TG_SUPPLY_SPECIALTY_HERB,
 		TRADE_GOOD_DENDOR_ESSENCE = 1, // literal: deliberately scarce, not category-bound
 		TRADE_GOOD_CALENDULA = TG_SUPPLY_SPECIALTY_HERB,
 		TRADE_GOOD_CLAY = TG_SUPPLY_CHEAP_RAW_MAT,
@@ -226,9 +234,13 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 	demands = list(
 		TRADE_GOOD_STEEL_INGOT = TG_DEMAND_REFINED_INGOTS,
 		TRADE_GOOD_IRON_INGOT = TG_DEMAND_REFINED_INGOTS,
+		TRADE_GOOD_COPPER_INGOT = TG_DEMAND_REFINED_INGOTS,
+		TRADE_GOOD_TIN_INGOT = TG_DEMAND_REFINED_INGOTS,
 		TRADE_GOOD_CLOTH = TG_DEMAND_CLOTH,
 		TRADE_GOOD_MEAT = TG_DEMAND_MEAT_BULK,
 		TRADE_GOOD_PORK = TG_DEMAND_MEAT_STAPLE,
+		TRADE_GOOD_HAM = TG_DEMAND_MEAT_STAPLE,
+		TRADE_GOOD_PORK_BELLY = TG_DEMAND_MEAT_STAPLE,
 		TRADE_GOOD_POULTRY = TG_DEMAND_MEAT_STAPLE,
 		TRADE_GOOD_EGG = TG_DEMAND_MEAT_BULK,
 		TRADE_GOOD_FAT = TG_DEMAND_MEAT_STAPLE,
@@ -236,6 +248,7 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 		TRADE_GOOD_GRAIN = TG_DEMAND_LOCAL_GRAIN,
 		TRADE_GOOD_OATS = TG_DEMAND_LOCAL_GRAIN,
 		TRADE_GOOD_RICE = TG_DEMAND_LOCAL_GRAIN,
+		TRADE_GOOD_MAIZE = TG_SUPPLY_LOCAL_GRAIN,
 		TRADE_GOOD_POTATO = TG_DEMAND_COMMON_VEG,
 		TRADE_GOOD_ONION = TG_DEMAND_COMMON_VEG,
 		TRADE_GOOD_CARROT = TG_DEMAND_COMMON_VEG,
@@ -258,6 +271,8 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 	demands = list(
 		TRADE_GOOD_IRON_INGOT = TG_DEMAND_REFINED_INGOTS,
 		TRADE_GOOD_STEEL_INGOT = TG_DEMAND_REFINED_INGOTS,
+		TRADE_GOOD_COPPER_INGOT = TG_DEMAND_REFINED_INGOTS,
+		TRADE_GOOD_TIN_INGOT = TG_DEMAND_REFINED_INGOTS,
 		TRADE_GOOD_FUR = TG_DEMAND_LEATHER,
 		TRADE_GOOD_HIDE = TG_DEMAND_LEATHER,
 		TRADE_GOOD_CURED_LEATHER = TG_DEMAND_LEATHER,
@@ -266,6 +281,8 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 		TRADE_GOOD_OATS = TG_DEMAND_LOCAL_GRAIN,
 		TRADE_GOOD_MEAT = TG_DEMAND_MEAT_BULK,
 		TRADE_GOOD_PORK = TG_DEMAND_MEAT_STAPLE,
+		TRADE_GOOD_HAM = TG_DEMAND_MEAT_STAPLE,
+		TRADE_GOOD_PORK_BELLY = TG_DEMAND_MEAT_STAPLE,
 		TRADE_GOOD_POULTRY = TG_DEMAND_MEAT_STAPLE,
 		TRADE_GOOD_BUTTER = TG_DEMAND_MEAT_STAPLE,
 		TRADE_GOOD_CHEESE = TG_DEMAND_MEAT_STAPLE,
@@ -301,6 +318,7 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 		TRADE_GOOD_EGG = TG_DEMAND_MEAT_BULK,
 		TRADE_GOOD_GRAIN = TG_DEMAND_LOCAL_GRAIN,
 		TRADE_GOOD_RICE = TG_DEMAND_LOCAL_GRAIN,
+		TRADE_GOOD_MAIZE = TG_DEMAND_LOCAL_GRAIN,
 		TRADE_GOOD_APPLE = TG_DEMAND_LOCAL_FRUIT,
 		TRADE_GOOD_PEAR = TG_DEMAND_LOCAL_FRUIT,
 		TRADE_GOOD_JACKSBERRY = TG_DEMAND_LOCAL_FRUIT,
@@ -343,9 +361,9 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 //Placeholders, uh, fill with whatever you want in the future, either future poss or whoever.
 /datum/economic_region/town_placeholder
 	region_id = TRADE_REGION_TOWN_PLACEHOLDER
-	name = "Town Placeholder" //Placeholder do update if you want.
-	subtitle = "Placeholder of the town."
-	description = "Placeholder."
+	name = "Sandsurtale" //Placeholder do update if you want.
+	subtitle = "The Deep Mountains to the North"
+	description = "Beyond the mountain range of the Desert Duchy is a less hostile desert, but still a desert in the end, always in need of food the mountain passages remain an integral neccessity to the Azurian crown, as its the safest way for royalty, and peasant alike to reach the desert nested town. Like most of the nearby landscape, ores are mined in excess, and the need for food is always present."
 	threat_region_id = THREAT_REGION_DESERT_TOWN
 	produces = list(
 		TRADE_GOOD_IRON_ORE = TG_SUPPLY_IRON,
@@ -366,9 +384,9 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 
 /datum/economic_region/lower_caverns_placeholder
 	region_id = TRADE_REGION_LOWER_CAVENRS_PLACEHOLDER
-	name = "Lower Caverns Placeholder" //Placeholder do update if you want.
-	subtitle = "Placeholder of the lower caverns."
-	description = "Placeholder."
+	name = "Grovedune" //Placeholder do update if you want.
+	subtitle = "The Numerous Mountain Passages that connect east, south and west, includes the Coastal Inlet."
+	description = "The Azurian Duchy has taken it upon themselves to maintain the nearby passages in and out of the enclave and exclave, the need for food and water is always a constant for safe zones, but with it comes an endless supply of mined materials."
 	threat_region_id = THREAT_REGION_DESERT_TOWN_CAVES
 	produces = list(
 		TRADE_GOOD_IRON_ORE = TG_SUPPLY_IRON,
@@ -481,9 +499,9 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 //CC Edit - Desert Mappification
 /datum/economic_region/inner_dunes_placeholder
 	region_id = TRADE_REGION_INNER_DUNES_PLACEHOLDER
-	name = "Inner Dunes Placeholder" //Placeholder do update if you want.
-	subtitle = "Someplace that likes the dunes. (PLACEHOLDER REGION!)"
-	description = "(PLACEHOLDER REGION!)"
+	name = "Dustvelh" //Placeholder do update if you want.
+	subtitle = "The Eastern Collective of Border Towns of the Exclave"
+	description = "The numerous connected regions and roads east of Al-Ashur, seperated by the hostile landscape, the flow of mined materials is almost constant, but the lack of proper farm and hunting grounds leave for a constant demand for food."
 	threat_region_id = THREAT_REGION_INNER_DUNES
 	produces = list(
 		TRADE_GOOD_IRON_ORE = TG_SUPPLY_IRON,
@@ -505,9 +523,9 @@ GLOBAL_LIST_INIT(economic_regions, init_economic_regions())
 //CC Edit - Desert Mappification
 /datum/economic_region/deep_dunes_placeholder
 	region_id = TRADE_REGION_DEEP_DUNES_PLACEHOLDER
-	name = "Deep Dunes Placeholder" //Placeholder do update if you want.
-	subtitle = "Someplace that likes the deeper dunes. (PLACEHOLDER REGION!)"
-	description = "(PLACEHOLDER REGION!)"
+	name = "Djannis" //Placeholder do update if you want.
+	subtitle = "The Western Collective of Small Border Towns of the Exclave. All on the other side of the Empty Wasteland"
+	description = "The numerous connected regions and roads connected west of Al-Ashur, separated by a massive empty desert also known as The Empty Sands. This stretch of desert is purely inhospitable and main cause for the duchies gifted obligation to take care of the land, the flow of mined materials is almost constant, skilled crafters eagerly offer their hoards of resources and equipment as due to the more chaotic proximity of this region. At a moments notice the demands of this land can grow to immense scale, but ultimately needed as out in the desert every source is invaluable."
 	threat_region_id = THREAT_REGION_DEEP_DUNES
 	produces = list( //Deeper dunes supplies some of the more important wood.
 		TRADE_GOOD_WOOD = TG_SUPPLY_CHEAP_RAW_MAT,

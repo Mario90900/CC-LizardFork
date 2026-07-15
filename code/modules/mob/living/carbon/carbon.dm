@@ -271,6 +271,9 @@
 			if(HAS_TRAIT(src, TRAIT_PACIFISM) && I.throwforce)
 				to_chat(src, "<span class='notice'>I set [I] down gently on the ground.</span>")
 				return
+			if(HAS_TRAIT(src, TRAIT_DEADITE)) //Zombies are too stupid to throw things at all...
+				to_chat(src, "<span class='warning'>...What?</span>")
+				return
 
 	if(thrown_thing)
 		if(rogue_sneaking)
@@ -574,22 +577,6 @@
 			used = 1
 		return used
 
-/mob/living/Stat()
-	..()
-	if(statpanel("STATS"))
-		stat("STR: \Roman [STASTR]")
-		stat("PER: \Roman [STAPER]")
-		stat("INT: \Roman [STAINT]")
-		stat("CON: \Roman [STACON]")
-		stat("WIL: \Roman [STAWIL]")
-		stat("SPD: \Roman [STASPD]")
-		stat("FOR: \Roman [STALUC]")
-		stat("PATRON: [patron]")
-
-/mob/living/carbon/Stat()
-	..()
-	add_abilities_to_panel()
-
 /mob/living/carbon/attack_ui(slot)
 	if(!has_hand_for_held_index(active_hand_index))
 		return 0
@@ -600,7 +587,7 @@
 	nausea = clamp(nausea + amt, 0, 300)
 
 /mob/living/carbon/proc/handle_nausea()
-	if(HAS_TRAIT(src, TRAIT_ROTMAN)||HAS_TRAIT(src, TRAIT_IRONMAN)) // constructs shouldn't feel nauseous, makes no sense, this fixes it
+	if(HAS_TRAIT(src, TRAIT_ROTMAN)||HAS_TRAIT(src, TRAIT_IRONMAN))
 		return TRUE
 	if(stat == DEAD)
 		return TRUE
@@ -625,7 +612,7 @@
 /mob/living/carbon/proc/vomit(lost_nutrition = 50, blood = FALSE, stun = TRUE, distance = 1, message = TRUE, toxic = FALSE, harm = FALSE, force = FALSE)
 	if(HAS_TRAIT(src, TRAIT_IRONMAN))
 		return TRUE
-
+	
 	if(HAS_TRAIT(src, TRAIT_TOXINLOVER) && !force)
 		return TRUE
 
@@ -759,31 +746,10 @@
 /mob/living/carbon/updatehealth()
 	if(status_flags & GODMODE)
 		return
-	var/total_burn = 0
 	var/total_stamina = 0
 	var/total_tox = getToxLoss()
 	var/total_oxy = getOxyLoss()
 	var/used_damage = 0
-	// Burn hardcrit - total burn across all bodyparts vs threshold (scales to chest max HP / CON)
-	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		total_burn += BP.burn_dam
-	if(total_burn > 0)
-		var/obj/item/bodypart/chest/C = get_bodypart(BODY_ZONE_CHEST)
-		var/burn_threshold = C ? C.max_damage : FIRE_HARDCRIT_BASE
-		if((HAS_TRAIT(src, TRAIT_NOPAIN) || HAS_TRAIT(src, TRAIT_NOPAINSTUN)) && !HAS_TRAIT(src, TRAIT_NOBURN_RESIST))
-			burn_threshold *= FIRE_HARDCRIT_NOPAIN_MULT
-		var/burn_ratio = total_burn / burn_threshold
-		if(!burn_warning_shown)
-			if(burn_ratio >= 1.0)
-				burn_warning_shown = TRUE
-				balloon_alert_to_viewers("<font color='#bb2b2b'>burnt down!</font>")
-			else if(burn_ratio >= 0.75)
-				burn_warning_shown = TRUE
-				balloon_alert_to_viewers("<font color='#bb2b2b'>burning down!</font>")
-		else if(burn_ratio < 0.75)
-			burn_warning_shown = FALSE
-		var/burn_damage = burn_ratio * maxHealth
-		used_damage = max(used_damage, burn_damage)
 	if(used_damage < total_tox)
 		used_damage = total_tox
 	if(used_damage < total_oxy)
@@ -1126,7 +1092,6 @@
 				var/bled_out = (blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE)
 				var/suffocating = getOxyLoss() > 75
 				var/poisoned = health <= HEALTH_THRESHOLD_FULLCRIT && getToxLoss() >= getFireLoss() && getToxLoss() >= getBruteLoss()
-				var/burned = health <= HEALTH_THRESHOLD_FULLCRIT && getFireLoss() >= getBruteLoss()
 				if(bled_out)
 					visible_message(span_danger("<b>[src] collapses, [src.p_their()] skin pale as parchment!</b>"), \
 						span_userdanger("My blood... there is nothing left. I cannot feel my limbs."))
@@ -1139,11 +1104,6 @@
 					visible_message(span_danger("<b>[src] collapses, [src.p_their()] body wracked with poison!</b>"), \
 						span_userdanger("The poison is too much... I cannot go on."))
 					balloon_alert_to_viewers("<font color='#2b8a3e'>poisoned!</font>")
-				else if(burned)
-					visible_message(span_danger("<b>[src] collapses, [src.p_their()] flesh charred and smoking!</b>"), \
-						span_userdanger("My body is too burnt to go on!"))
-					balloon_alert_to_viewers("<font color='#bb2b2b'>burnt down!</font>")
-					playsound(src, 'sound/health/burning.ogg', 60, TRUE)
 				else if(health <= HEALTH_THRESHOLD_FULLCRIT)
 					visible_message(span_danger("<b>[src] collapses, broken and bloodied!</b>"), \
 						span_userdanger("My bones are shattered... I cannot go on."))

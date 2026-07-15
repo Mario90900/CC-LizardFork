@@ -375,7 +375,6 @@
 		TAT_TRAIT_LOOTRAT = list(TAT_TRAIT_WANTED),
 		TAT_TRAIT_LOOTRAT_2 = list(TAT_TRAIT_SPELLBLADE, TAT_TRAIT_MAGE_INITIATE, TAT_TRAIT_DIVINE_BOON_2, TAT_TRAIT_HERETIC, TAT_TRAIT_WARRIOR_EXPERT, TAT_TRAIT_BONUS_STAT_POOL, TRAIT_PARRYEXPERT, TRAIT_DODGEEXPERT, TRAIT_CRITICAL_RESISTANCE, TRAIT_MEDIUMARMOR, TRAIT_HEAVYARMOR, TRAIT_CIVILIZEDBARBARIAN),
 		TRAIT_NOSLEEP = list(TRAIT_RITUALIST, TRAIT_REGROW_LIMBS),
-		TRAIT_REVERSE_GUIDANCE = list(TRAIT_LESSER_REVERSE_GUIDANCE),
 		//TRAIT_MANORHOLDERMEDIUM = list(TRAIT_MANORHOLDERSMALL),
 		//TRAIT_MANORHOLDERSMALL = list(TRAIT_MANORHOLDERMEDIUM),
 		TRAIT_NOPAINSTUN = list(TAT_TRAIT_MAGE_INITIATE),
@@ -622,8 +621,8 @@
 			H.mind.AddSpell(new /datum/action/cooldown/spell/advance)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/gate_of_reckoning)
 		if("Macebearer")
-			H.mind.AddSpell(new /datum/action/cooldown/spell/projectile/kastvyl)
-			H.mind.AddSpell(new /datum/action/cooldown/spell/tremor)
+			H.mind.AddSpell(new /datum/action/cooldown/spell/telegraphed_strike/spellblade/shatter)
+			H.mind.AddSpell(new /datum/action/cooldown/spell/telegraphed_strike/spellblade/tremor)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/charge)
 			H.mind.AddSpell(new /datum/action/cooldown/spell/cataclysm)
 	H.mind.setup_mage_aspects(build_mage_aspects(FALSE))

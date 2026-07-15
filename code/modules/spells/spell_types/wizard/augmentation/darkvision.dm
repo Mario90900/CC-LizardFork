@@ -19,9 +19,10 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = TRUE
+	charge_swingdelay_type = SWINGDELAY_PENALTY
 	charge_time = 1 SECONDS
-	charge_drain = 0
-	charge_slowdown = CHARGING_SLOWDOWN_NONE
+	hold_drain = 0
+	charge_slowdown = CHARGING_SLOWDOWN_SMALL
 	charge_sound = 'sound/magic/charging.ogg'
 	cooldown_time = 1.5 MINUTES
 

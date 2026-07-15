@@ -23,10 +23,10 @@
 
 	charge_required = TRUE
 	charge_time = 2 SECONDS
-	charge_drain = 1
+	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 5 MINUTES
+	cooldown_time = 1 MINUTES
 
 	associated_skill = /datum/skill/magic/arcane
 	spell_tier = 2
@@ -97,7 +97,7 @@
 	R.fiber_salvage = FALSE
 
 	// Conjured glow
-	R.AddComponent(/datum/component/conjured_item, GLOW_COLOR_ARCANE)
+	R.AddComponent(/datum/component/conjured_item, GLOW_COLOR_ARCANE, FALSE, H, src)
 
 	H.put_in_hands(R)
 	conjured_item = R
@@ -124,10 +124,10 @@
 
 	charge_required = TRUE
 	charge_time = 4 SECONDS
-	charge_drain = 1
+	hold_drain = 1
 	charge_slowdown = CHARGING_SLOWDOWN_MEDIUM
 	charge_sound = 'sound/magic/charging.ogg'
-	cooldown_time = 6 MINUTES
+	cooldown_time = 2 MINUTES
 
 	spell_tier = 1
 	point_cost = 1

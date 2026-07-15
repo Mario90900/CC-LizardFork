@@ -359,6 +359,38 @@
 	releasedrain = 0
 	blade_class = BCLASS_PUNCH
 
+/datum/intent/tome/aegis
+	name = "arcyne aegis"
+	desc = "Project an arcyne shield into the offhand. Aim anywhere and hold to charge it like a spell."
+	icon_state = "inuse"
+	chargetime = 2 SECONDS
+	chargedrain = 0
+	no_early_release = TRUE
+	charging_slowdown = CHARGING_SLOWDOWN_HEAVY
+	chargedloop = /datum/looping_sound/invokeascendant
+	glow_color = GLOW_COLOR_ARCANE
+	glow_intensity = GLOW_INTENSITY_MEDIUM
+	tranged = 1
+	noaa = TRUE
+	candodge = FALSE
+	canparry = FALSE
+	misscost = 0
+	no_attack = TRUE
+	releasedrain = 0
+	blade_class = BCLASS_PUNCH
+
+/datum/intent/tome/aegis/get_chargetime()
+	var/obj/item/rogueweapon/spellbook/book = masteritem
+	if(istype(book))
+		return book.aegis_charge_time
+	return chargetime
+
+/datum/intent/tome/aegis/can_charge(atom/clicked_object)
+	var/obj/item/rogueweapon/spellbook/book = masteritem
+	if(!istype(book))
+		return FALSE
+	return book.can_conjure_aegis(mastermob, feedback = TRUE)
+
 /datum/intent/give
 	name = "give"
 	candodge = FALSE
@@ -448,6 +480,11 @@
 	swingdelay = 12
 	max_intent_damage = 9999
 
+/datum/intent/pick/heavy //Slightly faster swing delay AKA easier to use.
+	name = "heavy pick"
+	icon_state = "inpick"
+	swingdelay = 8
+
 /datum/intent/drill
 	name = "drill"
 	icon_state = "inpick"
@@ -524,6 +561,7 @@
 
 /datum/intent/arc
 	name = "arc"
+	desc = "Fires the shot in an arc that allows it to passes through mob in the way. Will also tracks the target IF you have your cursor over them. This also allows you to aims at a target above or below."
 	icon_state = "inarc"
 	tranged = 1
 	warnie = "aimwarn"
@@ -572,7 +610,7 @@
 	noaa = FALSE
 	animname = "bite"
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
-	misscost = 3
+	misscost = 1
 	releasedrain = 1
 	swingdelay = 0
 	clickcd = CLICK_CD_FAST // Same speed as katar — fists are the free unarmed weapon
@@ -606,8 +644,8 @@
 	chargetime = 0
 	animname = "blank22"
 	hitsound = list('sound/combat/hits/punch/punch (1).ogg', 'sound/combat/hits/punch/punch (2).ogg', 'sound/combat/hits/punch/punch (3).ogg')
-	misscost = 5
-	releasedrain = 4	//More than punch cus pen factor.
+	misscost = 1
+	releasedrain = 1	//More than punch cus pen factor.
 	swingdelay = 0
 	penfactor = PEN_NONE
 	candodge = TRUE
@@ -649,7 +687,7 @@
 	chargetime = 0
 	noaa = TRUE
 	rmb_ranged = TRUE
-	releasedrain = 10
+	releasedrain = 2
 	misscost = 8
 	candodge = TRUE
 	canparry = TRUE
@@ -780,6 +818,39 @@
 	no_attack = TRUE
 	candodge = FALSE
 	canparry = FALSE
+
+// Hand intents (i.e. prestidigitation)
+/datum/intent/hand
+	name = "hand"
+	icon_state = "inuse"
+	no_attack = TRUE
+	candodge = FALSE
+	canparry = FALSE
+	noaa = TRUE
+
+/datum/intent/hand/clean
+	name = "clean"
+	icon_state = "inclean"
+
+/datum/intent/hand/voice
+	name = "voice"
+	icon_state = "invoice"
+
+/datum/intent/hand/sense
+	name = "sense"
+	icon_state = "insense"
+
+/datum/intent/hand/draw
+	name = "draw"
+	icon_state = "indraw"
+
+/datum/intent/hand/spark
+	name = "spark"
+	icon_state = "inspark"
+
+/datum/intent/hand/light
+	name = "light"
+	icon_state = "inlight"
 
 /datum/intent/effect
 	blade_class = BCLASS_EFFECT

@@ -18,6 +18,7 @@ export const GrimoireAspectDetail = ({
   stagedChoices,
   pointbuySelections,
   allSelectedSpells,
+  claimedGroups,
   getPointbuyUsed,
   act,
   readOnly = false,
@@ -35,6 +36,7 @@ export const GrimoireAspectDetail = ({
   stagedChoices: Record<string, string>;
   pointbuySelections: Record<string, string[]>;
   allSelectedSpells: string[];
+  claimedGroups: Record<string, string>;
   getPointbuyUsed: (a: Aspect) => number;
   act: (action: string, params: Record<string, unknown>) => void;
   readOnly?: boolean;
@@ -57,7 +59,6 @@ export const GrimoireAspectDetail = ({
             <span
               style={{
                 fontSize: '11px',
-                fontStyle: 'italic',
                 marginLeft: '10px',
                 color: 'rgba(200,100,100,0.8)',
               }}
@@ -101,6 +102,7 @@ export const GrimoireAspectDetail = ({
             aspect={aspect}
             stagedChoices={stagedChoices}
             allSelectedSpells={allSelectedSpells}
+            claimedGroups={claimedGroups}
             act={act}
             readOnly={readOnly}
           />
@@ -129,6 +131,7 @@ export const GrimoireAspectDetail = ({
             aspect={aspect}
             pointbuySelections={pointbuySelections}
             allSelectedSpells={allSelectedSpells}
+            claimedGroups={claimedGroups}
             getPointbuyUsed={getPointbuyUsed}
             act={act}
             readOnly={readOnly}

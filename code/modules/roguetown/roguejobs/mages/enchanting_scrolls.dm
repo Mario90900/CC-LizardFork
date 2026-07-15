@@ -12,6 +12,7 @@ T1 Enchantments below here*/
 	possible_item_intents = list(/datum/intent/use)
 	grid_width = 64
 	grid_height = 32
+	dropshrink = 0.8
 
 /obj/item/enchantmentscroll/attack_obj(obj/item/O, mob/living/user)
 	if(O.unenchantable)
@@ -129,6 +130,23 @@ T1 Enchantments below here*/
 		var/magiceffect= new component
 		O.AddComponent(/datum/component/magic_item, magiceffect)
 		O.name += " of revealing"
+		qdel(src)
+	else
+		to_chat(user, span_notice("Nothing happens. Perhaps you can't enchant [O] with this?"))
+
+/obj/item/enchantmentscroll/basic/fairseeming
+	name = "enchanting scroll of fair seeming"
+	desc = "A scroll imbued with an enchantment of fair seeming. Allows an enchanted item to clean its owner."
+	component = /datum/magic_item/mundane/fairseeming
+
+/obj/item/enchantmentscroll/basic/fairseeming/attack_obj(obj/item/O, mob/living/user)
+	if(!..())
+		return
+	if(istype(O,/obj/item/clothing)|| istype(O,/obj/item/handmirror))
+		to_chat(user, span_notice("You open [src] and place [O] within. Moments later, it flashes blue with arcana, and [src] crumbles to dust."))
+		var/magiceffect= new component
+		O.AddComponent(/datum/component/magic_item, magiceffect)
+		O.name += " of fair seeming"
 		qdel(src)
 	else
 		to_chat(user, span_notice("Nothing happens. Perhaps you can't enchant [O] with this?"))

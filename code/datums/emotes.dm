@@ -240,8 +240,16 @@
 		else
 			// familiars get to do emotes with their weird planar being anatomy, so that they can caw and such
 			if(istype(user, /mob/living/simple_animal/pet/familiar))
-				var/datum/voicepack/pack2use = (user.gender==MALE)? /datum/voicepack/male : /datum/voicepack/female
-				return pack2use.get_sound(key)
+				var/mob/living/simple_animal/pet/familiar/fam = user
+				if(!fam.voice_pack)
+					return
+				var/possible_sounds = fam.voice_pack.get_sound(key)
+				var/used_sound
+				if(islist(possible_sounds))
+					used_sound = pick(possible_sounds)
+				else
+					used_sound = possible_sounds
+				return used_sound
 			return user.get_sound(key)
 
 /mob/living/proc/get_sound(input)
@@ -260,7 +268,7 @@
 	. = message
 	if(message_muffled && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent)
+		if(C.silent || C.muffled) //Caustic Edit - Account for Belly Muffling emotes!
 			. = message_muffled
 		if(!muzzle_ignore && HAS_TRAIT(C, TRAIT_MUTE) && emote_type == EMOTE_AUDIBLE)
 			. = message_muffled
@@ -327,6 +335,10 @@
 	return target
 
 /datum/emote/proc/is_emote_muffled(mob/living/carbon/H) //ONLY for audible emote use
+	//Caustic Edit - Account for Belly Muffling
+	if(H.muffled)
+		return FALSE
+	//Caustic Edit End
 	if(H.mouth?.muteinmouth)
 		return FALSE
 	for(var/obj/item/grabbing/grab in H.grabbedby)
