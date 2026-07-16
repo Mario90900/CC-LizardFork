@@ -1,5 +1,4 @@
-/datum/tat_items
-/datum/tat_items
+/datum/tat_items //This appears to hold your whole chosen items list, as well as what is currently selected to move it around in the UI.
 	var/datum/tat_build/owner_build
 	var/list/selected = list()
 	var/list/item_loadout = list()
