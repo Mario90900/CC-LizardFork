@@ -98,7 +98,7 @@
 	cost = 2
 
 /datum/tat_item_entry/weapon/iron/bow/long
-	/obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow
+	item_path = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow
 	name = "Long Bow"
 	cost = 3
 
