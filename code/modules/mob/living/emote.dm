@@ -472,10 +472,12 @@
 				message_param = "kisses %t deeply."
 			else if(H.zone_selected == BODY_ZONE_PRECISE_EARS)
 				message_param = "kisses %t on the ear."
-				var/mob/living/carbon/human/E = target
-				if(iself(E) || ishalfelf(E) || isdarkelf(E))
-					if(!E.cmode)
-						to_chat(target, span_love("It tickles..."))
+				if(!HAS_TRAIT(target, TRAIT_DECEIVING_MEEKNESS) && !HAS_TRAIT(target, TRAIT_NOMOOD))
+					var/mob/living/carbon/human/E = target
+					if(iself(E) || ishalfelf(E) || isdarkelf(E) || issunelf(E))
+						if(!E.cmode)
+							to_chat(target, span_love("It tickles..."))
+							E.emote("eflick", intentional = TRUE)
 			else if(H.zone_selected == BODY_ZONE_PRECISE_R_EYE || H.zone_selected == BODY_ZONE_PRECISE_L_EYE)
 				message_param = "kisses %t on the brow."
 			else if(H.zone_selected == BODY_ZONE_PRECISE_SKULL)
@@ -484,6 +486,11 @@
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
 	playsound(target.loc, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
+		/// Blackblood hidden interactions
+		var/mob/living/carbon/carbs = target
+		if(HAS_TRAIT(carbs, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(carbs, TRAIT_PSYDONIAN_GRIT))
+			user.add_stress(/datum/stressevent/inq_trauma)
+			carbs.emote("whimper")
 		record_round_statistic(STATS_KISSES_MADE)
 
 /datum/emote/living/lick
@@ -517,10 +524,12 @@
 				message_param = "licks %t lips."
 			else if(J.zone_selected == BODY_ZONE_PRECISE_EARS)
 				message_param = "licks the ear of %t."
-				var/mob/living/carbon/human/O = target
-				if(iself(O) || ishalfelf(O) || isdarkelf(O))
-					if(!O.cmode)
-						to_chat(target, span_love("It tickles..."))
+				if(!HAS_TRAIT(target, TRAIT_DECEIVING_MEEKNESS) && !HAS_TRAIT(target, TRAIT_NOMOOD))
+					var/mob/living/carbon/human/O = target
+					if(iself(O) || ishalfelf(O) || isdarkelf(O) || issunelf(O))
+						if(!O.cmode)
+							to_chat(target, span_love("It tickles..."))
+							O.emote("eflick", intentional = TRUE)
 			else if(J.zone_selected == BODY_ZONE_PRECISE_GROIN)
 				message_param = "licks %t between the legs."
 				to_chat(target, span_love("That feels nice..."))
@@ -586,6 +595,11 @@
 	if(ishuman(target))
 		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 		if(user.mind)
+			/// Blackblood hidden interactions
+			var/mob/living/carbon/carbs = target
+			if(HAS_TRAIT(carbs, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(carbs, TRAIT_PSYDONIAN_GRIT))
+				carbs.add_stress(/datum/stressevent/inq_trauma)
+				carbs.stress_freakout()
 			record_round_statistic(STATS_HUGS_MADE)
 			SEND_SIGNAL(user, COMSIG_MOB_HUGGED, target)
 
@@ -667,6 +681,11 @@
 		//Caustic Edit End
 		H.AdjustSleeping(-50)
 		playsound(target.loc, 'sound/foley/slap.ogg', 100, TRUE, -1)
+		/// Blackblood hidden interactions
+		var/mob/living/carbon/carbs = target
+		if(HAS_TRAIT(target, TRAIT_BLACKBLOOD) && HAS_TRAIT(user, TRAIT_INQUISITION) && !HAS_TRAIT(target, TRAIT_PSYDONIAN_GRIT))
+			user.add_stress(/datum/stressevent/inq_trauma)
+			carbs.emote("whimper")
 
 /datum/emote/living/pinch
 	key = "pinch"
@@ -1564,7 +1583,7 @@
 
 		switch(key)
 			if("strength")
-				success = living.stat_roll(STAT_STRENGTH, chance_per_point, modifier_sum) 
+				success = living.stat_roll(STAT_STRENGTH, chance_per_point, modifier_sum)
 				chance = living.get_stat(STAT_STRENGTH)
 			if("perception")
 				success = living.stat_roll(STAT_PERCEPTION, chance_per_point, modifier_sum)
@@ -1898,13 +1917,13 @@
 
 /mob/living/carbon/human/verb/dive()
 	set name = "Dive Underwater"
-	set category = "IC" //Caustic Edit - Originally was it's own tab, "Swimming"
-	
+	set category = "IC.Actions" //Caustic Edit - Originally was it's own tab, "Swimming"
+
 	var/turf/T = get_turf(src)
 	if(!istype(T, /turf/open/water/transparent))
 		to_chat(src, span_warning("You must be in deep water to dive!"))
 		return
-	
+
 	var/turf/below = GET_TURF_BELOW(T)
 	if(!below || !istype(below, /turf/open/water/transparent))
 		to_chat(src, span_warning("It's not deep enough here to dive."))
@@ -1914,10 +1933,10 @@
 
 /mob/living/carbon/human/verb/surface()
 	set name = "Swim to Surface"
-	set category = "IC" //Caustic Edit - Originally was it's own tab, "Swimming"
-	
+	set category = "IC.Actions" //Caustic Edit - Originally was it's own tab, "Swimming"
+
 	var/turf/T = get_turf(src)
-	
+
 	if(!istype(T, /turf/open/water/transparent/inner))
 		to_chat(src, span_warning("You are already at the surface!"))
 		return
@@ -1930,22 +1949,22 @@
 	src.swim_z(UP)
 
 /mob/living/carbon/human/proc/swim_z(direction)
-	if(stat || IsKnockdown() || IsParalyzed()) 
+	if(stat || IsKnockdown() || IsParalyzed())
 		to_chat(src, span_warning("You are too incapacitated to move!"))
 		return FALSE
-	
+
 	var/turf/current_T = get_turf(src)
 	var/target_z = (direction == UP) ? (z + 1) : (z - 1)
 	var/turf/target_T = locate(current_T.x, current_T.y, target_z)
 
 	if(istype(target_T, /turf/open/water))
-		if(!stamina_add(direction == DOWN ? 20 : 10)) 
+		if(!stamina_add(direction == DOWN ? 20 : 10))
 			to_chat(src, span_warning("You are too exhausted to [direction == UP ? "surface" : "dive"]!"))
 			return FALSE
 
 		visible_message(span_notice("[src] [direction == UP ? "emerges to the surface" : "dives into the depths"]."))
 		forceMove(target_T)
 		return TRUE
-		
+
 	to_chat(src, span_warning("You can't [direction == UP ? "emerge" : "dive"] here."))
 	return FALSE

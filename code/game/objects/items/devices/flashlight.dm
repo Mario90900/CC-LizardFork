@@ -253,6 +253,8 @@
 //Caustic Edit - Thrown Torches light things on fire! Code pretty much borrowed from above.
 /obj/item/flashlight/flare/torch/afterattack(atom/movable/A, mob/user, proximity)
 	. = ..()
+	if (istype(src, /obj/item/flashlight/flare/torch/lantern)) //Only let exposed flame torches actually light people on fire!
+		return
 	if (!proximity)
 		return
 	if (on && (prob(50) || (user.used_intent.type == /datum/intent/use)))
@@ -415,10 +417,10 @@
 	on_damage = 15
 	wdefense = 1 //Metal rod. Offers a pittance-of-a-chance to parry an incoming strike.
 	smeltresult = /obj/item/rogueore/coal
-	max_integrity = 100	
+	max_integrity = 100
 	fuel = 120 MINUTES
 	should_self_destruct = FALSE
-	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike) //Reflects the fact that it is, in essence, a heavy rod of iron. 
+	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike) //Reflects the fact that it is, in essence, a heavy rod of iron.
 	extinguishable = FALSE
 	weather_resistant = TRUE
 
@@ -617,6 +619,9 @@
 	icon_state = "pumpkinlampz"
 	item_state = "pumpkinlampz"
 	light_color = "#ceff72ff"
+
+/obj/item/flashlight/flare/torch/lantern/pumpkin/zizo/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, "GREAT GOOGLY MOOGLY, THAT PUMPKIN IS PRAISING SHE OF Z!")
 
 /obj/item/flashlight/flare/torch/lantern/pumpkin/grin
 	name = "smiling pumpkin lamptern"

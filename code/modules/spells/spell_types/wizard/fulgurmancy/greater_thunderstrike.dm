@@ -7,7 +7,7 @@
 	desc = "PLACEHOLDER MASTERY SPELL - may be replaced later.\n\n\
 	Call a massive lightning strike that engulfs the entire area at once. \
 	Damage falls off with distance from the center."
-	button_icon_state = "thunderstrike"
+	button_icon_state = "greater_thunderstrike"
 	sound = 'sound/magic/lightning.ogg'
 	spell_color = GLOW_COLOR_LIGHTNING
 	glow_intensity = GLOW_INTENSITY_VERY_HIGH
@@ -65,7 +65,7 @@
 
 	H.visible_message(span_boldwarning("[H] calls down a massive storm of lightning!"))
 	playsound(centerpoint, 'sound/magic/charging.ogg', 80, TRUE, 6)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(thunderstrike_erupt), centerpoint, H, aoe_range, GTSTRIKE_DAMAGE, src, "Greater Thunderstrike", H), GTSTRIKE_TELEGRAPH)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(thunderstrike_erupt), centerpoint, H, aoe_range, GTSTRIKE_DAMAGE, src, "Greater Thunderstrike"), GTSTRIKE_TELEGRAPH)
 	return TRUE
 
 #undef GTSTRIKE_DAMAGE

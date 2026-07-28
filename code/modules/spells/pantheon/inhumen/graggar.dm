@@ -186,12 +186,16 @@
 	range = 8 // you can dodge it, see speed. lower if need be.
 	speed = 1.6
 	hitsound = 'sound/magic/slimesquish.ogg'
+	guard_deflectable = TRUE
+	expose_caster_on_deflect = TRUE
 
-/obj/projectile/magic/unholy_grasp/on_hit(target)
+/obj/projectile/magic/unholy_grasp/on_hit(target, blocked = FALSE)
 	. = ..()
 	if(!iscarbon(target))
 		return
 	if(out_of_effective_range())
+		return
+	if(blocked >= 100)
 		return
 	if(target)
 		ensnare(target)
@@ -284,7 +288,7 @@
 	if(spell_guard_check(human, TRUE))
 		human.visible_message(span_warning("[human] resists the bloodlust!"))
 		return TRUE
-	
+
 	human.apply_status_effect(/datum/status_effect/debuff/bloody_mess)
 	human.apply_status_effect(/datum/status_effect/debuff/sensitive_nerves)
 

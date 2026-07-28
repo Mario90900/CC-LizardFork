@@ -167,3 +167,45 @@
 
 /mob/living/carbon/human/proc/CloseWings()
 	return
+
+/datum/emote/living/carbon/human/eflick
+	key = "eflick"
+	key_third_person = "flicks"
+	message = "flicks their ears."
+	emote_type = EMOTE_VISIBLE
+	show_runechat = TRUE
+
+/datum/emote/living/carbon/human/eflick/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(!.)
+		return
+	var/mob/living/carbon/human/H = user
+	if(!istype(H) || !H.dna || !H.dna.species || !H.dna.species.can_flick_ears(H))
+		return
+	if(!H.dna.species.is_flicking_ears(H))
+		H.dna.species.perform_flick_ears(H)
+
+/datum/emote/living/carbon/human/eflick/can_run_emote(mob/user, status_check = TRUE , intentional)
+	if(!..())
+		return FALSE
+	var/mob/living/carbon/human/H = user
+	return H.dna && H.dna.species && H.dna.species.can_flick_ears(user)
+
+/mob/living/carbon/human/verb/emote_eflick()
+	set name = "Ear Flick"
+	set category = "EMOTES"
+
+	emote("eflick", intentional = TRUE)
+
+/datum/emote/living/carbon/human/weh
+	key = "weh"
+	key_third_person = "wehs"
+	message = "lets out a weh!"
+	message_muffled = "makes a muffled weh."
+	emote_type = EMOTE_AUDIBLE
+
+/mob/living/carbon/human/verb/emote_weh()
+	set name = "Weh"
+	set category = "NOISES"
+
+	emote("weh", intentional = TRUE)

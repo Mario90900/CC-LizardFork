@@ -27,7 +27,7 @@
 			return
 	else
 		return ..()
-		
+
 	return ..()
 
 /obj/item/rogueore/gold
@@ -147,8 +147,8 @@
 	smeltresult = null
 	resistance_flags = FIRE_PROOF
 	smelted = TRUE
+	has_item_quality = TRUE
 	var/datum/anvil_recipe/currecipe
-	var/quality = SMELTERY_LEVEL_NORMAL
 	grid_width = 64
 	grid_height = 32
 	dropshrink = 0.8
@@ -162,30 +162,38 @@
 
 /obj/item/ingot/Initialize(mapload, smelt_quality)
 	. = ..()
-	if(!smelt_quality)
-		return
-	quality = smelt_quality
-	switch(quality)
-		if(SMELTERY_LEVEL_SPOIL)
-			name = "spoilt [name]"
-			desc += " It is practically scrap."
-			sellprice *= 0.5
-		if(SMELTERY_LEVEL_POOR)
-			name = "poor-quality [name]"
-			desc += " It is of dubious quality." // EA NASSIR, WHEN I GET YOU...
-			sellprice *= 0.8
-		if(SMELTERY_LEVEL_GOOD)
-			name = "good-quality [name]"
-			desc += " It is of notable quality."
-			sellprice *= 1.1
-		if(SMELTERY_LEVEL_GREAT)
-			name = "great-quality [name]"
-			desc += " It is of remarkable quality. Fit for ambitious endeavours."
-			sellprice *= 1.2
-		if(SMELTERY_LEVEL_EXCELLENT)
-			name = "excellent-quality [name]"
-			desc += " It is of exquisite quality. It [pick("yearns","begs","demands")] to be turned into a masterwork."
-			sellprice *= 1.3
+	if(smelt_quality)
+		apply_smelt_quality(smelt_quality)
+
+/obj/item/ingot/proc/apply_smelt_quality(smelt_quality)
+	item_quality = smelt_quality
+	name = initial(name)
+	desc = initial(desc)
+	var/prefix
+	switch(item_quality)
+		if(ITEM_QUALITY_AWFUL)
+			prefix = ITEM_QUALITY_PREFIX_AWFUL
+			desc = "[initial(desc)] It is practically scrap."
+		if(ITEM_QUALITY_CRUDE)
+			prefix = ITEM_QUALITY_PREFIX_CRUDE
+			desc = "[initial(desc)] It is of dubious quality."
+		if(ITEM_QUALITY_ROUGH)
+			prefix = ITEM_QUALITY_PREFIX_ROUGH
+		if(ITEM_QUALITY_STANDARD)
+			prefix = null
+		if(ITEM_QUALITY_FINE)
+			prefix = ITEM_QUALITY_PREFIX_FINE
+			desc = "[initial(desc)] It is of notable quality."
+		if(ITEM_QUALITY_FLAWLESS)
+			prefix = ITEM_QUALITY_PREFIX_FLAWLESS
+			desc = "[initial(desc)] It is of remarkable quality. Fit for ambitious endeavours."
+		if(ITEM_QUALITY_MASTERWORK)
+			prefix = ITEM_QUALITY_PREFIX_MASTERWORK
+			desc = "[initial(desc)] It is of exquisite quality. It [pick("yearns","begs","demands")] to be turned into a masterwork."
+	if(prefix)
+		name = "[prefix] [initial(name)]"
+	if(initial(sellprice) > 0)
+		sellprice = max(1, round(initial(sellprice) * ITEM_QUALITY_MULT(item_quality)))
 
 /obj/item/ingot/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/rogueweapon/tongs))
@@ -364,31 +372,31 @@
 
 /obj/item/ingot/bsslag
 	name = "blacksteel-speckled slag"
-	desc = "A mass of smoldered blacksteel, rendered lame from the forge's heat. It has taken its secrets to the grave." 
+	desc = "A mass of smoldered blacksteel, rendered lame from the forge's heat. It has taken its secrets to the grave."
 	icon_state = "blacksteelslag"
 	sellprice = 7
 
 /obj/item/ingot/jadeslag
 	name = "jade-speckled slag"
-	desc = "A mass of smoldered jade, rendered lame from the forge's heat. Heavenly beauty, left barely recognizable." 
+	desc = "A mass of smoldered jade, rendered lame from the forge's heat. Heavenly beauty, left barely recognizable."
 	icon_state = "jadeslag"
 	sellprice = 9
 
 /obj/item/ingot/silverslag
 	name = "silver-speckled slag"
-	desc = "A mass of smoldered silver, rendered lame from the forge's heat. Holy might, marred and tarnished." 
+	desc = "A mass of smoldered silver, rendered lame from the forge's heat. Holy might, marred and tarnished."
 	icon_state = "silverslag"
 	sellprice = 9
 
 /obj/item/ingot/goldslag
 	name = "gold-speckled slag"
-	desc = "A mass of smoldered gold, rendered lame from the forge's heat. Haughty dreams, brought lower than low." 
+	desc = "A mass of smoldered gold, rendered lame from the forge's heat. Haughty dreams, brought lower than low."
 	icon_state = "goldslag"
 	sellprice = 12
 
 /obj/item/ingot/copperslag
 	name = "copper-speckled slag"
-	desc = "A mass of smoldered copper, rendered lame from the forge's heat. Primeval innovation, gnarled into rubble." 
+	desc = "A mass of smoldered copper, rendered lame from the forge's heat. Primeval innovation, gnarled into rubble."
 	icon_state = "copperslag"
 	sellprice = 3
 
@@ -458,6 +466,9 @@
 	smeltresult = null
 	sellprice = 130
 
+/obj/item/ingot/avantyne/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_ZIZO_AVANTYNE)
+
 //Components!
 
 /obj/item/ingot/component //Root. Don't use under most circumstances.
@@ -524,11 +535,18 @@
 	icon_state = "component_zizo"
 	dropshrink = 0.7
 
+/obj/item/ingot/component/zizo/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_ZIZO_AVANTYNE)
+
 /obj/item/ingot/component/graggar
 	name = "vicious fragment"
 	desc = "Bleeding fragments of an otherworldly alloy. </br>Murder is nothing more than justice without arbitration."
 	icon_state = "component_graggar"
 	dropshrink = 0.7
+
+/obj/item/ingot/component/graggar/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_GRAGGAR_MISC)
+
 
 /obj/item/ingot/component/matthios
 	name = "gilded fragment"
@@ -536,8 +554,14 @@
 	icon_state = "component_matthios"
 	dropshrink = 0.7
 
+/obj/item/ingot/component/matthios/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_MATTHIOS_MISC)
+
 /obj/item/ingot/component/baotha
 	name = "saccharine fragment"
 	desc = "Aromatic fragments of an otherworldly alloy. </br>Despair is the gravest, most agonizing poison of them all."
 	icon_state = "component_baotha"
 	dropshrink = 0.7
+
+/obj/item/ingot/component/baotha/get_examine_highlight_status()
+	return list(EXAMINEHIGHLIGHT_HERESYSEVERITY_SUSPICIOUS, HERESYDESC_BAOTHA_MISC)

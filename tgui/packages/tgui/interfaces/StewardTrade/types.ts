@@ -13,10 +13,29 @@ export type RegionCatalogEntry = {
   description: string;
 };
 
+export type LedgerEntry = {
+  kind: string; // mint | burn | transfer | micro | ...
+  from: string;
+  to: string;
+  amount: number;
+  reason: string;
+};
+
+export type LedgerPage = {
+  entries: LedgerEntry[];
+  page: number;
+  page_size: number;
+  shown: number;
+  has_more: BooleanLike;
+  filtered: BooleanLike;
+};
+
 export type StaticData = {
   order_pool_cap: number;
   good_catalog: Record<string, GoodCatalogEntry>;
   region_catalog: Record<string, RegionCatalogEntry>;
+  // Only present while the user has the Ledger tab open (server gates it on ledger_view).
+  ledger_page?: LedgerPage;
 };
 
 // --- Dynamic state (re-shipped on each ui_data) ----------------------------
@@ -55,6 +74,8 @@ export type EconomicEvent = {
   event_type: string; // ECON_EVENT_SHORTAGE | ECON_EVENT_OVERSUPPLY
   days_left: number;
   affected_goods: string[];
+  saturation_target: number;
+  saturation_progress: number;
 };
 
 export type BanditryProjection = {
@@ -158,6 +179,8 @@ export type TradeQuote = {
   warrant_remaining: number;
   warrant_ok: BooleanLike;
   can_afford: BooleanLike;
+  stockpile_amount: number;
+  stockpile_after: number;
 };
 
 export type PetitionCategory = {
@@ -231,4 +254,5 @@ export type TabKey =
   | 'regions'
   | 'auto_import'
   | 'petition'
+  | 'ledger'
   | 'royal_custom';

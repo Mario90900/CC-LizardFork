@@ -13,7 +13,7 @@ import {
   tabBarStyle,
   tabStyle,
 } from '../../common/parchment';
-import { type FundEntry, type TabProps } from '../types';
+import type { FundEntry, TabProps } from '../types';
 
 type LoanTier = 'personal' | 'indenture';
 
@@ -29,6 +29,9 @@ export const IssueLoanSection = ({
   const [amount, setAmount] = useState<string>('');
   const [term, setTerm] = useState<number>(2);
   const [rate, setRate] = useState<number>(25);
+  const rateOptions = fund.allow_zero_rate
+    ? [0, ...RATE_OPTIONS]
+    : RATE_OPTIONS;
   const indentureTargets = data.funds.filter(
     (f) => f.id !== fund.id && f.supports_loans,
   );
@@ -91,9 +94,7 @@ export const IssueLoanSection = ({
                       marginRight: 4,
                       fontWeight: target === t.id ? 'bold' : 'normal',
                       background:
-                        target === t.id
-                          ? 'var(--p-tab-active-bg)'
-                          : BUTTON_BG,
+                        target === t.id ? 'var(--p-tab-active-bg)' : BUTTON_BG,
                     }}
                     onClick={() => setTarget(t.id)}
                   >
@@ -137,10 +138,7 @@ export const IssueLoanSection = ({
                 ...inkButtonStyle({}),
                 marginRight: 4,
                 fontWeight: term === t ? 'bold' : 'normal',
-                background:
-                  term === t
-                    ? 'var(--p-tab-active-bg)'
-                    : BUTTON_BG,
+                background: term === t ? 'var(--p-tab-active-bg)' : BUTTON_BG,
               }}
               onClick={() => setTerm(t)}
             >
@@ -152,7 +150,7 @@ export const IssueLoanSection = ({
       <div style={fieldRowStyle}>
         <div style={fieldLabelStyle}>Rate</div>
         <div style={fieldValueStyle}>
-          {RATE_OPTIONS.map((r) => (
+          {rateOptions.map((r) => (
             <button
               type="button"
               key={r}
@@ -160,10 +158,7 @@ export const IssueLoanSection = ({
                 ...inkButtonStyle({}),
                 marginRight: 4,
                 fontWeight: rate === r ? 'bold' : 'normal',
-                background:
-                  rate === r
-                    ? 'var(--p-tab-active-bg)'
-                    : BUTTON_BG,
+                background: rate === r ? 'var(--p-tab-active-bg)' : BUTTON_BG,
               }}
               onClick={() => setRate(r)}
             >

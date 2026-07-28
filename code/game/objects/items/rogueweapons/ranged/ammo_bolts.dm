@@ -86,10 +86,13 @@
 	min_range = MIN_BOLT_RANGE
 	max_range = MAX_BOLT_RANGE
 	dam_falloff_factor = DAM_FALLOFF_BOLT
+	var/trains_ranged_skill = TRUE
 
 
 /obj/projectile/bullet/reusable/bolt/on_hit(atom/target)
 	. = ..()
+	if(!trains_ranged_skill)
+		return
 	var/mob/living/L = firer
 	if(!L || !L.mind)
 		return
@@ -312,11 +315,11 @@
 /obj/projectile/bullet/reusable/heavy_bolt/silver
 	name = "heavy silver bolt"
 	damage = 110
-	armor_penetration = PEN_BSTEEL 
+	armor_penetration = PEN_BSTEEL
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/silver
 	icon_state = "silvheavybolt_proj"
 	hitsound = 'sound/combat/hits/hi_bolt (3).ogg'
-	speed = 0.8 //Same speed as a crossbow bolt. 
+	speed = 0.8 //Same speed as a crossbow bolt.
 	is_silver_proj = TRUE
 	npc_simple_damage_mult = 10 //..or 1000 damage against a mindless mob. If you're using this against one, you're either a fool or have no other choice left. Godspeed.
 
@@ -335,7 +338,7 @@
 /obj/projectile/bullet/reusable/heavy_bolt/stake
 	name = "siegestake"
 	damage = 60
-	armor_penetration = PEN_BSTEEL 
+	armor_penetration = PEN_BSTEEL
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/stake
 	icon_state = "heavystake_proj"
 	hitsound = 'sound/combat/hits/hi_bolt (2).ogg'
@@ -360,7 +363,7 @@
 /obj/projectile/bullet/reusable/heavy_bolt/stake_silver
 	name = "silver-tipped siegestake"
 	damage = 70 // In essence, a lesser version of the traditional silver siegebolts.
-	armor_penetration = PEN_BSTEEL 
+	armor_penetration = PEN_BSTEEL
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/stake_silver
 	icon_state = "silvheavystake_proj"
 	hitsound = 'sound/combat/hits/hi_bolt (2).ogg'
@@ -442,7 +445,7 @@
 /obj/projectile/bullet/reusable/heavy_bolt/stake
 	name = "siegestake"
 	damage = 60
-	armor_penetration = PEN_BSTEEL 
+	armor_penetration = PEN_BSTEEL
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/stake
 	icon_state = "heavystake_proj"
 	hitsound = 'sound/combat/hits/hi_bolt (2).ogg'
@@ -467,7 +470,7 @@
 /obj/projectile/bullet/reusable/heavy_bolt/stake_silver
 	name = "silver-tipped siegestake"
 	damage = 70 // In essence, a lesser version of the traditional silver siegebolts.
-	armor_penetration = PEN_BSTEEL 
+	armor_penetration = PEN_BSTEEL
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/heavy_bolt/stake_silver
 	icon_state = "silvheavystake_proj"
 	hitsound = 'sound/combat/hits/hi_bolt (2).ogg'
@@ -547,21 +550,25 @@
 	name = "pyroclastic bolt"
 	desc = "A flint-tipped bolt, housed in a thin alloy and smeared with a flammable tincture. The lightest impact tends to violently crumple its alloyed blanket \
 	against the flint, spawning a flurry of sparks that turns its jellified accompaniment into a firestorm."
-	damage = 20
+	damage = 50
 	icon_state = "boltpyro_proj"
 	hitsound = 'sound/blank.ogg'
 	embedchance = 0
-	woundclass = BCLASS_BLUNT
-	npc_simple_damage_mult = 4 //..or 100 damage against a mindless mob. Fairly mild, but also comes with the benefit of inducing heavy firestacks on impact.
+	woundclass = BCLASS_BURN
+	damage_type = BURN
+	flag = "fire"
+	npc_simple_damage_mult = 2
 
-/obj/projectile/bullet/bolt/pyro/on_hit(target)
+/obj/projectile/bullet/bolt/pyro/on_hit(target, blocked = FALSE)
 	..()
-	if(!ismob(target))
+	var/turf/epicenter = get_turf(target)
+	if(epicenter)
+		new /obj/effect/temp_visual/explosion(epicenter)
+		playsound(epicenter, pick('sound/misc/explode/incendiary (1).ogg', 'sound/misc/explode/incendiary (2).ogg'), 100, TRUE, 4)
+	if(!ismob(target) || blocked >= 100)
 		return
 	var/mob/living/M = target
-	M.adjust_fire_stacks(6)
-	M.adjustFireLoss(15)
-	M.ignite_mob()
+	apply_scorch_stack(M, 4, def_zone)
 
 /obj/item/ammo_casing/caseless/rogue/bolt/water
 	name = "water bolt"

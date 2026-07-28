@@ -27,10 +27,10 @@
 	//Caustic Edit - Add Spontaneous Vore element
 	AddElement(/datum/element/spontaneous_vore)
 	//Caustic Edit End
-	
+
 	//CC Edit - Make all living mobs resize when they spawn to adjust appropriately.
 	update_transform()
-	//CC Edit - Make all living mobs resize when they spawn to adjust appropriately.
+	//CC Edit End
 
 /mob/living/Destroy()
 	surgeries = null
@@ -62,6 +62,11 @@
 	if(craftingthing)
 		QDEL_NULL(craftingthing)
 	QDEL_LIST(simple_wounds)
+	if(simple_embedded_objects)
+		for(var/obj/item/embedded as anything in simple_embedded_objects)
+			embedded.is_embedded = FALSE
+			embedded.embedded_host = null
+		simple_embedded_objects = null
 	return ..()
 
 /mob/living/onZImpact(turf/T, levels)
@@ -291,7 +296,7 @@
 				forceMove(target.loc)
 				now_pushing = FALSE
 				return TRUE
-			
+
 			if(!(istype(target.a_intent, INTENT_HELP) || target.get_active_held_item() || target.restrained()))
 				if(step_mechanics_pref && target.step_mechanics_pref)
 					if(handle_micro_bump_other(target)) return
@@ -809,6 +814,9 @@
 	if(pulledby)
 		to_chat(src, span_warning("I'm grabbed!"))
 		return
+	if(world.time < rest_locked_until)
+		to_chat(src, span_warning("I'm too charged with vigor to lie down!"))
+		return
 	if(!resting)
 		set_resting(TRUE, FALSE)
 
@@ -846,6 +854,9 @@
 		else
 			src.visible_message(span_warning("[src] struggles to stand up."))
 	else
+		if(world.time < rest_locked_until)
+			to_chat(src, span_warning("I'm too charged with vigor to lie down!"))
+			return
 		set_resting(TRUE, FALSE)
 
 /mob/living/proc/set_resting(rest, silent = TRUE)
@@ -2215,6 +2226,12 @@
 					found_ping(get_turf(M), client, "trap")
 			if(istype(O, /obj/structure/flora/roguegrass/maneater/real))
 				found_ping(get_turf(O), client, "trap")
+			if(istype(O, /obj/item/clothing) || istype(O, /obj/item/rogueweapon) || istype(O, /obj/item/gun))	//bows and crossbows are... guns...
+				if(!isturf(O.loc))
+					continue
+				if(get_dist(O, get_turf(src)) > (get_skill_level(/datum/skill/misc/tracking) + 1))	// From 1 to 7.
+					continue
+				found_ping_object(get_turf(O), O, client)
 			//Hearthstone port - Tracking
 		for(var/obj/effect/track/potential_track in orange(7, src)) //Can't use view because they're invisible by default.
 			if(!can_see(src, potential_track, 10))
@@ -2255,6 +2272,57 @@
 					dist_text = "in the distance"
 			to_chat(src, span_notice("You spot a faint trail [dist_text] to the [dir_text]."))
 
+		var/trackskill = get_skill_level(/datum/skill/misc/tracking)
+		var/has_sleuth = HAS_TRAIT(src, TRAIT_SLEUTH)
+
+		if(trackskill >= SKILL_LEVEL_EXPERT || has_sleuth)
+			var/search_range = has_sleuth ? (trackskill + 1) : 7 // Up to 7 (full screen) w/ Legendary
+			var/turf_origin = get_turf(src)
+			var/turf_up_one	= get_step_multiz(turf_origin, UP)
+			var/turf_up_two
+			if(turf_up_one && (trackskill >= SKILL_LEVEL_MASTER || has_sleuth))
+				turf_up_two = get_step_multiz(turf_up_one, UP)
+			var/turf_up_three
+			if(turf_up_two && (trackskill >= SKILL_LEVEL_LEGENDARY || has_sleuth))
+				turf_up_three = get_step_multiz(turf_up_two, UP)	// We physically cannot go higher on dun world, so we don't. This is very niche already.
+
+			var/list/z_highlights
+			if(turf_up_one)
+				z_highlights = list()
+
+			#define ZTAG_ONE 1
+			#define ZTAG_TWO 2
+			#define ZTAG_THREE 3
+
+			if(turf_up_one)
+				for(var/mob/living/L in get_hearers_in_range(search_range, turf_up_one, RECURSIVE_CONTENTS_CLIENT_MOBS))
+					if((L.m_intent == MOVE_INTENT_SNEAK || HAS_TRAIT(src, TRAIT_LIGHT_STEP)) && !has_sleuth)
+						continue
+					var/turf/T = locate(L.x, L.y, src.z) // We'll want to highlight the turf on -our- z-level.
+					z_highlights[T] = ZTAG_ONE
+
+			if(turf_up_two)
+				for(var/mob/living/L in get_hearers_in_range(search_range, turf_up_two, RECURSIVE_CONTENTS_CLIENT_MOBS))
+					if((L.m_intent == MOVE_INTENT_SNEAK || HAS_TRAIT(src, TRAIT_LIGHT_STEP)) && !has_sleuth)
+						continue
+					var/turf/T = locate(L.x, L.y, src.z) // We'll want to highlight the turf on -our- z-level.
+					z_highlights[T] = ZTAG_TWO
+
+			if(turf_up_three)
+				for(var/mob/living/L in get_hearers_in_range(search_range, turf_up_three, RECURSIVE_CONTENTS_CLIENT_MOBS))
+					if((L.m_intent == MOVE_INTENT_SNEAK || HAS_TRAIT(src, TRAIT_LIGHT_STEP)) && !has_sleuth)
+						continue
+					var/turf/T = locate(L.x, L.y, src.z) // We'll want to highlight the turf on -our- z-level.
+					z_highlights[T] = ZTAG_THREE
+
+			if(length(z_highlights))
+				for(var/turf/T in z_highlights)
+					if(!T.density)
+						found_ping_someone_above(T, client, z_highlights[T])
+
+			#undef ZTAG_ONE
+			#undef ZTAG_TWO
+			#undef ZTAG_THREE
 
 /proc/found_ping(atom/A, client/C, state)
 	if(!A || !C || !state)
@@ -2267,11 +2335,41 @@
 	I.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	flick_overlay(I, list(C), 30)
 
+/proc/found_ping_object(turf/tloc, atom/A, client/C)
+	if(!A || !C || !tloc)
+		return
+	if(!A.icon_state || !A.icon)
+		return
+	var/image/I = image(icon = 'icons/effects/effects.dmi', loc = tloc, icon_state = "found_obj", layer = 18)
+	if(!I)
+		return
+	var/image/IAtom = image(icon = A.icon, loc = A, icon_state = A.icon_state, layer = 18)
+	IAtom.alpha = 155
+	IAtom.add_overlay(I)
+	IAtom.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	IAtom.layer = 18
+	IAtom.plane = 18
+	flick_overlay(IAtom, list(C), 30)
+
+/proc/found_ping_someone_above(turf/tloc, client/C, tag)
+	if(!C || !tloc || !tag)
+		return
+	var/image/I = image(icon = 'icons/effects/effects.dmi', loc = tloc, icon_state = "found_above[tag]", layer = 18)
+	if(!I)
+		return
+	I.alpha = 155
+	I.layer = 19
+	I.plane = 19
+	if(!I)
+		return
+	I.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	flick_overlay(I, list(C), 30)
+
 /mob/proc/look_up()
 	return
 
 /mob/living/look_up()
-	if(client.perspective != MOB_PERSPECTIVE) 
+	if(client.perspective != MOB_PERSPECTIVE)
 		stop_looking()
 		return
 	if(client.pixel_x || client.pixel_y)
@@ -2315,8 +2413,8 @@
 			to_chat(src, span_warning("There is nothing unusual about this weather.."))
 			do_time_change()
 		return
-		
-	else if(!istransparentturf(ceiling) && !water_view) 
+
+	else if(!istransparentturf(ceiling) && !water_view)
 		to_chat(src, span_warning("There is a ceiling above my head."))
 		return
 
@@ -2331,7 +2429,7 @@
 
 	if(!do_after(src, ttime, target = src))
 		return
-		
+
 	reset_perspective(ceiling)
 	update_cone_show()
 //	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking)) //We stop looking up if we move.
@@ -2432,7 +2530,7 @@
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks down through [T]."))
 	else
-		to_chat(src, span_info("[src] looks down through [T]."))	
+		to_chat(src, span_info("[src] looks down through [T]."))
 
 	if(!do_after(src, ttime, target = src))
 		return

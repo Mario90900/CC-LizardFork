@@ -171,7 +171,6 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 		/datum/crafting_recipe/roguetown/sewing/tailor/otavangambeson,
 		/datum/crafting_recipe/roguetown/leather/unique/otavanleatherpants,
 		/datum/crafting_recipe/roguetown/leather/unique/otavanboots,
-		/datum/crafting_recipe/roguetown/sewing/tailor/hgambeson/fencer,
 		/datum/crafting_recipe/roguetown/leather/unique/fencingbreeches,
 		/datum/crafting_recipe/roguetown/sewing/tailor/grenzelhat,
 		/datum/crafting_recipe/roguetown/sewing/tailor/grenzelshirt,
@@ -211,7 +210,6 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 		/datum/crafting_recipe/roguetown/leather/unique/monkleather,
 		/datum/crafting_recipe/roguetown/sewing/tailor/desertgown,
 		/datum/crafting_recipe/roguetown/leather/unique/baggyleatherpants,//Naledi
-		/datum/crafting_recipe/roguetown/sewing/tailor/hgambeson/fencer,
 		/datum/crafting_recipe/roguetown/leather/unique/fencingbreeches,//Aanvr
 		/datum/crafting_recipe/roguetown/leather/unique/openrobes,
 		/datum/crafting_recipe/roguetown/leather/unique/gronngloves,
@@ -238,7 +236,7 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 		icon_state = "scroll"
 		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll!"))
 
-/obj/item/book/granter/spell/noc
+/*/obj/item/book/granter/spell/noc
 	name = "Scroll of if you see this you report it as a bug and not try to activate it because it calls gib() on you."
 	desc = "Spelltext: read"
 	spell = /datum/action/cooldown/spell/dummyspellforscrolls
@@ -356,4 +354,4 @@ UNDER NO CIRCUMSTANCE SHOULD ANY OF THE BOOKS BE GIVEN OUT INTO SPAWNERS OR TO B
 	name = "Scroll of Repulse"
 	desc = "Teaches you how to cast Repulse."
 	spell = /datum/action/cooldown/spell/repulse
-	spellname = "Repulse"
+	spellname = "Repulse"*/

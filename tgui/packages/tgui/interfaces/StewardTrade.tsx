@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -18,6 +18,7 @@ import { AutoImportView } from './StewardTrade/AutoImportView';
 import { BanditryBanner } from './StewardTrade/BanditryBanner';
 import { BlockadeBanner } from './StewardTrade/BlockadeBanner';
 import { EventsBanner } from './StewardTrade/EventsBanner';
+import { LedgerView } from './StewardTrade/LedgerView';
 import { MarketView } from './StewardTrade/MarketView';
 import { OrdersView } from './StewardTrade/OrdersView';
 import { PetitionView } from './StewardTrade/PetitionView';
@@ -30,22 +31,24 @@ import { TradeModal, type TradeModalRequest } from './StewardTrade/TradeModal';
 import type { Data, TabKey } from './StewardTrade/types';
 
 export const StewardTrade = () => {
-  const { data } = useBackend<Data>();
+  const { data, act } = useBackend<Data>();
   const [tab, setTab] = useState<TabKey>('orders');
   const [tradeRequest, setTradeRequest] = useState<TradeModalRequest | null>(
     null,
   );
 
+  useEffect(() => {
+    if (tab === 'ledger') {
+      act('ledger_open');
+      return () => act('ledger_close');
+    }
+  }, [tab, act]);
+
   const aldermanActing = !!data.is_alderman_acting;
   const warrant = data.alderman_warrant;
 
   return (
-    <Window
-      title="Market Scroll"
-      width={860}
-      height={820}
-      theme="parchment"
-    >
+    <Window title="Market Scroll" width={860} height={820} theme="parchment">
       <Window.Content scrollable>
         <div style={pageStyle}>
           <div style={titleStyle}>Market & Stockpile</div>
@@ -109,7 +112,8 @@ export const StewardTrade = () => {
                 of {warrant.trade_cap}m remaining today
               </div>
               <div style={{ color: INK_FAINT, fontSize: FONT_BODY }}>
-                Trades beyond the warrant are refused. Crown&apos;s Purse still pays the coin.
+                Trades beyond the warrant are refused. Crown&apos;s Purse still
+                pays the coin.
               </div>
             </div>
           )}
@@ -119,7 +123,10 @@ export const StewardTrade = () => {
           <ATCLoanBanner atc_loan={data.atc_loan} />
           <BlockadeBanner regions={data.blockaded_regions} />
           <BanditryBanner projection={data.banditry_projection} />
-          <EventsBanner events={data.active_events} goodCatalog={data.good_catalog} />
+          <EventsBanner
+            events={data.active_events}
+            goodCatalog={data.good_catalog}
+          />
 
           <TabBar tab={tab} onSwitch={setTab} />
           <hr style={rulerStyle} />
@@ -150,6 +157,7 @@ export const StewardTrade = () => {
             </SequesteredOverlay>
           )}
           {tab === 'petition' && <PetitionView data={data} />}
+          {tab === 'ledger' && <LedgerView data={data} />}
           {tab === 'royal_custom' && <RoyalCustomPanel />}
         </div>
         <TradeModal

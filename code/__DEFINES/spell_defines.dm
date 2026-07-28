@@ -19,6 +19,7 @@
 //Gods - Tennite
 #define GLOW_COLOR_UNDIVIDED "#28908C" //Undivided Cyan
 #define GLOW_COLOR_ASTRATA "#F9B362" //Astratan Yellow/Orange
+#define GLOW_COLOR_NOC "#9acdff" //Noc's lightbulb
 #define GLOW_COLOR_RAVOX "#7A1E30" //Ravox Crimson
 
 // Constants for spell glow intensity. These are literally 1 2 3 4 but it is for documenting design purposes
@@ -221,6 +222,7 @@
 #define ASPECT_RESET_COST_MAJOR 4
 #define ASPECT_RESET_COST_MINOR 2
 #define ASPECT_RESET_COST_UTILITY 1
+#define ASPECT_RESET_COST_CHOICE 2
 #define ARCANE_MARK_FILTER_WEAPON "arcane_mark_enchant"
 #define ARCANE_MARK_COOLDOWN 12 SECONDS
 

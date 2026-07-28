@@ -297,7 +297,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	if(!owner.loc)
 		return FALSE
-	
+
 	var/mob/living/carbon/O = owner
 	if(iscarbon(O)) //CC Edit - Prevent bleed runtiming on simples.
 		if(O.dna?.species && (NOBLOOD in O.dna.species.species_traits))
@@ -308,8 +308,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		if(!owner || QDELETED(owner) || QDELETED(src))
 			return FALSE
 
-	if(HAS_TRAIT(owner, TRAIT_PSYDONITE) && !passive_healing)
-		heal_wound(0.6)
+	if(HAS_TRAIT(owner, TRAIT_PSYDONITE) && !passive_healing && !HAS_TRAIT(src, TRAIT_BLACKBLOOD))
+		if(!istype(src, /datum/wound/slash/incision))
+			heal_wound(0.6)
 		if(!owner || QDELETED(owner) || QDELETED(src))
 			return FALSE
 
@@ -323,13 +324,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	// for optimization's sake, only do dead wound healing if the mob has a client.
 	if (!owner.client)
 		return
-	
+
 	var/mob/living/carbon/O = owner
 	if(O.dna?.species && (NOBLOOD in O.dna.species.species_traits))
 		set_bleed_rate(0)
 
-	if (HAS_TRAIT(owner, TRAIT_PSYDONITE) && !passive_healing)
-		heal_wound(0.6) // psydonites are supposed to apparently slightly heal wounds whether dead or alive
+	if (HAS_TRAIT(owner, TRAIT_PSYDONITE) && !passive_healing && !HAS_TRAIT(src, TRAIT_BLACKBLOOD))
+		if(!istype(src, /datum/wound/slash/incision))
+			heal_wound(0.6) // psydonites are supposed to apparently slightly heal wounds whether dead or alive
 
 	return TRUE
 
@@ -448,6 +450,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 				checkval = bleed_rate
 			if(SEVERITY_TYPE_WHP)
 				checkval = whp
+			if(SEVERITY_TYPE_BURN)
+				if(bodypart_owner && bodypart_owner.max_damage > 0)
+					checkval = round((bodypart_owner.burn_dam / bodypart_owner.max_damage) * 100)
 		for(var/sevname in severity_stages)
 			if(severity_stages[sevname] <= checkval)
 				newname = sevname
@@ -457,7 +462,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		severityval = clamp(severityval, 0, 5)
 		if(severityval)
 			severity = severityval
-		
+
 	name = "[newname  ? "[newname] " : ""][initial(name)]"	//[adjective] [name], aka, "gnarly slash" or "slash"
 	if(name != oldname)
 		owner.visible_message(span_red("The [oldname] on [owner]'s [lowertext(bodyzone2readablezone(bodypart_to_zone(bodypart_owner)))] gets worse!"))
