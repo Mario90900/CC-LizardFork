@@ -226,8 +226,8 @@
 #define BB_FIND_TARGETS_FIELD(type) "bb_find_targets_field_[type]"
 
 
-#define AI_ITEM_THROWING		(1<<0)
-#define AI_ITEM_QUIVER			(1<<1)
+#define AI_ITEM_THROWING        (1<<0)
+#define AI_ITEM_QUIVER          (1<<1)
 
 GLOBAL_LIST_INIT(ai_item_flags, list(
 	AI_ITEM_THROWING,
