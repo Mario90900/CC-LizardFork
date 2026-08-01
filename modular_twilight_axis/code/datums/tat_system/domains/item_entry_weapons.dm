@@ -255,6 +255,21 @@
 /datum/tat_item_entry/weapon/steel/axe
 	subcat = TAT_SUBCAT_AXES
 
+/datum/tat_item_entry/weapon/steel/axe/reg
+	item_path = /obj/item/rogueweapon/stoneaxe/woodcut/steel
+	name = "Steel Axe"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/axe/battle
+	item_path = /obj/item/rogueweapon/stoneaxe/battle
+	name = "Steel Battleaxe"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/axe/atgervi
+	item_path = /obj/item/rogueweapon/stoneaxe/woodcut/steel/atgervi
+	name = "Steel Varangian Axe"
+	cost = 4
+
 /datum/tat_item_entry/weapon/steel/axe/greataxe
 	item_path = /obj/item/rogueweapon/greataxe/steel
 	name = "Steel Greataxe"
@@ -268,6 +283,11 @@
 /datum/tat_item_entry/weapon/silver/axe
 	subcat = TAT_SUBCAT_AXES
 
+/datum/tat_item_entry/weapon/silver/axe/war
+	item_path = /obj/item/rogueweapon/stoneaxe/woodcut/silver
+	name = "Silver War Axe"
+	cost = 5
+
 /datum/tat_item_entry/weapon/silver/axe/greataxe
 	item_path = /obj/item/rogueweapon/greataxe/steel/knight/silver
 	name = "Silver Poleaxe"
@@ -275,12 +295,160 @@
 
 // -- Blunt -- //
 
+/datum/tat_item_entry/weapon/bronze/blunt
+	subcat = TAT_SUBCAT_BLUNT
 
+/datum/tat_item_entry/weapon/bronze/blunt/mace
+	item_path = /obj/item/rogueweapon/mace/bronze
+	name = "Bronze Mace"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/blunt/flail
+	item_path = /obj/item/rogueweapon/flail/bronze
+	name = "Bronze Flail"
+	cost = 2.5
+
+/datum/tat_item_entry/weapon/bronze/blunt/warhammer
+	item_path = /obj/item/rogueweapon/mace/warhammer/bronze
+	name = "Bronze Warhammer"
+	cost = 3
+
+/datum/tat_item_entry/weapon/iron/blunt
+	subcat = TAT_SUBCAT_BLUNT
+
+/datum/tat_item_entry/weapon/iron/blunt/mace
+	item_path = /obj/item/rogueweapon/mace
+	name = "Iron Mace"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/blunt/mace/spiked
+	item_path = /obj/item/rogueweapon/mace/spiked
+	name = "Spiked Mace"
+	cost = 3
+
+/datum/tat_item_entry/weapon/iron/blunt/flail
+	item_path = /obj/item/rogueweapon/flail
+	name = "Iron Flail"
+	cost = 2.5
+
+/datum/tat_item_entry/weapon/iron/blunt/flail/peasant
+	item_path = /obj/item/rogueweapon/flail/peasantwarflail
+	name = "Peasant War Flail"
+	cost = 2.5
+
+/datum/tat_item_entry/weapon/iron/blunt/warhammer
+	item_path = /obj/item/rogueweapon/mace/warhammer
+	name = "Iron Warhammer"
+	cost = 3
+
+/datum/tat_item_entry/weapon/iron/blunt/greatflail
+	item_path = /obj/item/rogueweapon/flail/peasantwarflail/iron
+	name = "Iron Greatflail"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/blunt
+	subcat = TAT_SUBCAT_BLUNT
+
+/datum/tat_item_entry/weapon/steel/blunt/mace
+	item_path = /obj/item/rogueweapon/mace/steel
+	name = "Steel Mace"
+	cost = 3.5
+
+/datum/tat_item_entry/weapon/steel/blunt/mace/flanged
+	item_path = /obj/item/rogueweapon/mace/cudgel/flanged
+	name = "Flanged Steel Mace"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/blunt/morningstar
+	item_path = /obj/item/rogueweapon/mace/steel/morningstar
+	name = "Steel Morningstar"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/blunt/flail
+	item_path = /obj/item/rogueweapon/flail/sflail
+	name = "Steel Flail"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/blunt/flail
+	item_path = /obj/item/rogueweapon/flail/alt
+	name = "Steel Flail, Studded"
+	cost = 4.5
+
+/datum/tat_item_entry/weapon/steel/blunt/warhammer
+	item_path = /obj/item/rogueweapon/mace/warhammer/steel
+	name = "Steel Warhammer"
+	cost = 5
+
+/datum/tat_item_entry/weapon/steel/blunt/greatmaul
+	item_path = /obj/item/rogueweapon/mace/maul/grand
+	name = "Steel Grand Maul"
+	cost = 6
+
+/datum/tat_item_entry/weapon/silver/blunt
+	subcat = TAT_SUBCAT_BLUNT
+
+/datum/tat_item_entry/weapon/silver/blunt/mace
+	item_path = /obj/item/rogueweapon/mace/steel/silver
+	name = "Silver Mace"
+	cost = 5
+
+/datum/tat_item_entry/weapon/silver/blunt/mace/flanged
+	item_path = /obj/item/rogueweapon/mace/cudgel/flanged/silver
+	name = "Flanged Silver Mace"
+	cost = 5.5
+
+/datum/tat_item_entry/weapon/silver/blunt/morningstar
+	item_path = /obj/item/rogueweapon/flail/sflail/silver
+	name = "Belmont Mace"
+	cost = 6
+
+/datum/tat_item_entry/weapon/silver/blunt/warhammer
+	item_path = /obj/item/rogueweapon/mace/warhammer/steel/silver
+	name = "Silver Warhammer"
+	cost = 6.5
 
 // -- Polearms -- //
 
+/datum/tat_item_entry/weapon/bronze/polearm
+	subcat = TAT_SUBCAT_POLEARMS
+
+/datum/tat_item_entry/weapon/bronze/polearm/spear
+	item_path = /obj/item/rogueweapon/spear/bronze
+	name = "Bronze Spear"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/polearm/spear/strapless
+	item_path = /obj/item/rogueweapon/spear/bronze/strapless
+	name = "Bronze Strapless Spear"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/polearm/spear/winged
+	item_path = /obj/item/rogueweapon/spear/bronze/winged
+	name = "Bronze Winged Spear"
+	cost = 3
+
+/datum/tat_item_entry/weapon/bronze/polearm/spear/winged/strapless
+	item_path = /obj/item/rogueweapon/spear/bronze/winged/strapless
+	name = "Bronze Winged Strapless Spear"
+	cost = 3
+
+/datum/tat_item_entry/weapon/bronze/polearm/tridant
+	item_path = /obj/item/rogueweapon/spear/trident
+	name = "Bronze Tridant"
+	cost = 3
+
 /datum/tat_item_entry/weapon/iron/polearm
 	subcat = TAT_SUBCAT_POLEARMS
+
+/datum/tat_item_entry/weapon/iron/polearm/spear
+	item_path = /obj/item/rogueweapon/spear
+	name = "Iron Spear"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/polearm/assegai
+	item_path = /obj/item/rogueweapon/spear/assegai/iron
+	name = "Iron Assegai"
+	cost = 3
 
 /datum/tat_item_entry/weapon/iron/polearm/lucerne
 	item_path = /obj/item/rogueweapon/eaglebeak/lucerne
@@ -289,6 +457,31 @@
 
 /datum/tat_item_entry/weapon/steel/polearm
 	subcat = TAT_SUBCAT_POLEARMS
+
+/datum/tat_item_entry/weapon/steel/polearm/spear/boar
+	item_path = /obj/item/rogueweapon/spear/boar
+	name = "Steel Boar Spear"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/polearm/spear/short
+	item_path = /obj/item/rogueweapon/spear/short
+	name = "Steel Short Spear"
+	cost = 2
+
+/datum/tat_item_entry/weapon/steel/polearm/assegai
+	item_path = /obj/item/rogueweapon/spear/assegai
+	name = "Steel Assegai"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/polearm/naginata
+	item_path = /obj/item/rogueweapon/spear/naginata
+	name = "Steel Naginata"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/polearm/partizan
+	item_path = /obj/item/rogueweapon/spear/partizan
+	name = "Steel Partizan"
+	cost = 5
 
 /datum/tat_item_entry/weapon/steel/polearm/eaglebeak
 	item_path = /obj/item/rogueweapon/eaglebeak
@@ -312,6 +505,11 @@
 
 /datum/tat_item_entry/weapon/silver/polearm
 	subcat = TAT_SUBCAT_POLEARMS
+
+/datum/tat_item_entry/weapon/silver/polearm/spear
+	item_path = /obj/item/rogueweapon/spear/silver
+	name = "Silver Spear"
+	cost = 5
 
 /datum/tat_item_entry/weapon/silver/polearm/halberd
 	item_path = /obj/item/rogueweapon/halberd/silver
@@ -337,4 +535,36 @@
 
 // -- Unarmed -- //
 
+/datum/tat_item_entry/weapon/bronze/unarmed
+	subcat = TAT_SUBCAT_UNARMED
 
+/datum/tat_item_entry/weapon/bronze/unarmed/katar
+	item_path = /obj/item/rogueweapon/katar/bronze
+	name = "Bronze Katar"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/unarmed/katar/gladiator
+	item_path = /obj/item/rogueweapon/katar/bronze/gladiator
+	name = "Arbelos"
+	cost = 2
+
+/datum/tat_item_entry/weapon/steel/unarmed
+	subcat = TAT_SUBCAT_UNARMED
+
+/datum/tat_item_entry/weapon/steel/unarmed/katar
+	item_path = /obj/item/rogueweapon/katar
+	name = "Katar"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/unarmed/punchdagger
+	item_path = /obj/item/rogueweapon/katar/punchdagger
+	name = "Punch Dagger"
+	cost = 3
+
+/datum/tat_item_entry/weapon/silver/unarmed
+	subcat = TAT_SUBCAT_UNARMED
+
+/datum/tat_item_entry/weapon/silver/unarmed/katar
+	item_path = /obj/item/rogueweapon/katar/silver
+	name = "Silver Katar"
+	cost = 5
