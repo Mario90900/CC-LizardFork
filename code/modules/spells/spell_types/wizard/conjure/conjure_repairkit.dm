@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/touch/conjure_repairkit
 	button_icon = 'icons/mob/actions/roguespells.dmi'
-	name = "Mending"
+	name = "Reformation"
 	desc = "Conjure a mending focus that can be used to repair equipment, prosthetic limbs, and constructs. It will be unsummoned as soon as it leaves your hand."
 	button_icon_state = "mending"
 	sound = 'sound/magic/whiteflame.ogg'
