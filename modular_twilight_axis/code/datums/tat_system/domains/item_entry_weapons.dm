@@ -183,7 +183,207 @@
 
 // -- Swords -- //
 
+/datum/tat_item_entry/weapon/bronze/sword
+	subcat = TAT_SUBCAT_SWORDS
 
+/datum/tat_item_entry/weapon/bronze/sword/arming
+	item_path = /obj/item/rogueweapon/sword/bronze
+	name = "Bronze Arming Sword"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/sword/spatha
+	item_path = /obj/item/rogueweapon/sword/long/broadsword/bronze
+	name = "Spatha"
+	cost = 3
+
+/datum/tat_item_entry/weapon/bronze/sword/khopesh
+	item_path = /obj/item/rogueweapon/sword/bronzekhopesh
+	name = "Bronze Khopesh"
+	cost = 3
+
+/datum/tat_item_entry/weapon/bronze/sword/gladius
+	item_path = /obj/item/rogueweapon/sword/short/gladius
+	name = "Gladius"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/sword/makhaira
+	item_path = /obj/item/rogueweapon/sword/short/messer/bronze
+	name = "Makhaira"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/sword
+	subcat = TAT_SUBCAT_SWORDS
+
+/datum/tat_item_entry/weapon/iron/sword/broken
+	item_path = /obj/item/rogueweapon/sword/broken
+	name = "Broken Sword"
+	cost = 1
+
+/datum/tat_item_entry/weapon/iron/sword/arming
+	item_path = /obj/item/rogueweapon/sword/iron
+	name = "Iron Arming Sword"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/sword/broad
+	item_path = /obj/item/rogueweapon/sword/long/broadsword
+	name = "Iron Broad Sword"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/sword/exe
+	item_path = /obj/item/rogueweapon/sword/long/exe
+	name = "Iron Executioner's Sword"
+	cost = 3.5
+
+/datum/tat_item_entry/weapon/iron/sword/sabre
+	item_path = /obj/item/rogueweapon/sword/sabre/iron
+	name = "Iron Sabre"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/sword/shotel
+	item_path = /obj/item/rogueweapon/sword/long/shotel/iron
+	name = "Iron Shotel"
+	cost = 3
+
+/datum/tat_item_entry/weapon/iron/sword/short
+	item_path = /obj/item/rogueweapon/sword/short/iron
+	name = "Iron Short Sword"
+	cost = 2
+
+/datum/tat_item_entry/weapon/iron/sword/messer
+	item_path = /obj/item/rogueweapon/sword/short/messer/iron
+	name = "Iron Messer"
+	cost = 2
+
+/datum/tat_item_entry/weapon/steel/sword
+	subcat = TAT_SUBCAT_SWORDS
+
+/datum/tat_item_entry/weapon/steel/sword/arming
+	item_path = /obj/item/rogueweapon/sword
+	name = "Steel Arming Sword"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/broad
+	item_path = /obj/item/rogueweapon/sword/long/broadsword/steel
+	name = "Steel Broad Sword"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/cutlass
+	item_path = /obj/item/rogueweapon/sword/cutlass
+	name = "Steel Cutlass"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/falx
+	item_path = /obj/item/rogueweapon/sword/falx
+	name = "Steel Falx"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/frei
+	item_path = /obj/item/rogueweapon/sword/long/fencerguy
+	name = "Frei Longsword"
+	cost = 3.5
+
+/datum/tat_item_entry/weapon/steel/sword/long
+	item_path = /obj/item/rogueweapon/sword/long
+	name = "Steel Longsword"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/sword/greatkhopesh
+	item_path = /obj/item/rogueweapon/sword/long/greatkhopesh
+	name = "Great Khopesh"
+	cost = 3.5
+
+/datum/tat_item_entry/weapon/steel/sword/kriegmesser
+	item_path = /obj/item/rogueweapon/sword/long/kriegmesser
+	name = "Kriegmesser"
+	cost = 4.5
+
+/datum/tat_item_entry/weapon/steel/sword/ssangsudo
+	item_path = /obj/item/rogueweapon/sword/long/kriegmesser/ssangsudo
+	name = "Ssangsudo"
+	cost = 4.5
+
+/datum/tat_item_entry/weapon/steel/sword/rapier
+	item_path = /obj/item/rogueweapon/sword/rapier
+	name = "Steel Rapier"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/rapier/etruscan
+	item_path = /obj/item/rogueweapon/sword/rapier/vaquero
+	name = "Etruscan Rapier"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/sword/shotel
+	item_path = /obj/item/rogueweapon/sword/long/shotel
+	name = "Steel Shotel"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/sword/sabre
+	item_path = /obj/item/rogueweapon/sword/sabre
+	name = "Steel Sabre"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/hwando
+	item_path = /obj/item/rogueweapon/sword/sabre/mulyeog
+	name = "Steel Hwando"
+	cost = 4
+
+/datum/tat_item_entry/weapon/steel/sword/short
+	item_path = /obj/item/rogueweapon/sword/short
+	name = "Steel Short Sword"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/falchion
+	item_path = /obj/item/rogueweapon/sword/short/falchion
+	name = "Steel Falchion"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/messer
+	item_path = /obj/item/rogueweapon/sword/short/messer
+	name = "Steel Messer"
+	cost = 3
+
+/datum/tat_item_entry/weapon/steel/sword/hunting
+	item_path = /obj/item/rogueweapon/sword/short/messer/alt
+	name = "Steel Hunting Sword"
+	cost = 3
+
+/datum/tat_item_entry/weapon/silver/sword
+	subcat = TAT_SUBCAT_SWORDS
+
+/datum/tat_item_entry/weapon/silver/sword/arming
+	item_path = /obj/item/rogueweapon/sword/silver
+	name = "Silver Arming Sword"
+	cost = 5
+
+/datum/tat_item_entry/weapon/silver/sword/broad
+	item_path = /obj/item/rogueweapon/sword/long/kriegmesser/silver
+	name = "Silver Broad Sword"
+	cost = 5
+
+/datum/tat_item_entry/weapon/silver/sword/long
+	item_path = /obj/item/rogueweapon/sword/long/silver
+	name = "Silver Longsword"
+	cost = 6
+
+/datum/tat_item_entry/weapon/silver/sword/exe
+	item_path = /obj/item/rogueweapon/sword/long/exe/silver
+	name = "Silver Executioner's Sword"
+	cost = 6
+
+/datum/tat_item_entry/weapon/silver/sword/rapier
+	item_path = /obj/item/rogueweapon/sword/rapier/silver
+	name = "Silver Rapier"
+	cost = 5
+
+/datum/tat_item_entry/weapon/silver/sword/short
+	item_path = /obj/item/rogueweapon/sword/short/silver
+	name = "Silver Shortsword"
+	cost = 5
+
+/datum/tat_item_entry/weapon/silver/sword/short/psy
+	item_path = /obj/item/rogueweapon/sword/short/psy
+	name = "Psydonic Shortsword"
+	cost = 10
 
 // -- Greatswords -- //
 
@@ -238,6 +438,16 @@
 
 /datum/tat_item_entry/weapon/bronze/axe
 	subcat = TAT_SUBCAT_AXES
+
+/datum/tat_item_entry/weapon/bronze/axe/reg
+	item_path = /obj/item/rogueweapon/stoneaxe/woodcut/bronze
+	name = "Bronze Axe"
+	cost = 2
+
+/datum/tat_item_entry/weapon/bronze/axe/war
+	item_path = /obj/item/rogueweapon/stoneaxe/woodcut/bronzebattleaxe
+	name = "Bronze War Axe"
+	cost = 2.5
 
 /datum/tat_item_entry/weapon/bronze/axe/greataxe
 	item_path = /obj/item/rogueweapon/greataxe/bronze
@@ -455,6 +665,11 @@
 	name = "Lucerne Hammer"
 	cost = 3
 
+/datum/tat_item_entry/weapon/iron/polearm/scythe
+	item_path = /obj/item/rogueweapon/scythe
+	name = "Iron Scythe"
+	cost = 3
+
 /datum/tat_item_entry/weapon/steel/polearm
 	subcat = TAT_SUBCAT_POLEARMS
 
@@ -523,7 +738,21 @@
 
 // -- Whips -- //
 
+/datum/tat_item_entry/weapon/bronze/whip
+	subcat = TAT_SUBCAT_WHIPS
 
+/datum/tat_item_entry/weapon/bronze/whip/reg
+	item_path = /obj/item/rogueweapon/whip/bronze
+	name = "Bronze Whip"
+	cost = 2
+
+/datum/tat_item_entry/weapon/silver/whip
+	subcat = TAT_SUBCAT_WHIPS
+
+/datum/tat_item_entry/weapon/silver/whip/reg
+	item_path = /obj/item/rogueweapon/whip/silver
+	name = "Silver Whip"
+	cost = 5
 
 // -- Casting -- //
 
@@ -538,6 +767,11 @@
 /datum/tat_item_entry/weapon/bronze/unarmed
 	subcat = TAT_SUBCAT_UNARMED
 
+datum/tat_item_entry/weapon/bronze/unarmed/knuckles
+	item_path = /obj/item/clothing/gloves/roguetown/knuckles/bronze
+	name = "Bronze Knuckles"
+	cost = 2
+
 /datum/tat_item_entry/weapon/bronze/unarmed/katar
 	item_path = /obj/item/rogueweapon/katar/bronze
 	name = "Bronze Katar"
@@ -550,6 +784,11 @@
 
 /datum/tat_item_entry/weapon/steel/unarmed
 	subcat = TAT_SUBCAT_UNARMED
+
+datum/tat_item_entry/weapon/steel/unarmed/knuckles
+	item_path = /obj/item/clothing/gloves/roguetown/knuckles
+	name = "Steel Knuckles"
+	cost = 3
 
 /datum/tat_item_entry/weapon/steel/unarmed/katar
 	item_path = /obj/item/rogueweapon/katar

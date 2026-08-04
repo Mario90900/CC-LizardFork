@@ -1328,8 +1328,8 @@
 	icon_state = "decsaber"
 	sheathe_icon = "decsaber"
 
-/obj/item/rogueweapon/sword/saber/iron
-	name = "iron saber"
+/obj/item/rogueweapon/sword/sabre/iron //Caustic Edit - This was originally 'saber' instead of 'sabre', I think it was a typo?
+	name = "iron sabre" //Caustic Edit - same as above!
 	desc = "A Naledian sword mass produced for line infantry. Its fittings are simple, munitions grade, but the construction is sturdy and the blade as threatening \
 	as any."
 	smeltresult = /obj/item/ingot/iron
