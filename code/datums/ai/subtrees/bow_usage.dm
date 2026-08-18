@@ -125,7 +125,8 @@
 			if(dist > ARCHER_NPC_JUKE_MIN_DIST)
 				var/turf/juke = _archer_reposition_turf(pawn, target)
 				if(juke)
-					_archer_commit_burst(controller, pawn, juke)
+					controller.set_blackboard_key(BB_ARCHER_NPC_REPOSITION_TURF, juke)
+					controller.set_blackboard_key(BB_ARCHER_NPC_REPOSITION_UNTIL, world.time + ARCHER_NPC_REPOSITION_TIME)
 
 	var/draw_slow = _bow_draw_slowdown(bow)
 	if(draw_slow && !is_crossbow)
