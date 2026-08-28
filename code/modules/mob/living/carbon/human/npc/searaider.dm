@@ -172,17 +172,6 @@ GLOBAL_LIST_INIT(searaider_aggro, world.file2list("strings/rt/searaideraggroline
 
 /datum/outfit/job/roguetown/human/species/human/northern/searaider/archer/pre_equip(mob/living/carbon/human/H)
 	..()
-	STAPER = 10
-	STAINT = 8
-	STASTR = 12 // These are archers
-	for(var/obj/item/I in held_items)
-		qdel(I)
-	for(var/obj/item/I in get_equipped_items(FALSE))
-		if(istype(I, /obj/item/gun) || istype(I, /obj/item/quiver))
-			qdel(I)
-	equipOutfit(new archer_outfit)
-
-/datum/outfit/job/roguetown/human/species/human/northern/searaider/archer/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	shirt = /obj/item/clothing/suit/roguetown/shirt/tunic

@@ -73,9 +73,6 @@
 				return newtime
 	return chargetime
 
-/datum/intent/arc/bow/heavy
-	strength_check = TRUE
-
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/get_npc_chargetime(mob/living/user)
 	var/newtime = (10 - user.get_skill_level(ranged_skill) * 2) + (10 - user.STASTR / 2) + (20 - user.STAPER)
 	if(chambered)
