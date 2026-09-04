@@ -41,6 +41,10 @@ SUBSYSTEM_DEF(nightshift)
 		nightshift_day_start =  270000		//270000=   730am
 		nightshift_dusk_start = 666000		//630000=   630pm
 
+		if(!GLOB.mirage_controller)
+			GLOB.mirage_controller = new
+			GLOB.mirage_controller.MoveOasis()
+
 	return ..()
 
 /datum/controller/subsystem/nightshift/fire(resumed = FALSE)

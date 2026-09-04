@@ -46,7 +46,7 @@
 
 	if(L in GLOB.active_hags)
 		return
-	
+
 	GLOB.bogged_players += L.real_name
 
 	if(recent_intruders[L] && recent_intruders[L] > world.time)
@@ -128,7 +128,7 @@
 		return
 
 	GLOB.bogged_players += L.real_name
-	
+
 	if(recent_intruders[L] && recent_intruders[L] > world.time)
 		return
 

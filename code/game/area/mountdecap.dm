@@ -29,6 +29,7 @@
 	deathsight_message = "a twisted tangle of soaring peaks"
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP
+	allow_extreme_weather = TRUE //Caustic Edit - Add in the possibility for tornado spawns!
 
 /area/rogue/indoors/shelter/mountains/decap
 	name = "Mount Decapitation"
@@ -71,6 +72,7 @@
 	converted_type = /area/rogue/indoors/shelter/mountains/decap
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_TARICHEA
+	allow_extreme_weather = FALSE //Caustic Edit - No spawns here, it's Lava HELL.
 
 /area/rogue/outdoors/mountains/decap/gunduzirak
 	name = "Gundu Zirak"
@@ -90,11 +92,13 @@
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_GUNDU_ZIRAK
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 
 /area/rogue/outdoors/mountains/decap/gunduzirak/bossarena
 	name = "Baronness Boss Arena"
 	first_time_text = "THE BARONESS"
 	detail_text = DETAIL_TEXT_DECAP_GUNDU_ZIRAK
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 
 
 /area/rogue/outdoors/mountains/decap/gunduzirak/bossarena/can_craft_here()
@@ -155,6 +159,7 @@
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_MINOTAUR_FORTRESS
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 
 /area/rogue/outdoors/mountains/decap/minotaurfort/can_craft_here()
 	return FALSE
@@ -172,6 +177,7 @@
 	converted_type = /area/rogue/indoors/shelter/mountains/decap
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, is dungeon!
 
 /area/rogue/indoors/shelter/mountains/decap/banditcamp
 	name = "Bandit Camp"

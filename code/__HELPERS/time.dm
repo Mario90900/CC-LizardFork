@@ -37,11 +37,11 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 /proc/settod()
 	var/time = station_time()
 	var/oldtod = GLOB.tod
-	
+
 	//CC Edit - Desert Map
-	var/desert = FALSE
-	if(SSmapping.config.map_name == "Desert Town")
-		desert = TRUE //We're the desert map.
+	//var/desert = FALSE
+	//if(SSmapping.config.map_name == "Desert Town") //This bit got moved into the particle weather system, and the separation into different forcasts for different maps!
+	//	desert = TRUE //We're the desert map.
 
 	if(time >= SSnightshift.nightshift_start_time || time <= SSnightshift.nightshift_dawn_start)
 		GLOB.tod = "night"
@@ -53,12 +53,16 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 		GLOB.tod = "dusk"
 	else if(GLOB.todoverride)
 		GLOB.tod = GLOB.todoverride
-	if((GLOB.tod != oldtod) && !GLOB.todoverride && (GLOB.dayspassed>1)) //weather check on tod changes
+	if((GLOB.tod != oldtod) && !GLOB.todoverride) //&& (GLOB.dayspassed>1)) //weather check on tod changes, disabled first day weather block
+		SSParticleWeather.check_forecast(GLOB.tod)
+	/*if((GLOB.tod != oldtod) && !GLOB.todoverride && (GLOB.dayspassed>1)) //weather check on tod changes
 		if(!GLOB.forecast)
 			switch(GLOB.tod)
 				if("dawn")
 					//CC Edit - Desert Map
 					if(desert)
+						if(prob(15))
+							GLOB.forecast = PARTICLEWEATHER_SAND
 						if(prob(10))
 							GLOB.forecast = PARTICLEWEATHER_RAIN
 					else
@@ -69,6 +73,8 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 				if("day")
 					//CC Edit - Desert Map
 					if(desert)
+						if(prob(35))
+							GLOB.forecast = PARTICLEWEATHER_SAND
 						if(prob(1))
 							GLOB.forecast = PARTICLEWEATHER_RAIN
 					else
@@ -81,6 +87,8 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 				if("dusk")
 					//CC Edit - Desert Map
 					if(desert)
+						if(prob(15))
+							GLOB.forecast = PARTICLEWEATHER_SAND
 						if(prob(10))
 							GLOB.forecast = PARTICLEWEATHER_RAIN
 					else
@@ -104,12 +112,14 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 							GLOB.forecast = PARTICLEWEATHER_BLOODRAIN
 			if(GLOB.forecast != SSParticleWeather?.runningWeather?.target_trait)
 				switch(GLOB.forecast)
+					if(PARTICLEWEATHER_SAND)
+						SSParticleWeather?.run_weather(pick(/datum/particle_weather/sand_gentle, /datum/particle_weather/sand_storm))
 					if(PARTICLEWEATHER_RAIN)
 						//CC Edit - Desert Map
 						if(desert)
 							SSParticleWeather?.run_weather(pick(/datum/particle_weather/rain_gentle, /datum/particle_weather/rain_storm))
 						else
-							SSParticleWeather?.run_weather(pick(/datum/particle_weather/rain_gentle, /datum/particle_weather/rain_storm,/datum/particle_weather/fog))
+							SSParticleWeather?.run_weather(pick(/datum/particle_weather/rain_gentle, /datum/particle_weather/rain_storm, /datum/particle_weather/hurricane, /datum/particle_weather/fog))
 					if(PARTICLEWEATHER_LEAVES)
 						SSParticleWeather?.run_weather(pick(/datum/particle_weather/leaves_gentle, /datum/particle_weather/leaves_storm))
 					if(PARTICLEWEATHER_BLOODRAIN)
@@ -125,10 +135,12 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 					else
 						GLOB.forecast = null
 				if(PARTICLEWEATHER_LEAVES)
-					GLOB.forecast = null
+					GLOB.forecast = null*/
 
 	if(GLOB.tod != oldtod)
 		if(GLOB.tod == "dawn")
+			if(GLOB.mirage_controller)
+				GLOB.mirage_controller.MoveOasis()
 			GLOB.dayspassed++
 			scom_announce_new_dawn()
 			if(SStreasury?.initialized)

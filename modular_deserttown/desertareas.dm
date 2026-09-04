@@ -12,10 +12,11 @@
 	spookynight = SPOOKY_GEN
 	ambush_times = list("night")
 	ambush_mobs = list(
+				/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/stalker = 10,
 				/mob/living/simple_animal/hostile/retaliate/rogue/badger = 10,
-				/mob/living/simple_animal/hostile/retaliate/rogue/raccoon = 25,
+				/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/wormling = 25,
 				/mob/living/simple_animal/hostile/retaliate/rogue/bobcat = 20,
-				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
+				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 20,
 				/mob/living/simple_animal/hostile/retaliate/rogue/fox = 30,
 				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
 	first_time_text = "Al-Ashur Dunes"
@@ -25,6 +26,7 @@
 	deathsight_message = "somewhere in the dunes, next to towering walls"
 	warden_area = TRUE
 	threat_region = THREAT_REGION_INNER_DUNES
+	allow_extreme_weather = TRUE
 
 /area/rogue/outdoors/desert/river
 	name = "River"
@@ -34,6 +36,27 @@
 	spookysounds = SPOOKY_FROG
 	spookynight = SPOOKY_FOREST
 	threat_region = THREAT_REGION_FRESH_RIVER
+
+/area/rogue/outdoors/desert/oasis
+	name = "Oasis"
+	first_time_text = "Forgotten Oasis"
+	icon_state = "river"
+	ambientsounds = AMB_RIVERDAY
+	ambientnight = AMB_RIVERNIGHT
+	spookysounds = SPOOKY_FROG
+	spookynight = SPOOKY_FOREST
+
+/area/rogue/outdoors/desert/mirage
+	name = "Fleeting Repose"
+	first_time_text = "Fleeting Repose"
+	icon_state = ""
+	ambientsounds = AMB_TOWNDAY
+	ambientnight = AMB_TOWNNIGHT
+	spookysounds = SPOOKY_GEN
+	spookynight = SPOOKY_GEN
+	droning_sound = 'sound/newmusic/lovecraft2.ogg'
+	droning_sound_dusk = 'sound/newmusic/lovecraft2.ogg'
+	droning_sound_night = 'sound/newmusic/lovecraft2.ogg'
 
 //Deep Dunes Area
 /area/rogue/outdoors/desertdeep
@@ -50,18 +73,20 @@
 	droning_sound_night = 'sound/music/area/desert/Moonrise.ogg'
 	ambush_times = list("night","dawn","dusk","day")
 	ambush_mobs = list(
-		/mob/living/carbon/human/species/skeleton/npc/ambush = 30,
-		/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 60,
-		///mob/living/simple_animal/hostile/retaliate/rogue/spider/rock = 30,
-		/mob/living/carbon/human/species/goblin/npc/ambush/cave = 50,
-		/mob/living/simple_animal/hostile/retaliate/rogue/troll/bog = 15,
-		/mob/living/carbon/human/species/skeleton/npc/bogguard = 10,
-		///mob/living/carbon/human/species/skeleton/npc/rockhill = 15,
-		/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 20,
+		new /datum/ambush_config/dunewell_raider = 60,
+		new /datum/ambush_config/antlion_party = 30,
+		new /datum/ambush_config/lamia_party = 30,
+		new /datum/ambush_config/dunewell_raider/hard = 20,
+		new /datum/ambush_config/worm_hatchling_party = 30,
+		/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/stalker = 40,
+		/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/elder = 20,
+		/mob/living/simple_animal/hostile/retaliate/rogue/ifrit = 20,
+		/mob/living/simple_animal/hostile/retaliate/rogue/headless = 10,
 		/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 10,)
 	converted_type = /area/rogue/indoors/shelter/desertdeep
 	deathsight_message = "an empty, parched desert"
 	threat_region = THREAT_REGION_DEEP_DUNES
+	allow_extreme_weather = TRUE
 
 /area/rogue/indoors/shelter/desertdeep
 	name = "Deep Desert (shelter)"
@@ -78,6 +103,7 @@
 	first_time_text = null
 	ambush_times = null
 	ambush_mobs = null
+	allow_extreme_weather = FALSE
 
 /area/rogue/outdoors/desert/above
 	name = "Desert Above"
@@ -87,6 +113,7 @@
 	first_time_text = null
 	ambush_times = null
 	ambush_mobs = null
+	allow_extreme_weather = FALSE
 
 /area/rogue/outdoors/desertdeep/coastal
 	name = "Coastal Inlet"
@@ -94,6 +121,7 @@
 	ambush_times = null
 	ambush_mobs = null
 	deathsight_message = "along a small coastal space"
+	allow_extreme_weather = FALSE
 
 /area/rogue/outdoors/desertdeep/arenavillage
 	name = "Desert Claimed Village"
@@ -106,6 +134,7 @@
 	deathsight_message = "a decrepit arena in the dunes"
 	ambush_times = "null"
 	ambush_mobs = "null"
+	allow_extreme_weather = FALSE
 
 /area/rogue/outdoors/desert/dunepassage
 	name = "Dunelords Pass"
@@ -330,6 +359,7 @@
 	name = "Desert Pass"
 	ambush_times = null
 	ambush_mobs = null
+	allow_extreme_weather = FALSE
 
 //Unique quest area for the Town Indoor quest locations.
 /area/rogue/indoors/town/desert/quest

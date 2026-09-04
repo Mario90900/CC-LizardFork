@@ -28,6 +28,7 @@
 	deathsight_message = "somewhere in the wilds"
 	threat_region = THREAT_REGION_AZURE_GROVE
 	detail_text = DETAIL_TEXT_AZURE_GROVE
+	allow_extreme_weather = TRUE //Caustic Edit - Allow tornado spawns!
 
 /area/rogue/indoors/shelter/woods
 	name = "Azure Grove"
@@ -125,9 +126,11 @@
 	ambush_times = list()
 	ambush_mobs = null
 	threat_region = ""
+	allow_extreme_weather = FALSE //Caustic Edit - No tornado spawns!
 
 /area/rogue/outdoors/woods/wretch_lair
 	warden_area = FALSE
 	ambush_times = list()
 	ambush_mobs = null
 	threat_region = ""
+	allow_extreme_weather = FALSE //Caustic Edit - No tornado spawns!

@@ -2246,6 +2246,8 @@
 					found_ping(get_turf(M), client, "trap")
 			if(istype(O, /obj/structure/flora/roguegrass/maneater/real))
 				found_ping(get_turf(O), client, "trap")
+			if(istype(O, /obj/structure/quicksand)) //Caustic Edit - Add in Quicksand tracking pings!
+				found_ping(get_turf(O), client, "trap")
 			if(istype(O, /obj/item/clothing) || istype(O, /obj/item/rogueweapon) || istype(O, /obj/item/gun))	//bows and crossbows are... guns...
 				if(!isturf(O.loc))
 					continue
