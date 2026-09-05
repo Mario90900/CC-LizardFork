@@ -183,8 +183,8 @@
 			playsound(user.loc, 'sound/items/bsmith4.ogg', 100, FALSE)
 			if(prob(30))
 				M.emote("whimper") // robbit aboose
-			return	
-		else		
+			return
+		else
 			hammerheal(M, user)
 	else
 		. = ..() //normal hit
@@ -282,7 +282,7 @@
 			to_chat(user, span_warning("These injuries are too severe to repair with just a hammer! Either Tongs or a Wrench on your free hand are needed."))
 			return
 
-		var/used_time = 90 
+		var/used_time = 90
 
 		if(user.mind)
 			used_time -= (user.get_skill_level(/datum/skill/craft/engineering) * 7)
@@ -479,6 +479,7 @@
 	associated_skill = /datum/skill/craft/blacksmithing	//Tongs don't do a lot of damage and have 3 defense. This associated skill should be alright.
 	var/obj/item/ingot/hingot = null
 	var/obj/item/rogueore/ore = null
+	var/obj/item/natural/glass/heated/glass = null
 	var/hott = FALSE
 	smeltresult = /obj/item/ingot/iron
 	grid_width = 32
@@ -517,10 +518,10 @@
 
 /obj/item/rogueweapon/tongs/update_icon()
 	. = ..()
-	if(!hingot && !ore)
+	if(!hingot && !ore && !glass)
 		icon_state = initial(icon_state) // Caustic Edit. We do not need every tong subtype to need their own update_icon proc
 	else
-		if(hingot)
+		if(hingot || glass)
 			if(hott)
 				icon_state = "[initial(icon_state)]i1"
 			else
@@ -544,7 +545,7 @@
 			hingot = null
 			hott = FALSE
 			update_icon()
-	
+
 	if(ore)
 		if(isturf(user.loc))
 			var/turf/T = get_turf(user)
@@ -553,6 +554,16 @@
 			if(T)
 				ore.forceMove(T)
 			ore = null
+			update_icon()
+
+	if(glass)
+		if(isturf(user.loc))
+			var/turf/T = get_turf(user)
+			if(!T)
+				T = get_turf(src)
+			if(T)
+				glass.forceMove(T)
+			glass = null
 			update_icon()
 
 /obj/item/rogueweapon/tongs/dropped(mob/user)
@@ -567,6 +578,11 @@
 		if(T)
 			ore.forceMove(T)
 		ore = null
+	if(glass)
+		var/turf/T = get_turf(src) || (user ? get_turf(user) : null)
+		if(T)
+			glass.forceMove(T)
+		glass = null
 	hott = FALSE
 	update_icon()
 
@@ -636,6 +652,7 @@
 	smeltresult = null
 	auto_collect = TRUE
 
+/*
 /obj/item/rogueweapon/tongs/paalloy/update_icon()
 	. = ..()
 	if(!hingot)
@@ -645,6 +662,7 @@
 			icon_state = "atongsi1"
 		else
 			icon_state = "atongsi0"
+*/
 
 /obj/item/rogueweapon/tongs/bronze
 	name = "bronze tongs"

@@ -45,7 +45,7 @@
 	// excluded_turfs = list()
 	spawnableAtoms = list(/obj/structure/flora/roguetree/palm = 0.5,
 							/obj/structure/flora/roguegrass/bush/desertshrub = 0.5,
-							/obj/structure/flora/roguegrass = 0.5,
+							/obj/structure/flora/roguegrass/desertgrass = 1,
 							/obj/structure/flora/roguetree/stump/log = 0.3,
 							/obj/structure/flora/ausbushes/ppflowers = 0.1,
 							/obj/structure/flora/ausbushes/ywflowers = 0.1,
@@ -59,7 +59,7 @@
 							/obj/structure/flora/roguegrass/herb/manabloom = 0.05,
 							/obj/item/magic/manacrystal = 0.05,
 							/obj/structure/flora/roguegrass/herb/random = 0.25,
-							/obj/effect/decal/remains/bear = 0.5,
+							/obj/effect/decal/remains/bear = 0.3,
 							/obj/effect/hunting_track = 1,
 							/obj/effect/decal/remains/human = 0.3,)
 	// spawnableTurfs = list()

@@ -619,3 +619,14 @@
 	ambush_mobs = null
 	deathsight_message = "a paradise under a wretched presence"
 
+/area/rogue/under/dungeon/bizbaz
+	name = "Bizzare Bazaar"
+	icon_state = "under"
+	first_time_text = "BIZZARE BAZAAR"
+	droning_sound = 'sound/music/area/desert/freedive_2.ogg'
+
+/area/rogue/under/dungeon/desert_pyramid
+	name = "pyramid"
+	icon_state = "under"
+	first_time_text = "Tomb of the Ancient"
+	droning_sound = 'sound/music/area/tombs.ogg'
