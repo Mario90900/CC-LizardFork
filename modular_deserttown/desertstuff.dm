@@ -1086,3 +1086,14 @@
 
 /obj/structure/flora/roguegrass/desertgrass/update_icon()
 	icon_state = "desertgrass[rand(1, 5)]"
+
+/obj/structure/flora/roguegrass/verdant
+	icon = 'icons/obj/flora/ausflora.dmi'
+	icon_state = "sparsegrass_1"
+
+/obj/structure/flora/roguegrass/verdant/Initialize(mapload)
+	. = ..()
+	if(prob(60))
+		icon_state = "sparsegrass_[rand(1, 3)]"
+	else
+		icon_state = "fullgrass_[rand(1, 3)]"
