@@ -131,9 +131,8 @@
 /obj/item/clothing/mask/rogue/spectacles/golden
 	name = "golden spectacles"
 	icon_state = "goggles"
-	break_sound = "glassbreak"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
-	max_integrity = 35
+	max_integrity = 35 //this'll stop one or two good hits
+	armor = ARMOR_PLATE_BSTEEL //however, it can stop some *very strong* piercing. Essentially, ablative armor
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
@@ -770,9 +769,8 @@
 /obj/item/clothing/mask/rogue/spectacles/iron
 	name = "iron spectacles"
 	icon_state = "igoggles"
-	break_sound = "glassbreak"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 30
+	armor = ARMOR_PLATE_BSTEEL
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
@@ -787,9 +785,8 @@
 /obj/item/clothing/mask/rogue/spectacles/bronze
 	name = "bronze spectacles"
 	icon_state = "bgoggles"
-	break_sound = "glassbreak"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 30
+	armor = ARMOR_PLATE_BSTEEL
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
@@ -801,8 +798,8 @@
 /obj/item/clothing/mask/rogue/spectacles/steel
 	name = "steel spectacles"
 	icon_state = "sgoggles"
-	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	max_integrity = 40 // slightly more durable for the cqc nerds (stills 1 hit to break)
+	armor = ARMOR_PLATE_BSTEEL
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
