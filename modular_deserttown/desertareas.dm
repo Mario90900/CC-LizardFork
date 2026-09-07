@@ -448,6 +448,8 @@
 	ambush_mobs = null
 	first_time_text = "The Condemned Pyramid"
 	deathsight_message = "a sunken pyramid"
+	droning_sound = 'sound/music/area/tombs.ogg'
+	ceiling_protected = TRUE
 
 //Desert Towns Bog Biome, shares Threat Region with rest of Underdark. Hag gets notified of people in this area.
 /area/rogue/under/desertbog
@@ -583,6 +585,7 @@
 	ambush_times = null
 	ambush_mobs = null
 	deathsight_message = "a maze of the unredeemed"
+	ceiling_protected = TRUE
 
 /area/rogue/under/cave/dunelord
 	name = "Dunelords Hideout"
@@ -602,6 +605,42 @@
 	droning_sound_dusk = 'sound/newmusic/lovecraft2.ogg'
 	droning_sound_night = 'sound/newmusic/lovecraft2.ogg'
 	deathsight_message = "an abandoned hotspring under the sands"
+
+/area/rogue/under/cave/ifritdigsite
+	name = "The Digsite"
+	icon_state = "under"
+	first_time_text = "The Digsite"
+	droning_sound = 'sound/music/area/tombs.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	ambush_times = null
+	ambush_mobs = null
+	deathsight_message = "a disturbed lair of spirits and flames, all dancing angrily"
+	ceiling_protected = TRUE
+
+/area/rogue/under/cave/ifritbossarena
+	name = "The Matriarch Arena"
+	icon_state = "under"
+	first_time_text = "The Matriarch"
+	droning_sound = 'sound/music/area/tombs.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	ambush_times = null
+	ambush_mobs = null
+	deathsight_message = "within the disturbed matriarchs chamber"
+	ceiling_protected = TRUE
+
+/area/rogue/under/cave/bizbaz
+	name = "Bizzare Bazaar"
+	icon_state = "under"
+	first_time_text = "BIZZARE BAZAAR"
+	droning_sound = 'sound/music/area/desert/freedive_2.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	ambush_times = null
+	ambush_mobs = null
+	deathsight_message = "a bizzare enclave of violent faces, and violent deals"
+	ceiling_protected = TRUE
 
 // desert_wretch_oasis Special Areas. Bandit zone uses areas earlier in code
 /area/rogue/indoors/vampire_manor/desert

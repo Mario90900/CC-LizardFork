@@ -129,7 +129,7 @@
 //Caustic Edit - Add in Stonedust for Ratwood Pottery
 /obj/item/alch/stonedust
 	name = "stone dust"
-	desc = "Finely ground mineral dust used for glass clay refinement."
+	desc = "Finely ground mineral dust used for glassmaking materials."
 	icon_state = "coaldust"
 	major_pot = null
 	med_pot = null
