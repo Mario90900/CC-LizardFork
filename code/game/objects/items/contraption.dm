@@ -264,7 +264,7 @@
 	else
 		. += span_notice("All you can make out is a bunch of gibberish.")
 
-/obj/item/contraption/linker/get_mechanics_examine(mob/user)
+/obj/item/rogueweapon/contraption/linker/get_mechanics_examine(mob/user)
 	. = ..()
 	. += span_info("Use it like a multitool on compatible machinery to store a target in its buffer, then use it again on another compatible target to link them.")
 	. += span_info("Right click it in-hand to wipe its stored buffer.")

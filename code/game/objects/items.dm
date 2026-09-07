@@ -1594,7 +1594,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		return
 	if(!can_wield_two_handed(user))
 		return
-	if (istype(src, /obj/item/contraption))
+	if (istype(src, /obj/item/rogueweapon/contraption))
 		var/obj/item/rogueweapon/contraption/i = src
 		if (i.current_charge <= 0)
 			to_chat(user, span_warning("Not charged."))
