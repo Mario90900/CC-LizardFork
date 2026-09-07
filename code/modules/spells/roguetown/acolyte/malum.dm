@@ -663,7 +663,8 @@ var/global/list/anvil_recipe_prices[][]
 		if(cost != 0)
 			to_chat(user, "<font color='purple'>I lose [cost] devotion!</font>")
 		if(I.max_integrity <= I.obj_integrity)
-			I.obj_fix()
+			if(I.obj_broken) // obj_fix() strips armor ratings/class when called on intact armor; only call it on items that were actually broken.
+				I.obj_fix()
 			I.repair_coverage()
 			I.visible_message(span_info("[I]'s mend together, completely."))
 			continue
