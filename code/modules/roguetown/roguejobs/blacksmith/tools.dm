@@ -183,8 +183,8 @@
 			playsound(user.loc, 'sound/items/bsmith4.ogg', 100, FALSE)
 			if(prob(30))
 				M.emote("whimper") // robbit aboose
-			return
-		else
+			return	
+		else		
 			hammerheal(M, user)
 	else
 		. = ..() //normal hit
