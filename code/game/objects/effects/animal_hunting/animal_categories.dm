@@ -196,7 +196,7 @@
 		/area/rogue/outdoors/desert = 100,
 		/area/rogue/outdoors/desert/river = 50,
 		/area/rogue/outdoors/desert/dunepassage = 100,
-		/desert/rogue/outdoors/desertdeep/arenavillage = 50
+		/area/rogue/outdoors/desertdeep/arenavillage = 50
 	)
 
 /datum/hunting_category/desertdeepdunes //Amazing a single category just for these things for now
@@ -212,7 +212,7 @@
 	)
 
 	preferred_areas = list(
-		/area/rogue/desertdeep = 100,
+		/area/rogue/outdoors/desertdeep = 100,
 	)
 //End Caustic Edit
 
