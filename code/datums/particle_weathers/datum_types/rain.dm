@@ -113,7 +113,13 @@
 		else
 			lightning_destination = pick(SSParticleWeather.weathered_turfs)
 
-		new /obj/effect/temp_visual/lightning/storm(get_turf(lightning_destination))
+		var/turf/target = get_turf(lightning_destination)
+		for(var/mob/living/L in target)
+			L.Immobilize(1 SECONDS)
+			L.apply_status_effect(/datum/status_effect/debuff/clickcd, 6 SECONDS)
+			L.apply_status_effect(/datum/status_effect/buff/lightningstruck, 6 SECONDS)
+			L.electrocute_act(25, src)
+		new /obj/effect/temp_visual/lightning/storm(target)
 
 		COOLDOWN_START(src, thunder, rand(5, 40) * 1 SECONDS)
 
@@ -286,7 +292,13 @@
 		else
 			lightning_destination = pick(SSParticleWeather.weathered_turfs)
 
-		new /obj/effect/temp_visual/lightning/storm(get_turf(lightning_destination))
+		var/turf/target = get_turf(lightning_destination)
+		for(var/mob/living/L in target)
+			L.Immobilize(1 SECONDS)
+			L.apply_status_effect(/datum/status_effect/debuff/clickcd, 6 SECONDS)
+			L.apply_status_effect(/datum/status_effect/buff/lightningstruck, 6 SECONDS)
+			L.electrocute_act(25, src)
+		new /obj/effect/temp_visual/lightning/storm(target)
 
 		COOLDOWN_START(src, thunder, rand(5, 40) * 1 SECONDS)
 
