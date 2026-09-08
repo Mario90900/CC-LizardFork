@@ -282,7 +282,7 @@
 			to_chat(user, span_warning("These injuries are too severe to repair with just a hammer! Either Tongs or a Wrench on your free hand are needed."))
 			return
 
-		var/used_time = 90
+		var/used_time = 90 
 
 		if(user.mind)
 			used_time -= (user.get_skill_level(/datum/skill/craft/engineering) * 7)
@@ -545,7 +545,7 @@
 			hingot = null
 			hott = FALSE
 			update_icon()
-
+	
 	if(ore)
 		if(isturf(user.loc))
 			var/turf/T = get_turf(user)
