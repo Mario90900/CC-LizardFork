@@ -76,6 +76,7 @@
 		H.regenerate_icons()
 		H.AddSpell(new /obj/effect/proc_holder/spell/self/claws/gnoll)
 		H.AddSpell(new /obj/effect/proc_holder/spell/self/howl/gnoll)
+		H.mind.AddSpell(new /datum/action/cooldown/spell/gnoll/consume)
 		H.AddComponent(/datum/component/gnoll_combat_tracker)
 
 		var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/F = new()
