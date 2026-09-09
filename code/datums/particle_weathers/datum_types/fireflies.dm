@@ -22,6 +22,7 @@
 	particleEffectType = /particles/weather/fireflies
 	warning_message = span_greenannounce("Faint glows appear in the distance across the realm.")
 	late_warning_message = span_greenannounce("Tiny lights begin to flicker in and out nearby.")
+	wind_down_message = span_greenannounce("The few remaining flickering lights start to settle as the show seems to be coming to a close.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list() // intentionally quiet
 

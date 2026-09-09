@@ -20,6 +20,7 @@
 	particleEffectType = /particles/weather/rain
 	warning_message = span_greenannounce("Grey clouds gather up above the realm, beholding the gift of life.")
 	late_warning_message = span_greenannounce("Heavy drops begin to fall in rapid succession.")
+	wind_down_message = span_greenannounce("The skies grow still, beams of light shining through the clouds as the rain finally lets up.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/rain)
 	indoor_weather_sounds = list(/datum/looping_sound/indoor_rain)
@@ -60,6 +61,7 @@
 	particleEffectType = /particles/weather/rain
 	warning_message = span_greenannounce("Dark clouds gather up above the realm, sparks arcing between heavenly reaches.")
 	late_warning_message = span_greenannounce("The wind shifts and the storm breaks.")
+	wind_down_message = span_greenannounce("Those howling winds die down as the worst of the storm seems to have been endured. The last few flashes of light give way to clearer skies.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/storm)
 	indoor_weather_sounds = list(/datum/looping_sound/indoor_rain)
@@ -235,8 +237,9 @@
 	name = "Hurricane"
 	desc = "Abyssors wrath."
 	particleEffectType = /particles/weather/rain
-	warning_message = span_danger("The sky's clouds turn dark as night and form lengthy bands, creating a spinning wheel far too large for the eye to properly witness.")
-	late_warning_message = span_greenannounce("The winds buffet the trees and structures, heavy rains falling almost immediately. Abyssor's Wrath has arrived...")
+	warning_message = span_greenannounce("The sky's clouds turn dark as night and form lengthy bands, creating a spinning wheel far too large for the eye to properly witness.")
+	late_warning_message = span_greenannounce("The winds buffet the trees and structures, heavy rains falling almost immediately. Abyssor's Wrath is upon the land as he stirs in his sleep...")
+	wind_down_message = span_greenannounce("His Wrath finally abates, the seas crashing a few final times against the coast, as Abyssor once more settles back into his deep slumber.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/hurricane)
 	indoor_weather_sounds = list(/datum/looping_sound/indoor_rain)

@@ -64,6 +64,8 @@
 	var/warning_message
 	//warning message just before weather fires
 	var/late_warning_message = span_greenannounce("The realms wind blows as weather begins to turn.")
+	//wind down message when the wind-down is called for this weather signalling it's end
+	var/wind_down_message
 	//Caustic Edit End
 
 	// Sounds to play at different severities - order from lowest to highest
@@ -183,9 +185,9 @@
 		PW.queued_weather_start_time = null
 	if(running)
 		return //some cheeky git has started you early
-	weather_duration = rand(weather_duration_lower, weather_duration_upper)
+	//weather_duration = rand(weather_duration_lower, weather_duration_upper) //Caustic Edit - Changing the weather so that it can just keep going until the particle weather controller chooses a new one, or chooses to end it!
 	running = TRUE
-	addtimer(CALLBACK(src, PROC_REF(wind_down)), weather_duration)
+	//addtimer(CALLBACK(src, PROC_REF(wind_down)), weather_duration) //Caustic Edit - Same as 2 lines above!
 
 	if(particleEffectType)
 		SSParticleWeather.SetparticleEffect(new particleEffectType, blend_type, filter_type, color, secondary_filter_type)
@@ -231,6 +233,7 @@
 /datum/particle_weather/proc/wind_down()
 	if(QDELETED(src))
 		return
+
 	severity = 0
 	if(SSParticleWeather.particleEffect)
 		SSParticleWeather.particleEffect.animateSeverity(severityMod())
@@ -490,4 +493,14 @@
 			continue
 		if(can_weather(M))
 			to_chat(M, late_warning_message)
+
+/datum/particle_weather/proc/send_winddown_message()
+	if(!wind_down_message)
+		return
+
+	for(var/mob/living/M in GLOB.player_list)
+		if(!M.client)
+			continue
+		if(can_weather(M))
+			to_chat(M, wind_down_message)
 //Caustic Edit End

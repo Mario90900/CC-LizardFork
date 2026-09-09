@@ -20,6 +20,7 @@
 	particleEffectType = /particles/weather/hail
 	warning_message = span_greenannounce("The upper air chills and freezes as clouds gather above.")
 	late_warning_message = span_greenannounce("Hard pellets of ice begin to strike the ground.")
+	wind_down_message = span_greenannounce("The thumping of ice against the ground grows more infrequent as the clouds above start to clear.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/hail)
 	indoor_weather_sounds = list(/datum/looping_sound/indoor_hail)

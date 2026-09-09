@@ -35,6 +35,7 @@
 	particleEffectType = /particles/weather/snow
 	warning_message = span_greenannounce("The air chills across the realm, soft white specs appearing near warm breaths.")
 	late_warning_message = span_greenannounce("Flakes swirl as snow starts to drift down from the sky.")
+	wind_down_message = span_greenannounce("A few more flakes dance around in the air as the clouds start to part and move elsewhere.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/snow)
 
@@ -68,6 +69,7 @@
 	particleEffectType = /particles/weather/snow/storm
 	warning_message = span_greenannounce("Heavy clouds build in the sky as the air chills across the realm, soft white specs appearing near warm breaths.")
 	late_warning_message = span_greenannounce("Heavy snow begins to fall thick and fast.")
+	wind_down_message = span_greenannounce("The buffetting snowfall abates into lighter flakes, rays of light can be seen reflecting off the fresh snow.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/snow)
 

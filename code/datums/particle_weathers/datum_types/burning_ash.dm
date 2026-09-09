@@ -23,6 +23,7 @@
 	particleEffectType = /particles/weather/ash
 	warning_message = span_greenannounce("A thunderious cataclysm thunders in the distance and the skies grow unnaturally dark.")
 	late_warning_message = span_greenannounce("The air grows hot and gritty. Ash begins to fall from above.")
+	wind_down_message = span_greenannounce("The last of those ashes start to settle and be blown away by the wind, ready to begin the cycle anew.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/ash)
 	indoor_weather_sounds = list(/datum/looping_sound/indoor_ash)

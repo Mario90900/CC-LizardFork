@@ -27,6 +27,7 @@
 	particleEffectType = /particles/weather/sand/gentle
 	warning_message = span_greenannounce("Dry gusts winds their way across the realm, pulling at loose ground.")
 	late_warning_message = span_greenannounce("The wind groans lowly, carrying specs of sand and dust.")
+	wind_down_message = span_greenannounce("The sands start to grow heavy and settle, as the winds steadily calm down once more.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/sandstorm)
 	indoor_weather_sounds = list(/datum/looping_sound/wind)
@@ -152,6 +153,7 @@
 	particleEffectType = /particles/weather/sand
 	warning_message = span_greenannounce("Ferocious winds howl their way across the realm, building thick clouds close to the earth.")
 	late_warning_message = span_greenannounce("The wind screams, carrying blinding dust and forming small but powerful vortexes.")
+	wind_down_message = span_greenannounce("The last of the vortexes start to die off as the winds finally begin to calm. In the distance, the sandy haze is dissipating.")
 	scale_vol_with_severity = TRUE
 	weather_sounds = list(/datum/looping_sound/sandstorm)
 	indoor_weather_sounds = list(/datum/looping_sound/wind)

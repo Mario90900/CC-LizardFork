@@ -28,6 +28,7 @@
 	particleEffectType = /particles/weather/leaves
 	warning_message = span_greenannounce("Light winds blow in through the forests across the realm.")
 	late_warning_message = span_greenannounce("A sudden gust scatters leaves wildly through the air.")
+	wind_down_message = span_greenannounce("A few remaining leaves flit about in the weakening wind, ready to land somewhere amongst the trees.")
 	scale_vol_with_severity = TRUE
 
 	minSeverity = 1
@@ -45,6 +46,7 @@
 	particleEffectType = /particles/weather/leaves
 	warning_message = span_greenannounce("Heavy winds blow in through the forests across the realm.")
 	late_warning_message = span_greenannounce("A sudden gust scatters leaves wildly through the air.")
+	wind_down_message = span_greenannounce("A few remaining leaves flit about in the weakening wind, ready to land somewhere amongst the trees.")
 	scale_vol_with_severity = TRUE
 
 	minSeverity = 4
@@ -62,6 +64,7 @@
 	particleEffectType = /particles/weather/leaves/sakura
 	warning_message = span_greenannounce("Love reigns and a calm wind runs through floral trees")
 	late_warning_message = span_greenannounce("A sudden gust scatters leaves wildly through the air.")
+	wind_down_message = span_greenannounce("A few remaining leaves flit about in the weakening wind, their dancing display tapering off.")
 	scale_vol_with_severity = TRUE
 
 	minSeverity = 1
@@ -79,6 +82,7 @@
 	particleEffectType = /particles/weather/leaves/sakura
 	warning_message = span_greenannounce("Love reigns and a heavy wind runs through floral trees")
 	late_warning_message = span_greenannounce("A sudden gust scatters leaves wildly through the air.")
+	wind_down_message = span_greenannounce("A few remaining leaves flit about in the weakening wind, their dancing display tapering off.")
 	scale_vol_with_severity = TRUE
 
 	minSeverity = 4

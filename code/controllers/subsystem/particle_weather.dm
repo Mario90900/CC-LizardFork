@@ -87,6 +87,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 /datum/controller/subsystem/ParticleWeather/proc/run_weather(datum/particle_weather/weather_datum_type, force = 0, color)
 	if(runningWeather || queued_weather)
 		if(!force)
+			log_game("Run_Weather was called while a weather was running and without forced set to true. Ignoring this weather change.")
 			return
 		if(runningWeather)
 			runningWeather.end()
@@ -104,7 +105,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 	if(force)
 		runningWeather.start(color)
 	else
-		var/randTime = rand(0, 6000) + initial(runningWeather.weather_duration_upper)
+		var/randTime = rand(1 MINUTES, 3 MINUTES) //+ initial(runningWeather.weather_duration_upper) //Caustic Edit - Lets just make it a bit more consistent when it will actually start? Otherwise it's like... anywhere from almost immediately to 10 minutes later, plus the upper duration which... goodness.
 
 		queued_weather = runningWeather
 		queued_weather_start_time = world.time + randTime
@@ -159,7 +160,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 /datum/controller/subsystem/ParticleWeather/proc/check_forecast(time_of_day)
 
 	// Do not roll new forecast if weather is active or queued
-	if(runningWeather || queued_weather)
+	if(queued_weather) //(runningWeather || queued_weather) //Caustic Edit - Changing this to instead only refuse to interrupt a queued weather - and we can just call to wind down weathers here.
 		return
 
 	if(!selected_forecast)
@@ -169,11 +170,22 @@ SUBSYSTEM_DEF(ParticleWeather)
 	var/datum/particle_weather/weather_type = selected_forecast.pick_weather(time_of_day)
 
 	if(!weather_type)
-		log_game("Forecast roll produced no weather for [time_of_day]")
+		if(prob(50)) //Coin Flip for now to see if we just let the water continue or swap to 'clear' weather, by ending the current.
+			log_game("Forecast roll chose to extend the current weather for [time_of_day]")
+			return
+
+	var/time_to_start_next = particleEffect.lifespan + particleEffect.fade + 10 SECONDS //Lets add a constant here as well to ensure that it runs _after_ the current has ended.
+	if(runningWeather) //Just in case. Lets make sure nothing else accidentally ended it already.
+		runningWeather.send_winddown_message()
+		runningWeather.wind_down()
+
+	if(!weather_type) //If there is no weather and this point is it, it means the prob above failed to continue the weather!
+		log_game("Forecast rolled 'clear skies' for [time_of_day]")
 		return
+
 
 	GLOB.forecast = initial(weather_type.forecast_tag)
 
-	log_game("Forecast picked [weather_type] for [time_of_day]")
+	log_game("Forecast picked [weather_type] for [time_of_day]. It will run in [time_to_start_next] ticks.")
 
-	run_weather(weather_type)
+	addtimer(CALLBACK(src, PROC_REF(run_weather), weather_type), time_to_start_next, TIMER_UNIQUE|TIMER_STOPPABLE)
