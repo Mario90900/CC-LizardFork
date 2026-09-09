@@ -12897,14 +12897,6 @@
 /obj/item/natural/stone,
 /turf/open/floor/rogue/lightpath,
 /area/rogue/outdoors/desertdeep/colosseum)
-"dgl" = (
-/obj/structure/stairs/desert{
-	dir = 1
-	},
-/turf/open/floor/rogue/lightpath{
-	color = "#b3acbf"
-	},
-/area/rogue/under/cave/desertdeep)
 "dgq" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -19393,6 +19385,11 @@
 /obj/structure/bars/passage/shutter{
 	name = "Steward";
 	redstone_id = "stw_desk2"
+	},
+/obj/structure/standingbell{
+	name = "steward service bell";
+	pixel_y = -14;
+	pixel_x = 4
 	},
 /turf/open/floor/rogue/concrete{
 	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
@@ -64564,11 +64561,11 @@
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/desert)
 "qwx" = (
-/obj/structure/standingbell{
-	name = "steward service bell"
+/obj/structure/stairs/desert{
+	dir = 1
 	},
-/turf/open/floor/rogue/metal,
-/area/rogue/outdoors/town/desert)
+/turf/open/floor/rogue/lightpath,
+/area/rogue/under/cave/desertdeep)
 "qwy" = (
 /turf/open/floor/carpet/red,
 /area/rogue/outdoors/town/roofs/keep/desert)
@@ -71212,7 +71209,9 @@
 /obj/structure/stairs/desert{
 	dir = 1
 	},
-/turf/open/floor/rogue/lightpath,
+/turf/open/floor/rogue/lightpath{
+	color = "#b3acbf"
+	},
 /area/rogue/under/cave/desertdeep)
 "sgV" = (
 /mob/living/carbon/human/species/skeleton/npc/mediumspread,
@@ -215765,7 +215764,7 @@ oxE
 oxE
 obK
 obK
-dgl
+sgO
 iKA
 gkw
 gkw
@@ -216077,7 +216076,7 @@ hFC
 oxE
 obK
 obK
-dgl
+sgO
 iKA
 iKA
 gkw
@@ -334325,7 +334324,7 @@ iZp
 iZp
 hBM
 hBM
-sgO
+qwx
 qBr
 iZp
 iZp
@@ -334637,7 +334636,7 @@ iZp
 hBM
 hBM
 hBM
-sgO
+qwx
 qBr
 iZp
 iZp
@@ -428632,7 +428631,7 @@ nbu
 rPy
 ajz
 eLd
-qwx
+mlf
 mlf
 bep
 icQ
