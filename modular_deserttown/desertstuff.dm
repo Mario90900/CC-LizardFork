@@ -1014,7 +1014,7 @@
 		if(Living.m_intent == MOVE_INTENT_SNEAK)
 			return
 		else
-			if(L.m_intent == MOVE_INTENT_RUN || !(HAS_TRAIT(L, TRAIT_AZURENATIVE)))
+			if(Living.m_intent == MOVE_INTENT_RUN || !(HAS_TRAIT(Living, TRAIT_AZURENATIVE)))
 				playsound(Parent.loc, 'sound/foley/footsteps/softbarefoot (1).ogg', 100, FALSE, -1)
 				playsound(Parent.loc, 'sound/foley/cloth_wipe (1).ogg', 100, FALSE, -1)
 				Living.consider_ambush()
