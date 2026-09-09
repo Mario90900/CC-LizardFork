@@ -667,8 +667,14 @@
 	if(!has_buckled_mobs())
 		STOP_PROCESSING(SSobj, src)
 		return
+	var/continue_process = FALSE
 	for(var/mob/living/carbon/human/L in buckled_mobs)
+		if(L.stat == DEAD)
+			continue
 		L.energy_add(-2)
+		continue_process = TRUE
+	if(!continue_process)
+		STOP_PROCESSING(SSobj, src)
 
 /obj/structure/quicksand/user_buckle_mob(mob/living/buckled_mob, mob/living/user)
 	return

@@ -12897,6 +12897,14 @@
 /obj/item/natural/stone,
 /turf/open/floor/rogue/lightpath,
 /area/rogue/outdoors/desertdeep/colosseum)
+"dgl" = (
+/obj/structure/stairs/desert{
+	dir = 1
+	},
+/turf/open/floor/rogue/lightpath{
+	color = "#b3acbf"
+	},
+/area/rogue/under/cave/desertdeep)
 "dgq" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -55359,7 +55367,9 @@
 /area/rogue/indoors/town/manor/desert)
 "ofr" = (
 /obj/item/cushion/zybantine,
-/mob/living/carbon/human/species/human/northern/deranged_knight/hedgeknight,
+/mob/living/carbon/human/species/human/northern/deranged_knight/hedgeknight{
+	faction = list("bandits","station")
+	},
 /turf/open/floor/carpet/royalblack,
 /area/rogue/under/dungeon/bizbaz)
 "ofy" = (
@@ -69476,7 +69486,9 @@
 /turf/open/water/sewer,
 /area/rogue/under/cave/dunelord)
 "rLE" = (
-/mob/living/carbon/human/species/elf/dark/drowraider,
+/mob/living/carbon/human/species/elf/dark/drowraider{
+	faction = list("bandits","station")
+	},
 /turf/open/floor/rogue/darkpath{
 	color = "#b0b0b0"
 	},
@@ -71197,10 +71209,11 @@
 	},
 /area/rogue/indoors/town/dwarfin/desert)
 "sgO" = (
-/turf/open/floor/rogue/lightpath{
-	color = "#b3acbf"
+/obj/structure/stairs/desert{
+	dir = 1
 	},
-/area/rogue/under/cave/skeletoncrypt)
+/turf/open/floor/rogue/lightpath,
+/area/rogue/under/cave/desertdeep)
 "sgV" = (
 /mob/living/carbon/human/species/skeleton/npc/mediumspread,
 /turf/open/floor/carpet/royalblack,
@@ -82654,7 +82667,9 @@
 /turf/closed/wall/mineral/rogue/wooddark,
 /area/rogue/under/desertcavewet)
 "uWB" = (
-/mob/living/carbon/human/species/elf/dark/drowraider,
+/mob/living/carbon/human/species/elf/dark/drowraider{
+	faction = list("bandits","station")
+	},
 /obj/structure/bed/rogue/shit,
 /turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/under/dungeon/bizbaz)
@@ -215750,7 +215765,7 @@ oxE
 oxE
 obK
 obK
-iKA
+dgl
 iKA
 gkw
 gkw
@@ -216062,9 +216077,9 @@ hFC
 oxE
 obK
 obK
+dgl
 iKA
 iKA
-sgO
 gkw
 usF
 oiD
@@ -216376,7 +216391,7 @@ obK
 obK
 iKA
 iKA
-sgO
+iKA
 gkw
 whK
 fzV
@@ -216688,7 +216703,7 @@ obK
 iKA
 iKA
 iKA
-sgO
+iKA
 gkw
 whK
 guY
@@ -220744,8 +220759,8 @@ iZp
 obK
 iKA
 iKA
-sgO
-sgO
+iKA
+iKA
 gkw
 gkw
 gkw
@@ -334310,7 +334325,7 @@ iZp
 iZp
 hBM
 hBM
-hBM
+sgO
 qBr
 iZp
 iZp
@@ -334622,7 +334637,7 @@ iZp
 hBM
 hBM
 hBM
-hBM
+sgO
 qBr
 iZp
 iZp

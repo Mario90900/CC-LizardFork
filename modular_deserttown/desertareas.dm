@@ -81,7 +81,6 @@
 		/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/stalker = 40,
 		/mob/living/simple_animal/hostile/retaliate/rogue/sandworm/elder = 20,
 		/mob/living/simple_animal/hostile/retaliate/rogue/ifrit = 20,
-		/mob/living/simple_animal/hostile/retaliate/rogue/headless = 10,
 		/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 10,)
 	converted_type = /area/rogue/indoors/shelter/desertdeep
 	deathsight_message = "an empty, parched desert"
