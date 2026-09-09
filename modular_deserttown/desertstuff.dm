@@ -990,8 +990,6 @@
 	anchored = TRUE
 	density = FALSE
 	opacity = TRUE
-	mouse_opacity = 0
-	max_integrity = 10
 	layer = 4.1
 	plane = FLOOR_PLANE
 	blade_dulling = DULLING_CUT
@@ -1000,6 +998,10 @@
 /obj/structure/roguesand/dune/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/roguedune) //bro its fine trust me
+
+/obj/structure/roguesand/dune/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Moving through foliage has a chance to attract an ambush. The farther you're away from civilization, the more dangerous that these ambushes can become. Most ambushes can be avoided by toggling the 'SNEAK' button on your HUD, before moving through the foliage.")
 
 /datum/component/roguedune/Initialize()
 	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
@@ -1012,9 +1014,10 @@
 		if(Living.m_intent == MOVE_INTENT_SNEAK)
 			return
 		else
-			if(!(HAS_TRAIT(Living, TRAIT_AZURENATIVE) && Living.m_intent != MOVE_INTENT_RUN))
-				playsound(Parent.loc, 'sound/foley/footsteps/dunewalk2.ogg', 100, FALSE, -1)
-			Living.consider_ambush()
+			if(L.m_intent == MOVE_INTENT_RUN || !(HAS_TRAIT(L, TRAIT_AZURENATIVE)))
+				playsound(Parent.loc, 'sound/foley/footsteps/softbarefoot (1).ogg', 100, FALSE, -1)
+				playsound(Parent.loc, 'sound/foley/cloth_wipe (1).ogg', 100, FALSE, -1)
+				Living.consider_ambush()
 	return
 
 /obj/structure/roguesand/dune/Crossed(atom/movable/O)
