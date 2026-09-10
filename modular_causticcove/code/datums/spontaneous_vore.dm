@@ -119,7 +119,7 @@
 		if(!thrown_mob.allowmobvore && isanimal(parent) && !parent.ckey)
 			return
 
-		var/mob/thrower = throwingdatum.thrower
+		var/mob/thrower = throwingdatum?.thrower
 		// PERSON BEING HIT: CAN BE DROP PRED, ALLOWS THROW VORE.
 		// PERSON BEING THROWN: DEVOURABLE, ALLOWS THROW VORE, CAN BE DROP PREY.
 		if(can_throw_vore(prey = thrown_mob, pred = parent))

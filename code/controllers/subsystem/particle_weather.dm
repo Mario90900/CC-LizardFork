@@ -174,8 +174,9 @@ SUBSYSTEM_DEF(ParticleWeather)
 			log_game("Forecast roll chose to extend the current weather for [time_of_day]")
 			return
 
-	var/time_to_start_next = particleEffect.lifespan + particleEffect.fade + 10 SECONDS //Lets add a constant here as well to ensure that it runs _after_ the current has ended.
+	var/time_to_start_next
 	if(runningWeather) //Just in case. Lets make sure nothing else accidentally ended it already.
+		time_to_start_next = particleEffect.lifespan + particleEffect.fade + 10 SECONDS //Lets add a constant here as well to ensure that it runs _after_ the current has ended.
 		runningWeather.send_winddown_message()
 		runningWeather.wind_down()
 
@@ -183,7 +184,8 @@ SUBSYSTEM_DEF(ParticleWeather)
 		log_game("Forecast rolled 'clear skies' for [time_of_day]")
 		return
 
-
+	if(!time_to_start_next)
+		time_to_start_next = 10 SECONDS
 	GLOB.forecast = initial(weather_type.forecast_tag)
 
 	log_game("Forecast picked [weather_type] for [time_of_day]. It will run in [time_to_start_next] ticks.")
