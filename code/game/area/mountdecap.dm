@@ -3,6 +3,7 @@
 	name = "Mount Decapitation"
 	loot_budget = LOOT_BUDGET_MOUNT_DECAP
 	icon_state = "decap"
+	allow_extreme_weather = TRUE //Caustic Edit - Add in the possibility for tornado spawns!
 	ambush_mobs = list(
 				// Singles — budget filler across all factions
 				/mob/living/carbon/human/species/human/northern/highwayman/ambush = 15,
@@ -29,7 +30,6 @@
 	deathsight_message = "a twisted tangle of soaring peaks"
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP
-	allow_extreme_weather = TRUE //Caustic Edit - Add in the possibility for tornado spawns!
 
 /area/rogue/indoors/shelter/mountains/decap
 	name = "Mount Decapitation"
@@ -48,6 +48,7 @@
 	loot_budget = LOOT_BUDGET_TARICHEA
 	loot_pool_key = "tarichea"
 	icon_state = "decap"
+	allow_extreme_weather = FALSE //Caustic Edit - No spawns here, it's Lava HELL.
 	ambush_mobs = list(
 				// Singles
 				/mob/living/carbon/human/species/human/northern/highwayman/ambush = 15,
@@ -72,13 +73,13 @@
 	converted_type = /area/rogue/indoors/shelter/mountains/decap
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_TARICHEA
-	allow_extreme_weather = FALSE //Caustic Edit - No spawns here, it's Lava HELL.
 
 /area/rogue/outdoors/mountains/decap/gunduzirak
 	name = "Gundu Zirak"
 	loot_budget = LOOT_BUDGET_GUNDU_ZIRAK
 	loot_pool_key = "gundu_zirak"
 	icon_state = "decap"
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 	ambush_mobs = list(
 				new /datum/ambush_config/treasure_hunter_posse = 1,
 				/mob/living/carbon/human/species/dwarfskeleton/ambush = 30,
@@ -92,13 +93,12 @@
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_GUNDU_ZIRAK
-	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 
 /area/rogue/outdoors/mountains/decap/gunduzirak/bossarena
 	name = "Baronness Boss Arena"
 	first_time_text = "THE BARONESS"
-	detail_text = DETAIL_TEXT_DECAP_GUNDU_ZIRAK
 	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
+	detail_text = DETAIL_TEXT_DECAP_GUNDU_ZIRAK
 
 
 /area/rogue/outdoors/mountains/decap/gunduzirak/bossarena/can_craft_here()
@@ -150,6 +150,7 @@
 	name = "Ancient Dwarven Forge"
 	loot_budget = LOOT_BUDGET_MINOTAUR_FORT
 	icon_state = "decap"
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 	droning_sound = 'sound/music/area/prospector.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
@@ -159,7 +160,6 @@
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
 	detail_text = DETAIL_TEXT_DECAP_MINOTAUR_FORTRESS
-	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, it's underground but... still in the outdoors path for some reason?
 
 /area/rogue/outdoors/mountains/decap/minotaurfort/can_craft_here()
 	return FALSE
@@ -167,6 +167,7 @@
 /area/rogue/outdoors/mountains/decap/banditcamp
 	name = "Bandit Camp"
 	icon_state = "decap"
+	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, is dungeon!
 	loot_budget = LOOT_BUDGET_BANDIT_CAMP
 	loot_pool_key = "decap_bandit_camp"
 	droning_sound = 'sound/music/area/decap.ogg'
@@ -177,7 +178,6 @@
 	converted_type = /area/rogue/indoors/shelter/mountains/decap
 	ceiling_protected = TRUE
 	threat_region = THREAT_REGION_MOUNT_DECAP
-	allow_extreme_weather = FALSE //Caustic Edit - Turn off spawns, is dungeon!
 
 /area/rogue/indoors/shelter/mountains/decap/banditcamp
 	name = "Bandit Camp"

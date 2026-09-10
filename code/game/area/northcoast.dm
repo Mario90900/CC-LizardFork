@@ -13,6 +13,7 @@
 	droning_sound_dusk = 'sound/music/area/septimus.ogg'
 	droning_sound_night = 'sound/music/area/sleeping.ogg'
 	soundenv = 15
+	allow_extreme_weather = TRUE //Caustic Edit - Add in the possibility for tornado spawns!
 	ambush_times = list("night","dusk")
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
@@ -34,15 +35,14 @@
 	deathsight_message = "somewhere betwixt Abyssor's realm and Dendor's bounty"
 	threat_region = THREAT_REGION_AZUREAN_COAST
 	detail_text = DETAIL_TEXT_NORTH_COAST
-	allow_extreme_weather = TRUE //Caustic Edit - Add in the possibility for tornado spawns!
 
 /area/rogue/outdoors/beach/forest/hamlet
 	name = "The Azure Coast - Hamlet"
 	first_time_text = "THE HAMLET"
+	allow_extreme_weather = FALSE //Caustic Edit - No spawns here pls!
 	ambush_mobs = null // We don't want actual ambushes in Hamlet but we also don't want to misuse outdoors/beach lol
 	threat_region = THREAT_REGION_AZUREAN_COAST
 	detail_text = DETAIL_TEXT_NORTH_COAST_HAMLET
-	allow_extreme_weather = FALSE //Caustic Edit - No spawns here pls!
 
 /area/rogue/outdoors/beach/forest/north
 	name = "The Azure Coast - North"

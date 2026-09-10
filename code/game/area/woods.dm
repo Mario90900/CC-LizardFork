@@ -12,6 +12,7 @@
 	droning_sound_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
 	warden_area = TRUE
+	allow_extreme_weather = TRUE //Caustic Edit - Allow tornado spawns!
 	ambush_times = list("night","dawn","dusk","day")
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/badger = 10,
@@ -28,7 +29,6 @@
 	deathsight_message = "somewhere in the wilds"
 	threat_region = THREAT_REGION_AZURE_GROVE
 	detail_text = DETAIL_TEXT_AZURE_GROVE
-	allow_extreme_weather = TRUE //Caustic Edit - Allow tornado spawns!
 
 /area/rogue/indoors/shelter/woods
 	name = "Azure Grove"
