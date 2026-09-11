@@ -164,6 +164,21 @@
 	icon_living = "hatchling"
 	icon_dead = "hatchling-dead"
 
+	botched_butcher_results = list(
+		/obj/item/alch/sinew = 1,
+		/obj/item/alch/viscera = 1,
+	)
+	butcher_results = list(
+		/obj/item/alch/sinew = 2,
+		/obj/item/alch/viscera = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 1,
+	)
+	perfect_butcher_results = list(
+		/obj/item/alch/sinew = 3,
+		/obj/item/alch/viscera = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 2,
+	)
+
 	health = 65
 	maxHealth = 65
 
@@ -190,6 +205,27 @@
 	icon_living = "juvenile"
 	icon_state = "juvenile"
 	icon_dead = "juvenile-dead"
+
+	botched_butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 2,
+		/obj/item/alch/viscera = 1,
+		/obj/item/alch/sinew = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 1,
+	)
+	butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 5,
+		/obj/item/alch/viscera = 2,
+		/obj/item/alch/sinew = 3,
+		/obj/item/alch/bone = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 2,
+	)
+	perfect_butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 7,
+		/obj/item/alch/viscera = 3,
+		/obj/item/alch/sinew = 4,
+		/obj/item/alch/bone = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 3,
+	)
 
 	health = 400
 	maxHealth = 400
@@ -219,6 +255,28 @@
 	icon_living = "adult"
 	icon_state = "adult"
 	icon_dead = "adult-dead"
+
+	botched_butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 4,
+		/obj/item/alch/viscera = 2,
+		/obj/item/alch/sinew = 4,
+		/obj/item/alch/bone = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 2,
+	)
+	butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 12,
+		/obj/item/alch/viscera = 4,
+		/obj/item/alch/sinew = 6,
+		/obj/item/alch/bone = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 4,
+	)
+	perfect_butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/steak = 18,
+		/obj/item/alch/viscera = 8,
+		/obj/item/alch/sinew = 8,
+		/obj/item/alch/bone = 2,
+		/obj/item/reagent_containers/food/snacks/fat = 8,
+	)
 
 	icon = 'modular_ratwood/icons/roguetown/mob/monster/adultsandworm.dmi'
 
