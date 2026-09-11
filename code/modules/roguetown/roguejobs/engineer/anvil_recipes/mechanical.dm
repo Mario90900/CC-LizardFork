@@ -2,7 +2,7 @@
 	i_type = "Engineering"
 	appro_skill = /datum/skill/craft/engineering
 	craftdiff = 1
-	
+
 //--------- TIN RECIPES -----------
 
 /datum/anvil_recipe/engineering/nails
@@ -304,14 +304,14 @@
 	name = "Arquebus (+1 bronze, +1 cog, +1 wood)"
 	req_bar = /obj/item/ingot/bronze
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/roguegear, /obj/item/grown/log/tree/small) //Expensive!
-	created_item = /obj/item/gun/ballistic/blackpowder/arquebus
+	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/arquebus
 	craftdiff = 5
 
 /datum/anvil_recipe/engineering/pistol
 	name = "Arquebus Pistol (+1 cog, +1 wood)"
 	req_bar = /obj/item/ingot/bronze
 	additional_items = list(/obj/item/roguegear, /obj/item/grown/log/tree/small) //A little cheaper!
-	created_item = /obj/item/gun/ballistic/blackpowder/small/arquebus_pistol
+	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/small/arquebus_pistol
 	craftdiff = 5
 
 /datum/anvil_recipe/engineering/powderbag
@@ -329,11 +329,19 @@
 	craftdiff = 0
 
 /datum/anvil_recipe/engineering/leadbullets
-	name = "Firearm Bullets (x10)"
+	name = "Firearm Bullets x10"
 	req_bar = /obj/item/ingot/iron
-	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/blackpowder //Caustic Edit - Changing the output to be our new refactored (basic) bullets
+	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/blackpowder
 	createditem_num = 10
 	craftdiff = 2
+
+/datum/anvil_recipe/engineering/grapeshot
+	name = "Grapeshot x8 (+1 Iron)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/ammo_casing/caseless/rogue/bullet/blackpowder/grapeshot
+	createditem_num = 8
+	craftdiff = 3
 
 /datum/anvil_recipe/engineering/ramrod
 	name = "Replacement Firearm Ramrod"
