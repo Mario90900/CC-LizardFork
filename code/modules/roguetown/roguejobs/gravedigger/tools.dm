@@ -101,7 +101,7 @@
 	if(!isliving(L))
 		return FALSE
 
-	if(istype(T, /turf/open/floor/rogue/sand) || istype(T, /turf/open/floor/rogue/AzureSand))
+	if(istype(T, /turf/open/floor/rogue/sand) || istype(T, /turf/open/floor/rogue/AzureSand) || istype(T,/turf/open/floor/rogue/dunes)) //Caustic Edit - Adds Desert Town Tiles
 		return start_autodig_sand(L, T)
 
 	if(!istype(T, /turf/open/floor/rogue/dirt))
@@ -166,6 +166,8 @@
 		var/turf/open/floor/rogue/sand/S = T
 		return S.sand_amt > 0
 	if(istype(T, /turf/open/floor/rogue/AzureSand))
+		return TRUE
+	if(istype(T,/turf/open/floor/rogue/dunes)) //Caustic Edit - Adds Desert Town Tiles
 		return TRUE
 	return FALSE
 
@@ -319,7 +321,7 @@
 
 					return
 
-				if(istype(T, /turf/open/floor/rogue/sand) || istype(T, /turf/open/floor/rogue/AzureSand))
+				if(istype(T, /turf/open/floor/rogue/sand) || istype(T, /turf/open/floor/rogue/AzureSand) || istype(T,/turf/open/floor/rogue/dunes)) //Caustic Edit - Adds Desert Town Tiles
 					if(heldclod)
 						heldclod.forceMove(T)
 						heldclod = null
