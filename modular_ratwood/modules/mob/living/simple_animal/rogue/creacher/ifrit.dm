@@ -85,6 +85,7 @@
 	icon_state = "ifrit_queen"
 	icon_living = "ifrit_queen"
 	icon_dead = "ifrit_queen_dead"
+	wander = 0
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
 	ranged_cooldown_time = 20 SECONDS
 	var/datum/action/cooldown/spell/telegraphed_strike/dragons_breath/mob_ability/ifrit/fire_breath
