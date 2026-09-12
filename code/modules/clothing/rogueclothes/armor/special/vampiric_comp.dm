@@ -67,14 +67,14 @@
 	// We don't really want gnolls to hit each other to pre-buff.
 	if(vamp_comp)
 		return
-	if(!istype(target, /mob/living/carbon/human))
+	if(!istype(target, /mob/living))
 		return
-	if(target.stat == DEAD || !target.mind)
+	if(target.stat == DEAD)
 		return
 	current_victim_ref = WEAKREF(target)
 	RegisterSignal(target, COMSIG_MOB_ARMOR_INTEGRITY_DAMAGED, PROC_REF(handle_target_armor_shred))
 
-/datum/component/vampiric_striker/proc/handle_target_armor_shred(mob/living/carbon/human/target, armor_damage_taken, obj/item/clothing/damaged_item, current_layer, total_layers)
+/datum/component/vampiric_striker/proc/handle_target_armor_shred(mob/living/target, armor_damage_taken, obj/item/clothing/damaged_item, current_layer, total_layers)
 	SIGNAL_HANDLER
 
 	if(armor_damage_taken <= 0)

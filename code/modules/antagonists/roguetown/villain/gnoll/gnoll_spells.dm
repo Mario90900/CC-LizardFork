@@ -376,7 +376,7 @@
 					return FALSE
 
 			to_chat(owner, span_notice("You begin to consume [corpse.name]."))
-			if(do_after(owner, 20 SECONDS, corpse))
+			if(do_after(owner, 10 SECONDS, corpse))
 				corpse.gib()
 				to_chat(owner, span_notice("You finish consuming [corpse.name], restoring your physical form."))
 				H.apply_status_effect(/datum/status_effect/buff/healing, 20)
