@@ -306,7 +306,7 @@
 	)
 	valid_roles = list("Templar", "Knight", "Sergeant", "Men-at-arms", "Squire", "Mercenary", "Warden")
 
-/datum/vision_quest/orthodoxist_echo
+/datum/vision_quest/tier_1/orthodoxist_echo
 	name = "Psydonic Vision"
 	description = "A psydonite stands in Abyssor's gaze. You are the prophet, you will deliver his missive."
 	target_description = "an Orthodoxist"
@@ -374,13 +374,13 @@
 	On Sun's Dae, the sun stands motionless at noon, burning those who speak lies. \
 	Six dawns shall pass as mere curiosities, but one shall bring true sorrow."
 	possible_phrases = list(
-		"Moon's Dae was and shall be an ill day",
-		"Truce's Dae was and shall be an ill day",
-		"Wedding's Dae was and shall be an ill day",
-		"Thunder's Dae was and shall be an ill day",
-		"Feast's Dae was and shall be an ill day",
-		"Psydon's Dae was and shall be an ill day",
-		"Sun's Dae was and shall be an ill day"
+		"Moon's Dae was and shall be an ill dae",
+		"Truce's Dae was and shall be an ill dae",
+		"Wedding's Dae was and shall be an ill dae",
+		"Thunder's Dae was and shall be an ill dae",
+		"Feast's Dae was and shall be an ill dae",
+		"Psydon's Dae was and shall be an ill dae",
+		"Sun's Dae was and shall be an ill dae"
 	)
 
 /datum/vision_quest/tier_1/seven_daes_of_wrath/is_valid_target(mob/living/carbon/human/target, mob/living/carbon/human/seeker)

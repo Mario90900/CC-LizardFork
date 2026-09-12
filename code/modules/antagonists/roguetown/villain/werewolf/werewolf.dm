@@ -44,6 +44,7 @@
 		TRAIT_STRONGBITE,
 		TRAIT_LYCANRESILENCE,
 		TRAIT_CHUNKYFINGERS, //So they can no longer use weapons at all.
+		TRAIT_TOUGH_COOKIE,
 		TRAIT_UNLYCKERABLE, //Literal archenemy
 		TRAIT_ZOMBIE_IMMUNE
 	)
