@@ -857,11 +857,11 @@
 
 	//Caustic Edit - Add in the Sandstorm Effect fullscreens!
 	if(HAS_TRAIT(src, TRAIT_SANDSTORMED))
-		if(!HAS_TRAIT(src, TRAIT_SANDSTORM_GOGGLES))
-			overlay_fullscreen("nearsighted", /atom/movable/screen/fullscreen/nearsight)
-		else
+		if(HAS_TRAIT(src, TRAIT_SANDSTORM_GOGGLES) || src.has_sandstorm_hood())
 			clear_fullscreen("nearsighted")
-		if(HAS_TRAIT(src, TRAIT_SANDSTORM_GOGGLES))
+		else
+			overlay_fullscreen("nearsighted", /atom/movable/screen/fullscreen/nearsight)
+		if(HAS_TRAIT(src, TRAIT_SANDSTORM_GOGGLES) || src.has_sandstorm_hood())
 			overlay_fullscreen("dust", /atom/movable/screen/fullscreen/dustoverlay_light)
 		else
 			overlay_fullscreen("dust", /atom/movable/screen/fullscreen/dustoverlay)

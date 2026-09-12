@@ -49,7 +49,7 @@
 	if(HAS_TRAIT(L, TRAIT_SANDSTORM_IMMUNE))
 		return
 
-	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && prob(5))
+	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && !L.has_sandstorm_hood() && prob(5))
 		L.adjust_blurriness(rand(1,3))
 
 	if(ishuman(L))
@@ -175,7 +175,7 @@
 	if(!HAS_TRAIT(L, TRAIT_SANDSTORMED))
 		ADD_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 	// Heat + abrasion
-	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && prob(25))
+	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && !L.has_sandstorm_hood() && prob(25))
 		L.adjust_blurriness(rand(1,3))
 
 	if(ishuman(L))
@@ -292,7 +292,9 @@
 /mob/living/proc/has_sandstorm_hood()
 	var/obj/item/clothing/head/H = get_item_by_slot(ITEM_SLOT_HEAD)
 	if(!H)
-		return FALSE
+		H = get_item_by_slot(ITEM_SLOT_MASK)
+		if(!H)
+			return FALSE
 
 	// Generic hood subtype
 	if(istype(H, /obj/item/clothing/head/roguetown/roguehood))
