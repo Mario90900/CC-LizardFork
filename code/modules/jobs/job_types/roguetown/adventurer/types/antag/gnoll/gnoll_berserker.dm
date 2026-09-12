@@ -10,7 +10,7 @@
 	reset_stats = TRUE
 	subclass_stats = list( //Caustic Edit start.
 		STATKEY_STR = 5,
-		STATKEY_CON = 2,
+		STATKEY_CON = 3,
 		STATKEY_WIL = 3,
 		STATKEY_SPD = 4,
 		STATKEY_INT = -3
@@ -37,7 +37,8 @@
 /datum/outfit/job/roguetown/gnoll/berserker/pre_equip(mob/living/carbon/human/H)
 	if(H.mind)
 		H.set_species(/datum/species/gnoll)
-		H.skin_armor = new /obj/item/clothing/suit/roguetown/armor/regenerating/skin/gnoll_armor(H)
+		H.skin_armor = new vamp_armor_type(H)
+		H.AddComponent(/datum/component/vampiric_striker, shard_threshold, shard_repair_value, max_fury_stacks)
 		neck = /obj/item/storage/belt/rogue/pouch/healing
 		backr = /obj/item/storage/backpack/rogue/satchel/gnoll
 		don_pelt(H)

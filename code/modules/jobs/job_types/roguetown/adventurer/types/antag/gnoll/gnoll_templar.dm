@@ -34,11 +34,18 @@
 	) //Caustic Edit end.
 	cmode_music = 'sound/music/combat_graggar.ogg'
 
+/datum/outfit/job/roguetown/gnoll/templar
+	vamp_armor_type = /obj/item/clothing/suit/roguetown/armor/vampiric/gnoll/templar
+	max_fury_stacks = 100
+	shard_threshold = 44
+	shard_repair_value = 20
+
 /datum/outfit/job/roguetown/gnoll/templar/pre_equip(mob/living/carbon/human/H)
 	if(H.mind)
 		H.set_species(/datum/species/gnoll)
-		H.skin_armor = new /obj/item/clothing/suit/roguetown/armor/regenerating/skin/gnoll_armor/templar(H)
-		neck = /obj/item/storage/belt/rogue/pouch
+		H.skin_armor = new vamp_armor_type(H)
+		H.AddComponent(/datum/component/vampiric_striker, shard_threshold, shard_repair_value, max_fury_stacks)
+		neck = /obj/item/storage/belt/rogue/pouch/healing
 		backr = /obj/item/storage/backpack/rogue/satchel/gnoll
 		wrists = /obj/item/clothing/neck/roguetown/psicross/inhumen/graggar
 		don_pelt(H)
