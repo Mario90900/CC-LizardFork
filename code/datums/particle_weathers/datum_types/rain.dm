@@ -255,6 +255,7 @@
 	forecast_tag = "rain"
 
 	COOLDOWN_DECLARE(thunder)
+	COOLDOWN_DECLARE(tornado) //Caustic Edit - Will have to add this to heavy storm above if we ever change it to have Tornadoes again!!
 
 /datum/particle_weather/hurricane/tick()
 	if(!COOLDOWN_FINISHED(src, thunder))
@@ -305,20 +306,18 @@
 
 		COOLDOWN_START(src, thunder, rand(5, 40) * 1 SECONDS)
 
-	var/max_tornadoes = 2 //Caustic - But... Hurricanes can have the chance to spawn them like the Storm did.
+	//Caustic Edit - Lets add in a tornado timer as well ontop of this. So BOTH the Tornado Timer and the Thunder Timer need to be off cooldown to spawn more tornados. This bit is the same as the Dust Devil timer, but based on the Tornado's Lifespan instead.
+	if(!COOLDOWN_FINISHED(src, tornado))
+		return
+
+	var/max_tornadoes = 2 //Caustic - But... Hurricanes can have the chance to spawn them like the Storm did - Maximum will actually be (max_devils - 1) + spawn_attempts but only in the WORST CASE scenario. See below for spawn_attempts's definition and explanation of this.
 	var/min_distance_between = 30
 	var/min_spawn_distance = 8
 	var/max_spawn_distance = 20
-	var/max_attempts = 2 //Caustic - Was previously 5
-	var/spawn_chance = 3 //Caustic - Adding in the spawn chance as a var instead! Previous Spawn Chance for Hurricanes was 40 (good god)
 	// Count active rain tornadoes
 	var/list/active_tornadoes = GLOB.active_abyssors_rage.len
 
 	if(active_tornadoes >= max_tornadoes)
-		return
-
-	// Small spawn chance each tick (prevents instant double spawn)
-	if(!prob(spawn_chance)) //Caustic - Lets instead set this to a var with the others above.
 		return
 
 	// Build viable outdoor players
@@ -343,8 +342,13 @@
 		return
 
 	var/turf/spawn_turf = null
+	var/max_attempts = 2 //Caustic - Was previously 5
+	var/spawn_chance = 3 //Caustic - Adding in the spawn chance as a var instead! Previous Spawn Chance for Hurricanes was 40 (good god)
 
 	for(var/i = 1 to max_attempts)
+		// Small spawn chance each tick (prevents instant double spawn)
+		if(!prob(spawn_chance)) //Caustic - Lets instead set this to a var with the others above, and move it into the actual spawn loop of tornados
+			continue
 
 		var/distance = rand(min_spawn_distance, max_spawn_distance)
 		var/angle = rand(0, 359)
@@ -379,6 +383,13 @@
 		return
 
 	new /obj/effect/weather/tornado(spawn_turf) //Caustic - Swapped to just regular tornados, can use the Abyssor ones for something else? -- /abyssors_rage
+
+	if(active_tornadoes < max_tornadoes) //If we have not hit the max Tornado amount, randomly set the cooldown in 30-60 seconds
+		COOLDOWN_START(src, tornado, rand(45, 90) * 1 SECONDS)
+	else //But if we have hit max_tornadoes or somehow greater, set a longer static cooldown that will go over their lifespan + a small amount of rng variance
+		COOLDOWN_START(src, tornado, (90 SECONDS /* Tornado Lifetime */ * 2.5 /* Constant Multiplier against that value */) + (rand(0, 60) * 1 SECONDS)) //Tornado lifespan is currently 90 SECONDS, and I don't want to move it into a global var right now just to get this working. It probably should be one though for consistency.
+		//This comes out to, when the max count is hit, starting a much longer timer that ensures all tornados will time out, and give a minimum grace period of 1.5x Tornado lifespan + up to another .66x Tornado lifespan based on RNG
+	//Caustic Edit End
 
 /datum/particle_weather/hurricane/weather_act(mob/living/L)
 	if(HAS_TRAIT(L, TRAIT_WEATHER_PROTECTED))

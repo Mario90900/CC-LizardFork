@@ -4,6 +4,7 @@
 	attack_aim = MOB_AIM_LEVEL
 	icon = 'modular_ratwood/icons/roguetown/mob/monster/ifrit.dmi'
 	name = "ifrit"
+	desc = "Heat from the desert brought to lyfe, it stares at you with a canine visage filled with smoke and anger."
 	icon_state = "ifrit"
 	icon_living = "ifrit"
 	icon_dead = "ifrit_dead"
@@ -41,6 +42,9 @@
 	aggressive = 1
 	stat_attack = UNCONSCIOUS	//You falling unconcious won't save you, little one..
 	eat_forever = TRUE
+	canparry = TRUE
+	minbodytemp = 250
+	maxbodytemp = INFINITY
 
 //new ai, old ai off
 	AIStatus = AI_OFF
@@ -80,6 +84,7 @@
 	health = DRAGON_BROODMOTHER_HEALTH
 	maxHealth = DRAGON_BROODMOTHER_HEALTH
 	name = "ifrit Matriarch"
+	desc = "The desert's heat demonically made manifest and sealed away. Run or Fight for your lyfe."
 	health = 8000
 	maxHealth = 8000
 	icon_state = "ifrit_queen"
@@ -94,6 +99,7 @@
 	STACON = 20
 	STASTR = 20
 	STASPD = 13
+	move_base_delay = MOVEMENT_DELAY_SPD_10
 
 /mob/living/simple_animal/hostile/retaliate/rogue/ifrit/matriarch/Initialize(mapload)
 	. = ..()
@@ -103,6 +109,7 @@
 	//fire_breath.Grant(src)
 
 	//ai_controller.set_blackboard_key(BB_TARGETED_ACTION, fire_breath)
+	ai_controller.movement_delay = MOVEMENT_DELAY_SPD_10
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, firewheel)
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_INFINITE_STAMINA, TRAIT_GENERIC)
@@ -135,6 +142,7 @@
 /obj/item/roguekey/mage/ifrit
 	name = "drakian key"
 	desc = "An ancient drakian key. Once embedded in an ifrit matriach's flame, now no more than a trophy."
+	icon = 'modular_ratwood/icons/roguetown/items/keys.dmi'
 	icon_state = "voidkey"//Temp. I hate temp sprites!!!!
 	lockid = "ifrit"
 

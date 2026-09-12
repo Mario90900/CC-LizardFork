@@ -193,17 +193,13 @@
 	if(!COOLDOWN_FINISHED(src, dustdevil))
 		return
 
-	var/max_devils = 4 //Caustic - Down from 10 to 4 at a time
-	var/spawn_chance = 15 //Caustic - Moving the spawn chance to a Var, down from 50 to 15
-
+	var/max_devils = 3 //Caustic - Down from 10 to 3 at a time - Maximum will actually be (max_devils - 1) + spawn_attempts but only in the WORST CASE scenario. See below for spawn_attempts's definition and explanation of this.
 	// Count active dust devils
 	var/current_devils = GLOB.active_dust_devils.len
 
 	if(current_devils >= max_devils)
 		return
 
-	if(!prob(spawn_chance))	//Caustic - Moving the spawn chance to a Var above!
-		return
 	// Build viable player list
 	var/list/viable_players = list()
 	for(var/client/C in GLOB.clients)
@@ -222,11 +218,15 @@
 	if(!viable_players.len)
 		return
 
-	var/spawn_attempts = 2
+	var/spawn_attempts = 2 // Check the commented block in the for loop below, and at the setting of the cooldown timer at the end of the tick() proc as well!
+	var/spawn_chance = 15 //Caustic - Moving the spawn chance to a Var, down from 50 to 15
 
 	for(var/i = 1 to spawn_attempts)
-		if(current_devils >= max_devils)
-			break
+		//if(current_devils >= max_devils) //Since I've added the much longer timer for if the max is hit, this will only ever allow for a maximum of (max_devils - 1) + spawn_attempts to spawn, if all spawn attempts succeed and current_devils was at max - 1 already
+		//	break
+
+		if(!prob(spawn_chance))	//Caustic - Moving the spawn chance to a Var above! And make it per-devil as well!
+			continue
 
 		var/mob/living/target = pick(viable_players)
 		if(!target)
@@ -267,7 +267,11 @@
 
 		current_devils++
 
-	COOLDOWN_START(src, dustdevil, rand(15, 40) * 1 SECONDS)
+	if(current_devils < max_devils) //If we have not hit the max Dust Devil amount, randomly set the cooldown in 30-60 seconds
+		COOLDOWN_START(src, dustdevil, rand(30, 60) * 1 SECONDS)
+	else //But if we have hit max_devils or somehow greater, set a longer static cooldown that will go over their lifespan + a small amount of rng variance
+		COOLDOWN_START(src, dustdevil, (180 SECONDS /* Dust Devil Lifetime */ * 1.75 /* Constant Multiplier against that value */) + (rand(0, 90) * 1 SECONDS)) //Dust Devil lifespan is currently 180 SECONDS, and I don't want to move it into a global var right now just to get this working. It probably should be one though for consistency.
+		//This comes out to, when the max count is hit, starting a much longer timer that ensures all dust devils will time out, and give a minimum grace period of .75x devil lifespan + up to another .5x devil lifespan based on RNG
 
 /datum/particle_weather/sand_storm/stop_weather_sound_effect(mob/living/L)
 	..() // stop sounds normally

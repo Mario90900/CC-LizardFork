@@ -1,5 +1,7 @@
 GLOBAL_LIST_INIT(time_change_tips, world.file2list("strings/rt/timechangetips.txt"))
 
+#define TICKS_IN_A_DAY 864000 //Caustic Edit - Moving this to a singular define instead of hardcoding it.
+
 //Returns the world time in english
 /proc/worldtime2text()
 	return gameTimestamp("hh:mm:ss", world.time)
@@ -19,7 +21,7 @@ GLOBAL_LIST_INIT(time_change_tips, world.file2list("strings/rt/timechangetips.tx
 	return time2text(wtime - GLOB.timezoneOffset, format)
 
 /proc/station_time(display_only = FALSE, wtime=world.time)
-	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (display_only? GLOB.timezoneOffset : 0)
+	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % TICKS_IN_A_DAY) - (display_only? GLOB.timezoneOffset : 0) //Caustic Edit - Moving the hardcoded ticks in a day to a define instead.
 
 /proc/station_time_timestamp(format = "hh:mm:ss", wtime)
 	return time2text(station_time(TRUE, wtime), format)
@@ -28,6 +30,14 @@ GLOBAL_VAR_INIT(tod, FALSE)
 GLOBAL_VAR_INIT(forecast, FALSE)
 GLOBAL_VAR_INIT(todoverride, FALSE)
 GLOBAL_VAR_INIT(dayspassed, 0)
+//Caustic Edit - Add in the weather ticking on it's own cycle instead of being hard-set to the TOD itself and nothing else.
+// Currently this will start the first weather tick 1 hour after Midnight, and then it ticks every 3 hours. So: 1:00am, 4:00am, 7:00am, 10:00am and continues on accordingly
+#define WEATHER_HOURS_TO_NEXT 108000 //1hr = 36000
+#define WEATHER_INIT_OFFSET 36000
+
+GLOBAL_VAR_INIT(next_weather_change, ((WEATHER_HOURS_TO_NEXT * 2) + WEATHER_INIT_OFFSET)) //Manually set the first weather change to be 7:00am ([2 * 3hours] + 1hour), then let the system just run normally after.
+// The rounds always start with the station time at 8:00, so this will roll a weather at round start, then again in 2 hours.
+//Caustic Edit End
 
 GLOBAL_VAR_INIT(date_override_enabled, FALSE)
 GLOBAL_VAR_INIT(date_override_day, 1)
@@ -38,7 +48,7 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 	var/time = station_time()
 	var/oldtod = GLOB.tod
 
-	//CC Edit - Desert Map
+	//CC Edit - Desert Map - And Weather System Changes to it's own ticking system.
 	//var/desert = FALSE
 	//if(SSmapping.config.map_name == "Desert Town") //This bit got moved into the particle weather system, and the separation into different forcasts for different maps!
 	//	desert = TRUE //We're the desert map.
@@ -53,8 +63,17 @@ GLOBAL_VAR_INIT(date_override_offset, 0)
 		GLOB.tod = "dusk"
 	else if(GLOB.todoverride)
 		GLOB.tod = GLOB.todoverride
-	if((GLOB.tod != oldtod) && !GLOB.todoverride) //&& (GLOB.dayspassed>1)) //weather check on tod changes, disabled first day weather block
+	if(time >= GLOB.next_weather_change) //Since the station_time() call automatically handles the rollover after midnight to trim the excess 24 hours with the modulus math, we can just look at the time as expected here
+		//Because the Nightshift ticks every 10 seconds, and it always calls settod() each tick, this should be reliable
 		SSParticleWeather.check_forecast(GLOB.tod)
+
+		var/new_weather_time = GLOB.next_weather_change + WEATHER_HOURS_TO_NEXT
+		if(new_weather_time > TICKS_IN_A_DAY)
+			new_weather_time -= TICKS_IN_A_DAY //This accounts for the same rollover done in station_time, but I'm lazy to verify modulus math :P
+
+		GLOB.next_weather_change = new_weather_time
+	/*if((GLOB.tod != oldtod) && !GLOB.todoverride) //&& (GLOB.dayspassed>1)) //weather check on tod changes, disabled first day weather block
+		SSParticleWeather.check_forecast(GLOB.tod)*/
 	/*if((GLOB.tod != oldtod) && !GLOB.todoverride && (GLOB.dayspassed>1)) //weather check on tod changes
 		if(!GLOB.forecast)
 			switch(GLOB.tod)
