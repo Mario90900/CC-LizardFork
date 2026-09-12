@@ -775,7 +775,7 @@
 				)
 	//Caustic Edit - Add in special handling for the Blackpowder Weapons. Honestly it probably should be asking the weapon itself for the prop instead of the strap... but OKAY I guess :P
 	else if(istype(hol_comp.sheathed, /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder))
-		hol_comp.sheathed.getonmobprop(tag)
+		return hol_comp.sheathed.getonmobprop(tag)
 	//Caustic Edit End
 	else
 		switch(tag)

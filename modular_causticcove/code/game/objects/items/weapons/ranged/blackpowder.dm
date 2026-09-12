@@ -58,17 +58,17 @@
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.6, "sx" = -7, "sy" = 6, "nx" = 7, "ny" = 6, "wx" = -2, "wy" = 3, "ex" = 1, "ey" = 3,
+				return list("shrink" = 0.6, "sx" = -6, "sy" = 2, "nx" = 6, "ny" = 2, "wx" = 1, "wy" = 2, "ex" = 1, "ey" = 2,
 							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0,
-							"nturn" = -43, "sturn" = 43, "wturn" = 30, "eturn" = -30, "nflip" = 0, "sflip" = 8, "wflip" = 8, "eflip" = 0)
+							"nturn" = -70, "sturn" = 70, "wturn" = -70, "eturn" = -110, "nflip" = 0, "sflip" = 8, "wflip" = 0, "eflip" = 1)
 			if("wielded")
-				return list("shrink" = 0.6, "sx" = 5, "sy" = -2, "nx" = -5, "ny" = -1, "wx" = -8, "wy" = 2, "ex" = 8, "ey" = 2,
+				return list("shrink" = 0.6, "sx" = 2, "sy" = 0, "nx" = -2, "ny" = 0, "wx" = -5, "wy" = 0, "ex" = 7, "ey" = 0,
 							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 1,
-							"nturn" = -45, "sturn" = 45, "wturn" = 0, "eturn" = 0, "nflip" = 8, "sflip" = 0, "wflip" = 8, "eflip" = 0)
+							"nturn" = 0, "sturn" = 0, "wturn" = 35, "eturn" = -35, "nflip" = 8, "sflip" = 0, "wflip" = 8, "eflip" = 0)
 			if("onback")
-				return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1,
-							"northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0,
-							"nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1)
+				return list("shrink" = 0.6, "sx" = -6, "sy" = 2, "nx" = 6, "ny" = 2, "wx" = 1, "wy" = 2, "ex" = 1, "ey" = 2,
+							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0,
+							"nturn" = -70, "sturn" = 70, "wturn" = -70, "eturn" = -110, "nflip" = 0, "sflip" = 8, "wflip" = 0, "eflip" = 1)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/shoot_live_shot(mob/living/user as mob|obj, pointblank = 0, mob/pbtarget = null, message = 1)
 	fire_sound = pick('modular_causticcove/sound/arquebus/arquefire.ogg', 'modular_causticcove/sound/arquebus/arquefire2.ogg', 'modular_causticcove/sound/arquebus/arquefire3.ogg',
@@ -351,8 +351,8 @@
 	name = "arquebus rifle"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
 	icon = 'modular_causticcove/icons/weapons/blackpowder64.dmi'
-	icon_state = "arquebus"
-	item_state = "arquebus"
+	icon_state = "longgun_0"
+	item_state = "longgun_0"
 	force = 10
 	force_wielded = 15
 	possible_item_intents = list(/datum/intent/mace/strike/wood)
@@ -374,8 +374,8 @@
 	name = "handgonne"
 	desc = "A gunpowder weapon that shoots an armor piercing metal ball."
 	icon = 'modular_causticcove/icons/weapons/blackpowder64.dmi'
-	icon_state = "handgonne_alt"
-	item_state = "handgonne_alt"
+	icon_state = "handgonne"
+	item_state = "handgonne"
 	force = 10
 	force_wielded = 15
 	possible_item_intents = list(/datum/intent/mace/strike/wood)
@@ -392,6 +392,22 @@
 	damfactor = 1.35
 	range = 50
 	load_time = 80
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/handgonne/getonmobprop(tag)
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6, "sx" = -7, "sy" = 6, "nx" = 7, "ny" = 6, "wx" = -2, "wy" = 3, "ex" = 1, "ey" = 3,
+							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0,
+							"nturn" = -43, "sturn" = 43, "wturn" = 30, "eturn" = -30, "nflip" = 0, "sflip" = 8, "wflip" = 8, "eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6, "sx" = 5, "sy" = -2, "nx" = -5, "ny" = -1, "wx" = -8, "wy" = 2, "ex" = 8, "ey" = 2,
+							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 1,
+							"nturn" = -45, "sturn" = 45, "wturn" = 0, "eturn" = 0, "nflip" = 8, "sflip" = 0, "wflip" = 8, "eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1,
+							"northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0,
+							"nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/blunderbus
 	name = "blunderbus"
@@ -416,23 +432,6 @@
 	damfactor = 0.21
 	range = 15
 	load_time = 50
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/blunderbus/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.6, "sx" = -6, "sy" = 2, "nx" = 6, "ny" = 2, "wx" = 1, "wy" = 2, "ex" = 1, "ey" = 2,
-							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0,
-							"nturn" = -70, "sturn" = 70, "wturn" = -70, "eturn" = -110, "nflip" = 0, "sflip" = 8, "wflip" = 0, "eflip" = 1)
-			if("wielded")
-				return list("shrink" = 0.6, "sx" = 2, "sy" = 0, "nx" = -2, "ny" = 0, "wx" = -5, "wy" = 0, "ex" = 7, "ey" = 0,
-							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 1,
-							"nturn" = 0, "sturn" = 0, "wturn" = 35, "eturn" = -35, "nflip" = 8, "sflip" = 0, "wflip" = 8, "eflip" = 0)
-			if("onback")
-				return list("shrink" = 0.6, "sx" = -6, "sy" = 2, "nx" = 6, "ny" = 2, "wx" = 1, "wy" = 2, "ex" = 1, "ey" = 2,
-							"northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0,
-							"nturn" = -70, "sturn" = 70, "wturn" = -70, "eturn" = -110, "nflip" = 0, "sflip" = 8, "wflip" = 0, "eflip" = 1)
 
 // -- Pistols --
 /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/small/arquebus_pistol
