@@ -773,10 +773,32 @@
 					"eastabove" = 0,
 					"westabove" = 0
 				)
-	//Caustic Edit - Add in special handling for the Blackpowder Weapons. Honestly it probably should be asking the weapon itself for the prop instead of the strap... but OKAY I guess :P
-	else if(istype(hol_comp.sheathed, /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder))
-		return hol_comp.sheathed.getonmobprop(tag)
-	//Caustic Edit End
+	else if(istype(hol_comp.sheathed, /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/blunderbus) || istype(hol_comp.sheathed, /obj/item/gun/ballistic/revolver/grenadelauncher/blackpowder/arquebus))
+		switch(tag)
+			if("onback")
+				return list(
+					"shrink" = 0.6,
+					"sx" = -2,
+					"sy" = 0,
+					"nx" = 2,
+					"ny" = 1,
+					"wx" = 5,
+					"wy" = 2,
+					"ex" = -3,
+					"ey" = 2,
+					"nturn" = -45,
+					"sturn" = 45,
+					"wturn" = -100,
+					"eturn" = -80,
+					"nflip" = 0,
+					"sflip" = 8,
+					"wflip" = 1,
+					"eflip" = 0,
+					"northabove" = 1,
+					"southabove" = 0,
+					"eastabove" = 0,
+					"westabove" = 0
+				)
 	else
 		switch(tag)
 			if("onback")
