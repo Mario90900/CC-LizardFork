@@ -981,6 +981,7 @@
 		if(mind)
 			if(admin_revive)
 				mind.remove_antag_datum(/datum/antagonist/zombie)
+				remove_status_effect(/datum/status_effect/debuff/rotted_zombie) //Caustic Edit - Add this bit in here to hopefully remove this debuff? Every other revive method seems to have it, except here.
 			for(var/spell as anything in mind.spell_list)
 				var/obj/effect/proc_holder/spell/newspell = spell
 				var/datum/action/cooldown/spell/oldspell = spell

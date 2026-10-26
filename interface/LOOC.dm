@@ -32,7 +32,7 @@
 /client/verb/subtlelooc(msg as text)
 	set name = "LOOC (Subtle)"
 	set desc = "Local OOC only for a specific target or 1 tile range."
-	set category = "OOC"
+	set category = "OOC.Chat"
 	do_subtlelooc(msg)
 
 /client/proc/do_subtlelooc(msg as text)
@@ -49,17 +49,17 @@
 		to_chat(src, span_danger("I cannot use LOOC (perma muted)."))
 		return
 
+	//Caustic edit start
+	/*
 	if(isobserver(mob) && !holder)
 		to_chat(src, span_danger("I cannot use LOOC while dead."))
 		return
+	*/
+	//Caustic edit end
 
-	//Caustic edit start
-	/*
 	if(!holder && istype(mob, /mob/dead/new_player))
 		to_chat(src, span_danger("I cannot use LOOC while in the lobby. Join the round or observe first."))
 		return
-	*/
-	//Caustic edit end
 
 	if(!mob)
 		return
